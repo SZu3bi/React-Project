@@ -1,0 +1,6 @@
+{
+    "Address" : "https://samjad-dev-ed.my.salesforce.com/services/apexrest/Cases",
+    "AddressCon":"https://samjad-dev-ed.my.salesforce.com/services/apexrest/ContactAPI",
+    "AddressH":"https://samjad-dev-ed.my.salesforce.com/services/apexrest/historyApi",
+    "Token":"00D4W000002S5BH!ARoAQMX3r6rfJTaFVPYRj9HEqZFB2eQopXY3eMruyWHw4JlKTaPf_LCEoHCQhgYVvmsFsstfO.nOJJC3vj4JLGkgdKy1X8iw"
+}

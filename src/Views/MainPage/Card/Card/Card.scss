@@ -1,0 +1,402 @@
+.users-card-wrappercard{
+
+    display: flex;
+    flex: 0 0 auto;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+width: 70%;
+    .cards-wrappercard {
+        width: 888px;
+        height: 490px;
+        background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        border: 1px solid #00000029;
+        border-radius: 10px;
+        opacity: 1;
+        padding: 2%;
+        margin: 1% ;
+        overflow: auto;
+      
+    @media (max-width: 900px) {
+        width: 315px;
+        height: 385px;
+    
+    }
+      }
+      .cards-wrappercard:hover{
+        box-shadow: 0px 3px 20px #00000029;
+        border: 1px solid #FF5E0D;
+        cursor: pointer;
+      }
+      .item-wrappercard{
+      display: flex;
+      flex: 1 1 auto;
+      flex-wrap: wrap;
+      font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-bold) var(--unnamed-font-size-17)/var(--unnamed-line-spacing-30) var(--unnamed-font-family-poppins);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-2b0649);
+    text-align: left;
+    font: normal normal bold 17px/30px Poppins;
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    
+    margin: 10px 32px;
+        height: 20px;
+    
+      }
+    
+      
+      .cards-wrappercard .item-wrappercard {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .cards-headercard {
+        flex-direction: row;
+        display: flex;
+        flex-direction: row;
+        display: flex;
+        margin: 10px;
+        width: 355px;
+       
+      }
+      
+    //   .cards-bodycard {
+
+    //     overflow: auto;
+   
+       
+    //   }
+      
+    
+      .item-headercard{
+      font-weight: bold;
+      margin-bottom: 0.25rem;
+      
+      }
+      
+    
+      .cards-wrappercard .item-wrappercard .item-bodycard {
+        display: inline-flex;
+        flex: 0 1 auto;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0.25rem;
+        padding: 0 0.25rem;
+      }
+    
+    .timelinecard{
+      display: inline-flex;
+      align-content: space-between;
+      flex-wrap: nowrap;
+      align-items: center;
+ 
+    
+    }
+      .linecard{
+        width: 47px;
+        height: 1px;
+        opacity: 1;
+        position: relative;
+        background: #D0D0D0;
+      }
+    
+    
+      .dotnumcard {
+        width: 20px;
+        height: 20px;
+        background: var(--unnamed-color-ffffff) 0% 0% no-repeat padding-box;
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        border: 1px solid #E3E3E3;
+        opacity: 1;
+        border-radius: 50%;
+        text-align: center;
+       
+      }
+    
+      .dotcard{
+        width: 6px;
+    height: 6px;
+    background: #FF5E0D 0% 0% no-repeat padding-box;
+    opacity: 1;
+    border-radius: 50%;
+      }
+    
+    
+      .piccard{
+        display: flex;
+        justify-content: center;
+     
+    
+      }
+      .placenamecard{
+        text-align: justify;
+  
+      }
+    
+      .contentcard{
+        text-align: center;
+        display: flex;
+        justify-content:center;
+      }
+    
+      .textcard{
+        font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-medium) var(--unnamed-font-size-12)/var(--unnamed-line-spacing-30) var(--unnamed-font-family-poppins);
+      
+        font: normal normal medium 12px/30px Poppins;
+       
+        color: #2B0649;
+    
+        font-size: 12px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .text2card{
+        font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-medium) var(--unnamed-font-size-12)/var(--unnamed-line-spacing-30) var(--unnamed-font-family-poppins);
+        letter-spacing: var(--unnamed-character-spacing-0);
+        color: var(--unnamed-color-2b0649);
+        font: normal normal medium 12px/30px Poppins;
+        letter-spacing: 0px;
+        color: #2B0649;
+        opacity: 1;
+      }
+    
+      .cardActivecard {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+     
+        cursor: pointer;
+      }
+    
+      .timelinepic{
+  
+        display: flex;
+        border-radius: 10px;
+        width: 98px;
+height: 84px;
+      }
+    
+    
+    
+    
+      .maindivcontentcard{
+    
+        width: 100%;
+        text-align: center;
+        margin-top: 2%;
+      }
+    
+    
+      .contenttextheadercard{
+        height: 22px;
+        border-radius: 15px;
+        opacity: 1;
+        margin: 3%;
+        font-size: 10px;
+        display: flex;
+        
+      }
+      /* .textheader{
+        white-space: nowrap;
+        width: 115px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      } */
+    
+      .mapimagecard{
+        display: flex;
+    
+        justify-content: center;
+      }
+    
+      .picmapcard{
+        width: 315px;
+        height: 60px;
+      }
+    
+      .pickupmarkcard{
+        background: #580DBF;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        color: white;
+    margin-top: 82px;
+        align-items: center;
+    
+      }
+      .pickupmark2card{
+        background: #d10e0e;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        color: white;
+        margin-top: 82px;
+        align-items: center;
+        margin-left: -6px;
+    
+      }
+    
+      #style-1::-webkit-scrollbar-track
+      {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        background-color: #F5F5F5;
+      }
+      
+      #style-1::-webkit-scrollbar
+      {
+        width: 12px;
+        background-color: #F5F5F5;
+      }
+      
+      #style-1::-webkit-scrollbar-thumb
+      {
+        border-radius: 10px;
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        background-color: #555;
+      }
+
+
+      
+  }
+
+  .headertitle{
+    display: flex;
+    justify-content: center;
+    color: black;
+    font-size: x-large;
+    font-weight: bolder;
+  }
+
+  .mainDiv{
+    width: 100%;
+    display: flex;
+
+    @media (max-width: 375px) {
+        display: contents;
+    
+    
+    }
+
+
+  }
+
+
+  .secDiv{
+width: 30%;
+padding-top: 3.5%;
+    .totalsummary{
+        border: 1px solid;
+        display: flex;
+        justify-content: center;
+        background: #FF5E0D;
+        color: white;
+        /* height: 37px; */
+        width: 345px;
+        height: 38px;
+        align-items: center;
+        border-radius: 10px;
+        @media (max-width: 1440px) {
+            width: 230px;
+        
+        
+        }
+
+    }
+
+    .tour{
+        border-radius: 10px;
+        width: 345px;
+        height: 96px;
+        box-shadow: 0px 3px 20px #00000029;
+        margin-top: 10%;
+
+
+        @media (max-width: 1440px) {
+            width: 230px;
+        
+        
+        }
+  
+
+        .tourDetails{
+            display: flex;
+            justify-content: space-between;
+            height: 50%;
+            align-items: center;
+            padding: 5%;
+
+
+            
+        }
+    }
+    .totalprice{
+        border-radius: 10px;
+        width: 345px;
+   
+        box-shadow: 0px 3px 20px #00000029;
+        margin-top: 10%;
+
+
+        .tourDetails{
+            display: flex;
+            justify-content: space-between;
+            height: 50%;
+            align-items: center;
+            padding: 5%;
+
+
+            
+        }
+
+        @media (max-width: 1440px) {
+            width: 230px;
+        
+        
+        }
+    }
+
+    .actionbtn{
+        margin-top: 4%;
+    }
+
+    .btns{
+        width: 346px;
+        height: 38px;
+        background: linear-gradient(to right, #FF7F18, #FF1364, #2B0649);   
+        color: #ffffff !important;
+        
+    }
+  }
+
+  .ContentWrapper{ display: flex;
+  overflow-x: hidden;
+  width: 75%;
+  border: 5px solid #ffffff;
+  border-radius: 10px;
+  // overflow: hidden;
+  }
+
+  .basebtn{
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+  
+    flex-wrap: wrap;
+    margin-top: 2%;
+    .btns2{
+      box-shadow: 3px 3px 12px #0000004F;
+border-radius: 10px;
+width: 35px;
+height: 35px;
+    
+  }
+}
+
+  
