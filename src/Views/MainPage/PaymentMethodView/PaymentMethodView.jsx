@@ -1,7 +1,6 @@
 import React , {useState , useRef} from 'react';
 import './PaymentMethodView.scss'
 import { Button } from '@material-ui/core';
-import paypallogo from '../../../Assets/Images/paypal.png'
 import { Inputs } from '../../../Componentes';
 
 export const PaymentMethodView = ()=>{

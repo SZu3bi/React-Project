@@ -1,5 +1,4 @@
 import React , {useRef , useState,useCallback,useEffect} from 'react';
-import View from '../../../Assets/Images/View.jpg'
 import { Button } from '@material-ui/core';
 import { ButtonBase } from '@material-ui/core';
 import './Card.scss'

@@ -2,7 +2,6 @@ import React , {useState , useRef} from 'react';
 
 import './PaymentCard.scss'
 import { Button } from '@material-ui/core';
-import paypal from '../../../Assets/Images/paypal.png'
 import { Inputs } from '../../../Componentes';
 
 export const PaymentCard = ()=>{
