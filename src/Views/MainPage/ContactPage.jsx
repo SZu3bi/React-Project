@@ -482,61 +482,7 @@ return (
             </div>
             </div>
             </div>))}
-{/* <div className="cards printme">
 
-{result && result.map((s ,index ) => ( 
-<div class="card-container" key={index} >
-    <span class="pro"> {s.Email}</span>
-    <img id="avatar" src={psi} alt="lead"></img>
-    <h3>{s.Name}</h3>
-    <h3>{s.Phone}</h3>
-    <h6>{s.LeadSource}</h6>
-    <p>{s.Id}</p>
-    <div class="buttons">
-    <ButtonGroup variant="contained" size='large' color="primary" aria-label="contained primary button group">
-  <Button onClick={() => { setOpen(true); setEditVal(s) }}>Edit</Button>
-  <Button  color="secondary" onClick={() => handleDeleteButton(s.Id)}>Delete</Button>
-  <Button  color="secondary" onClick={() => info(s.Name , s.Id)}>Info</Button>
- 
-</ButtonGroup>
-<Rating
-        name="text-feedback"
-        value={s.Rating__c}
-        readOnly
-        precision={0.5}
-        emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />}
-      />
-    </div>
-    <div class="skills">
-        <h6>Case Info</h6>
-        <ul>
-            <li> Origin :{s.Origin}</li>
-           
-            <li>priority : {s.Priority}</li>
-        </ul>
-    </div>
-    <div>
-      <Accordion   expanded={collapseView===index} onChange={handleChange(index)}>
-                <AccordionSummary
-                  className='collapes'
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls='panel1bh-content'
-                  id={index}>
-          <Typography className={classes.heading}>{collapseView===index ?'Hide Info' :'Show Info' }</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-          <p style={{    textAlign: 'justify' , fontSize: 'medium'}}>
- Origin : {s.Origin} <br/>
- priority : {s.Priority} <br/>
-       </p>
-      
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      </div>
-</div>))}
-</div> */}
 <br/>
   <div className="speedDial no-printme">
   <Backdrop open={openD} />

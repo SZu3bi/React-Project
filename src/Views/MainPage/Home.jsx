@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Route, Link, BrowserRouter as Router ,useHistory, Redirect  ,NavLink, Switch} from "react-router-dom";
 import{ MainPageView }from "./MainPageView";
+import{ TotalSummaryCard }from "./TotalSummaryCard/TotalSummaryCard";
+import{ TripTour }from "./TripTour/TripTour";
 import{ HistoryPage }from "./HistoryPage";
 import About from "./About";
 import WorkIcon from '@material-ui/icons/Work';
@@ -221,6 +223,16 @@ const print = ()=> {
 )} />
      <p>Case</p>
       </MenuItem>
+      <MenuItem>
+   
+   <Route render={({ history}) => (
+      <IconButton color="inherit" className={classes.myClassName}>
+
+<WorkIcon   onClick={() => { history.push('/TotalSummaryCard'); console.log("h",history) }}></WorkIcon>
+</IconButton>
+)} />
+     <p>Total Summary Card</p>
+      </MenuItem>
 
       <MenuItem>
 
@@ -284,23 +296,7 @@ const print = ()=> {
        <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{    background: 'black'}}>
         <Toolbar>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton> */}
-          {/* <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
-          > */}
-
-          {/* </Typography> */}
+     
           <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -341,9 +337,7 @@ const print = ()=> {
 <HomeIcon   onClick={() => { history.push('/home'); console.log("h",history) }}></HomeIcon>
 </IconButton>
 )} />
-                {/* <Badge badgeContent={17} color="error">
-                  <NotificationsIcon />
-                </Badge> */}
+            
             </IconButton>
       
             <IconButton
@@ -357,9 +351,33 @@ const print = ()=> {
 <WorkIcon   onClick={() => { history.push('/cases'); console.log("h",history) }}></WorkIcon>
 </IconButton>
 )} />
-                {/* <Badge badgeContent={17} color="error">
-                  <NotificationsIcon />
-                </Badge> */}
+              
+            </IconButton>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+                        <Route render={({ history}) => (
+      <IconButton color="inherit" className={classes.myClassName}>
+
+<WorkIcon   onClick={() => { history.push('/TotalSummaryCard'); console.log("h",history) }}></WorkIcon>
+</IconButton>
+)} />
+              
+            </IconButton>
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+                        <Route render={({ history}) => (
+      <IconButton color="inherit" className={classes.myClassName}>
+
+<WorkIcon   onClick={() => { history.push('/TripTour'); console.log("h",history) }}></WorkIcon>
+</IconButton>
+)} />
+              
             </IconButton>
    
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -441,6 +459,8 @@ const print = ()=> {
           <Route exact path="/contact" component={ContactPage} />
           <Route exact path="/history" component={HistoryPage} />
           <Route exact path="/home" component={DataTable} />
+          <Route exact path="/TotalSummaryCard" component={TotalSummaryCard} />
+          <Route exact path="/TripTour" component={TripTour} />
    
           </Switch>
     </Router>

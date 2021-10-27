@@ -147,22 +147,6 @@ console.log(loading);
         <div>
         
 
-{/* <TextField 
-    type="number"
-    error={state.rate === '' ? "error" : null}
-    label="Rate"
-    variant="outlined"
-    value={state.rate}
-    InputProps={{
-        inputProps: { 
-            max: 5, min: 0 
-        }
-    }}
-    onChange={(event) => {
-      setState((item) => ({ ...item, rate: event.target.value }))}} 
-    
-/> */}
-
         </div>
         <div>
           <TextField

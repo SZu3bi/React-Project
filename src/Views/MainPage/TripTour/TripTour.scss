@@ -1,0 +1,129 @@
+.basket-card-uicomponents {
+    width: 55%;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    .title {
+      display: flex;
+      width: 100%;
+      .around-tour {
+        width: 50%;
+        margin: 10px 20px;
+        font-size: 30px;
+        color: #2b0649;
+      }
+      .edit {
+        text-align: end;
+        margin: 10px;
+        width: 50%;
+        .details-edit {
+          width: 40%;
+          .MuiInputBase-input {
+            color: #ff5e0d;
+          }
+        }
+      }
+    }
+    .tour-info {
+      width: 50%;
+      margin: 10px 20px;
+      color: #2b0649;
+    }
+    .details-info {
+      width: 50%;
+      display: flex;
+      justify-content: space-around;
+      margin: 15px 0px;
+      color: #2b0649;
+    }
+    .Image-container {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      position: relative;
+      .Image {
+        width: 98px;
+        height: 86px;
+        border-radius: 15px;
+        margin: 0 42px;
+      }
+    }
+  
+    .container-data {
+      position: relative;
+      .timeline-basket {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        .line {
+          height: 2px;
+          width: 80px;
+          background: #d1d6e6;
+        }
+  
+        .dot {
+          width: 6px;
+          height: 6px;
+          background: blue;
+          border-radius: 7px;
+        }
+        .dot-num {
+          border: 1px solid #e3e3e3;
+          width: 18px;
+          color: black;
+          display: flex;
+          font-size: 12px;
+          justify-content: center;
+          align-items: center;
+          height: 18px;
+          border-radius: 25px;
+        }
+      }
+    }
+    .trips{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    .trip {
+      text-align: center;
+      width: 98px;
+      height: 40px;
+      margin: 0 42px;
+      font-size: 12px;
+      color: #2b0649;
+    }
+  }
+    .footer-button {
+      display: flex;
+      border: 1px solid #CCCCCC;
+      height: 40px;
+      width: 100%;
+      .add {
+        width: 38%;
+        font-size: 13px;
+        color: #1A002F;
+        margin: auto;
+        padding: 0 12px;
+        text-align: end;
+      }
+      .delete {
+        width: 24%;
+        font-size: 13px;
+        color: #FF2C55;
+        border-left: outset;
+        border-right: inset;
+        margin: auto;
+        text-align: center;
+      }
+      .save {
+        margin: auto;
+        padding: 0 12px;
+        font-size: 13px;
+        width: 38%;
+        color:#1A002F;
+      }
+    }
+  }
+  

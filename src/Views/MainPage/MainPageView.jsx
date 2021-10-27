@@ -443,7 +443,6 @@ return (
   <div className="overflow">
    
   <div className='Agents-wrapper view-wrapper'>
-    {/* <button onClick={top} id="myBtn" title="Go to top">Top</button> */}
 
     {open && <MainPageDialogView open={open} DTO={EditVal} 
     GetAllData={() => GetAllData()} openvalchange = {openvalchange} o={o}  setO={setO}/> }
@@ -452,31 +451,7 @@ return (
     {loading ? <CircularProgress /> : <div>
   
 <div style={{display: 'inline-block'}}>
-  {/* <div style={{display: 'inline-block'}}><Badge  badgeContent={undefined !== res && res !== null && res.length} color="primary" style={{float:'left'}}>
-        <PersonIcon/>
-      </Badge></div> */}
 
-{/* <button  onClick={() => { setO(true) }}></button> */}
-      {/* <div>
-      <Button
-      aria-controls="customized-menu"
-      aria-haspopup="true"
-      variant="contained"
-      color="primary"
-      onClick={Open}>
-        Open Menu
-      </Button>
-      </div> */}
-     
-      {/* <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={Close}>
-        <MenuItem onClick={Close}>Add New</MenuItem>
-    
-      </Menu> */}
     </div>
     {res && res.map((s ,index ) => ( 
       
@@ -609,7 +584,6 @@ return (
             icon={action.icon}
             tooltipTitle={action.name}
             onClick={() => handleClickOpen(action.id)}
-// onClick={()=>console.log("id",action.id)}
     
           
                 />
@@ -617,56 +591,7 @@ return (
         
       </SpeedDial>
       </div>
-{/* <div className="cards">
 
-{res && res.map((s ,index ) => ( 
-<div class="card-container">
-    <span class="pro"> {s.Status}</span>
-    <img id="avatar" src={psi} alt="lead"></img>
-   
-    <h3>{s.Subject}</h3>
-    <h6>Loc : Jordan</h6>
-
-    <h6>Contact Id : {s.ContactId}</h6>
-    <div class="buttons">
-    <ButtonGroup variant="contained" size='large' color="primary" aria-label="contained primary button group">
-  <Button onClick={() => { setOpen(true); setEditVal(s) }}>Edit</Button>
-  <Button  color="secondary" onClick={() => handleDeleteButton(s.Id)}>Delete</Button>
-</ButtonGroup>
-		
-    </div>
-    <div class="skills">
-        <h6>Case Info</h6>
-        <ul>
-            <li> Origin :{s.Origin}</li>
-           
-            <li>priority : {s.Priority}</li>
-       
-        </ul>
-    </div>
-    <div>
-      <Accordion   expanded={collapseView===index} onChange={handleChange(index)}>
-                <AccordionSummary
-                  className='collapes'
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls='panel1bh-content'
-                  id={index}>
-          <Typography className={classes.heading}>{collapseView===index ?'Hide Info' :'Show Info' }</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography>
-          <p style={{    textAlign: 'justify' , fontSize: 'medium'}}>
-<TripOriginIcon /> Origin : {s.Origin} <br/>
-
-<PriorityHighIcon /> priority : {s.Priority} <br/>
-       </p>
-      
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
-      </div>
-</div>))}
-</div> */}
     <div>
   
     <ToastContainer />
