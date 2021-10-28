@@ -63,6 +63,8 @@ export const TripTour = () => {
               }></img>
        
           </div>
+ 
+    
          
         </div>
         <div className='container-data'>
