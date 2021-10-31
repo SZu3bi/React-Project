@@ -1,0 +1,321 @@
+.basket-card-uicomponents {
+    display: flex;
+    flex-wrap: wrap;
+margin: 1px auto;
+  
+    .cards-wrappercards {
+      border-radius: 10px;
+      opacity: 1;
+      margin-top: 2%;
+      width: 100%;
+  
+      .title {
+        display: flex;
+        width: 100%;
+        @media (max-width: 770px) {
+          display: block;
+        }
+        .around-tour {
+          width: 50%;
+          margin: 10px 20px;
+          font-size: 30px;
+          color: #2b0649;
+        }
+        .edit {
+          text-align: end;
+          margin: 10px;
+  
+          .details-edit {
+            width: 100%;
+            min-width: 100%;
+            .MuiInputBase-input {
+              color: #ff5e0d !important;
+            }
+          }
+        }
+      }
+    }
+    .tour-info {
+      width: 50%;
+      margin: 10px 20px;
+      color: #2b0649;
+  
+      @media (max-width: 770px) {
+        width: auto;
+        margin: 10px 20px;
+        color: #2b0649;
+        font-size: 14px;
+      }
+    }
+    .details-info {
+      width: 50%;
+      display: flex;
+      justify-content: space-around;
+      margin: 15px 0px;
+      color: #2b0649;
+  
+      @media (max-width: 770px) {
+        width: auto;
+      }
+    }
+    .trips {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      position: relative;
+      .trip {
+        text-align: center;
+        width: 98px;
+        height: 40px;
+        margin: 0 42px;
+        font-size: 12px;
+        color: #2b0649;
+      }
+    }
+  
+    .flex-center {
+      display: flex;
+      justify-content: center;
+  
+      @media (max-width: 770px) {
+        display: block;
+      }
+  
+      .buttonbase-flex {
+        display: flex;
+  
+        .basebtnss {
+          box-shadow: 3px 3px 12px #0000004f;
+          border-radius: 10px;
+          width: 35px;
+          height: 35px;
+          color: black;
+          background: white;
+        }
+      }
+  
+      .three-element {
+        display: flex;
+        overflow-x: hidden;
+        border: 5px solid #ffffff;
+        border-radius: 10px;
+        width: 90%;
+        justify-content: center;
+        @media (max-width: 770px) {
+          display: flex;
+          overflow-x: hidden;
+          border: 5px solid #ffffff;
+          border-radius: 10px;
+          justify-content: center;
+          width: auto;
+        }
+        .pic-card {
+          display: flex;
+          justify-content: center;
+          .Image {
+            width: 98px;
+            height: 86px;
+            border-radius: 15px;
+          }
+        }
+  
+        .pickup-mark {
+          background: #580dbf;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          color: white;
+          margin-top: 90px;
+          align-items: center;
+        }
+        .drop-mark {
+          background: #d10e0e;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          color: white;
+          margin-top: 90px;
+          align-items: center;
+          margin-left: -6px;
+        }
+        .timelinecard {
+          display: inline-flex;
+          align-content: space-between;
+          flex-wrap: nowrap;
+          align-items: center;
+          .dotnumcard {
+            width: 20px;
+            height: 20px;
+            background: #ffffff 0% 0% no-repeat padding-box;
+            border: 1px solid #e3e3e3;
+            opacity: 1;
+            border-radius: 50%;
+            text-align: center;
+            font-size: small;
+            color: black;
+          }
+          .linecard {
+            height: 2px;
+            width: 49px;
+            opacity: 1;
+            position: relative;
+            background: #d0d0d0;
+  
+            @media (max-width: 770px) {
+              width: 38px;
+            }
+          }
+          .dotcard {
+            width: 6px;
+            height: 6px;
+            background: #ff5e0d 0% 0% no-repeat padding-box;
+            opacity: 1;
+            border-radius: 50%;
+          }
+        }
+  
+        .contentcard {
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          color: black;
+        }
+      }
+  
+      .ContentWrapper {
+        display: flex;
+        overflow-x: hidden;
+        border: 5px solid #ffffff;
+        border-radius: 10px;
+        scroll-behavior: smooth;
+        width: 60%;
+        padding: 4%;
+  
+        .pic-card {
+          display: flex;
+          justify-content: center;
+          .Image {
+            width: 98px;
+            height: 86px;
+            border-radius: 15px;
+          }
+        }
+  
+        .pickup-mark {
+          background: #580dbf;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          color: white;
+          margin-top: 90px;
+          align-items: center;
+        }
+        .drop-mark {
+          background: #d10e0e;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          color: white;
+          margin-top: 90px;
+          align-items: center;
+          margin-left: -6px;
+        }
+        .timelinecard {
+          display: inline-flex;
+          align-content: space-between;
+          flex-wrap: nowrap;
+          align-items: center;
+          .dotnumcard {
+            width: 20px;
+            height: 20px;
+            background: #ffffff 0% 0% no-repeat padding-box;
+            border: 1px solid #e3e3e3;
+            opacity: 1;
+            border-radius: 50%;
+            text-align: center;
+            font-size: small;
+            color: black;
+          }
+          .linecard {
+            height: 2px;
+            width: 49px;
+            opacity: 1;
+            position: relative;
+            background: #d0d0d0;
+          }
+          .dotcard {
+            width: 6px;
+            height: 6px;
+            background: #ff5e0d 0% 0% no-repeat padding-box;
+            opacity: 1;
+            border-radius: 50%;
+          }
+        }
+  
+        .contentcard {
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          color: black;
+        }
+      }
+    }
+    .footer-button {
+      display: flex;
+      border: 1px solid #cccccc;
+      height: 40px;
+      width: 100%;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      .add {
+        margin: auto;
+        padding: 0 12px;
+        font-size: 13px;
+        width: 38%;
+        color: #1a002f;
+        text-align: center;
+  
+        .add-btn {
+          @media (max-width: 770px) {
+            font-size: 10px;
+          }
+        }
+      }
+      .delete {
+        width: 24%;
+        font-size: 13px;
+        color: #ff2c55;
+        border-left: outset;
+        border-right: inset;
+        margin: auto;
+        text-align: center;
+        .delete-btn {
+          @media (max-width: 770px) {
+            font-size: 10px;
+          }
+        }
+      }
+      .save {
+        margin: auto;
+        padding: 0 12px;
+        font-size: 13px;
+        width: 38%;
+        color: #1a002f;
+        text-align: center;
+        .save-btn {
+          @media (max-width: 770px) {
+            font-size: 9px;
+          }
+        }
+      }
+    }
+  }
+  

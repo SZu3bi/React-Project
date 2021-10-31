@@ -31,6 +31,9 @@ import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import HomeWorkIcon from '@mui/icons-material/HomeWork';
 import PrintIcon from '@mui/icons-material/Print';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocalAtmIcon from '@mui/icons-material/LocalAtm';
+import{ ScrollPic }from "./ScrollPic/ScrollPic";
 
 
 
@@ -361,24 +364,12 @@ const print = ()=> {
                         <Route render={({ history}) => (
       <IconButton color="inherit" className={classes.myClassName}>
 
-<WorkIcon   onClick={() => { history.push('/TotalSummaryCard'); console.log("h",history) }}></WorkIcon>
+<LocalAtmIcon   onClick={() => { history.push('/TotalSummaryCard'); console.log("h",history) }}></LocalAtmIcon>
 </IconButton>
 )} />
               
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-                        <Route render={({ history}) => (
-      <IconButton color="inherit" className={classes.myClassName}>
-
-<WorkIcon   onClick={() => { history.push('/TripTour'); console.log("h",history) }}></WorkIcon>
-</IconButton>
-)} />
-              
-            </IconButton>
+      
    
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               {/* <Badge badgeContent={4} color="error">
@@ -388,6 +379,18 @@ const print = ()=> {
       <IconButton color="inherit" className={classes.myClassName}>
 
 <HomeWorkIcon  onClick={() => { history.push('/contact') }} ></HomeWorkIcon>
+</IconButton>
+)} />
+            </IconButton>
+   
+            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              {/* <Badge badgeContent={4} color="error">
+                <MailIcon />
+              </Badge> */}
+                            <Route render={({ history}) => (
+      <IconButton color="inherit" className={classes.myClassName}>
+
+<FavoriteIcon  onClick={() => { history.push('/Scroll') }} ></FavoriteIcon>
 </IconButton>
 )} />
             </IconButton>
@@ -461,6 +464,7 @@ const print = ()=> {
           <Route exact path="/home" component={DataTable} />
           <Route exact path="/TotalSummaryCard" component={TotalSummaryCard} />
           <Route exact path="/TripTour" component={TripTour} />
+          <Route exact path="/Scroll" component={ScrollPic} />
    
           </Switch>
     </Router>
