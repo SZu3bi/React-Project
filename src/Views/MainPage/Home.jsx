@@ -35,6 +35,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 import{ ScrollPic }from "./ScrollPic/ScrollPic";
 import ContactPageIcon from '@mui/icons-material/ContactPage';
+import HistoryIcon from '@mui/icons-material/History';
+import InfoIcon from '@mui/icons-material/Info';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -304,7 +306,7 @@ const print = ()=> {
     
     <div className="App no-printme" >
 
-    
+
        <Router>
        <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" style={{    background: 'black'}}>
@@ -347,11 +349,38 @@ const print = ()=> {
                         <Route render={({ history}) => (
       <IconButton color="inherit" className={classes.myClassName}>
 
+<InfoIcon   onClick={() => { history.push('/Abouts'); console.log("h",history) }}></InfoIcon>
+</IconButton>
+)} />
+            
+            </IconButton>
+          <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+                        <Route render={({ history}) => (
+      <IconButton color="inherit" className={classes.myClassName}>
+
 <HomeIcon   onClick={() => { history.push('/home'); console.log("h",history) }}></HomeIcon>
 </IconButton>
 )} />
             
             </IconButton>
+          <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+                        <Route render={({ history}) => (
+      <IconButton color="inherit" className={classes.myClassName}>
+
+<HistoryIcon   onClick={() => { history.push('/About'); console.log("h",history) }}></HistoryIcon>
+</IconButton>
+)} />
+            
+            </IconButton>
+      
       
     
 <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -464,7 +493,7 @@ const print = ()=> {
                 render={() => {
                     return (
                       state.isUserAuthenticated ?
-                      <Redirect to="/home" /> :
+                      <Redirect to="/Abouts" /> :
                       <Redirect to="/contact" /> 
                     )
                 }}
@@ -477,9 +506,11 @@ const print = ()=> {
           <Route exact path="/TotalSummaryCard" component={TotalSummaryCard} />
           <Route exact path="/TripTour" component={TripTour} />
           <Route exact path="/Scroll" component={ScrollPic} />
+          <Route exact path="/Abouts" component={About} />
    
           </Switch>
     </Router>
+    
     </div>
   );
 };

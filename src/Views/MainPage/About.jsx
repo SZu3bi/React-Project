@@ -99,7 +99,7 @@ class About extends PureComponent {
 
     return (
       <div className="App">
-        <div>
+        {/* <div>
           <input type="file" accept="image/*" onChange={this.onSelectFile} />
         </div>
         {src && (
@@ -114,7 +114,25 @@ class About extends PureComponent {
         )}
         {croppedImageUrl && (
           <img alt="Crop" style={{ maxWidth: '100%' }} src={croppedImageUrl} />
-        )}
+        )} */}
+        <section>
+  <span class="sliding">
+    <span>Sales </span>
+    <span>Force</span>
+    <span> - </span>
+    <span>Data</span>
+    <span></span>
+  </span>
+  <div class="wrappers">
+    <span class="sliding">
+      <span>Salah </span>
+      <span>Amjad</span>
+      <span> - </span>
+      <span>Alzuhbi</span>
+      <span></span>
+    </span>
+  </div>
+</section>
       </div>
     );
   }
