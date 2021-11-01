@@ -117,7 +117,8 @@ const [states, setStates] = useState({
     email:'',
     leadSource:'',
     rate:0,
-    active:false
+    active:false,
+    amount:0
   } );
 
 
@@ -176,7 +177,8 @@ const [state, setState] = useState
   phone: '',
   leadsource: '',
   email: '',
-  rate:0 
+  rate:0 ,
+  amount:0
 });
 
 
@@ -190,7 +192,9 @@ useEffect(() => {
       phone: (idedit && idedit.Phone) || '',
       email: (idedit && idedit.Email) || '',
       leadsource: (idedit && idedit.LeadSource) || '',
-      rate: (idedit && idedit.Rating__c) || ''
+      rate: (idedit && idedit.Rating__c) || '',
+      amount: (idedit && idedit.Amount__c) || '',
+      active: (idedit && idedit.Active__c) || ''
 
     }))
     setidedit(idedit && idedit.Id)
@@ -442,12 +446,19 @@ return (
                 
                 </span>
               </div>
-              <div className="item-wrapper">
+              {/* <div className="item-wrapper">
                 <span className="item-header">
                   <span className="mdi mdi-account-check px-2" />
                   <span>Status:</span>
                 </span>
-                <span className="item-body">Active</span>
+                <span className="item-body">{s.Active__c || null}</span>
+              </div> */}
+              <div className="item-wrapper">
+                <span className="item-header">
+                  <span className="mdi mdi-currency-usd px-2" />
+                  <span>Amount:</span>
+                </span>
+                <span className="item-body">{s.Amount__c}</span>
               </div>
               <div className="item-wrapper mb-3">
                 <span className="item-header">
@@ -456,6 +467,7 @@ return (
                 </span>
                 <span className="item-body">{s.LeadSource}</span>
               </div>
+           
               <Rating
         name="text-feedback"
         value={s.Rating__c}
@@ -560,6 +572,17 @@ return (
           value={states.email}
           onChange={(event) => {
             setStates((item) => ({ ...item, email: event.target.value })) }} /> 
+             </div>
+            <div>
+<TextField
+          required
+          id="outlined-required"
+          label="Amount"
+          variant="outlined"
+          error={states.amount === '' ? "error" : null}
+          value={states.amount}
+          onChange={(event) => {
+            setStates((item) => ({ ...item, amount: event.target.value })) }} /> 
              </div>
              <div>
              <TextField

@@ -16,6 +16,19 @@ export const GetMainInfo_Contact = async () => {
     return result;
   };
 
+export const GetAmount_Contact = async () => {
+    const result = await HttpServices_2.get_con(
+      `${config_2.server_address_Contact_Amonut}`, {
+      headers: {
+        Authorization: `Bearer ${config_2.token_2}`,
+      },
+    }
+    )
+      .then((data) => data)
+      .catch((error) => showError('Get Amount Filed'));
+    return result;
+  };
+
   export const CreateMainInfo_Contact = async (contact) => {
     const results = await HttpServices_2.post_con(
       `${config_2.server_address_Contact}`, contact, {

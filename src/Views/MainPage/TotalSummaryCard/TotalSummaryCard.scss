@@ -59,7 +59,7 @@
                 width: 346px;
                 height: 148px;
                 margin-top: 5%;
-                background-color: #3f51b5;
+                background-color: #ffeb3b;
                 @media (max-width: 375px) {
                     width: 245px;
                 }
@@ -84,12 +84,12 @@
 
                     .finalpricelabel{
                         font-size: 17px;
-                        color:$Orange
+                        color:green;
                     }
                     .finalprice{
                         font-size: 20px;
                         font-weight: bold;
-                        color: $Orange;
+                        color: green;
                     }
                 }   
             }
