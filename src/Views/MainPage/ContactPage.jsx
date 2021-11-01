@@ -17,20 +17,17 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import Badge from '@material-ui/core/Badge';
 import PersonIcon from '@material-ui/icons/Person';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import psi from '../../Views/sales.png'
 import Menu from '@material-ui/core/Menu';
 import { Rating } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
-import Box from '@mui/material/Box';
 import SpeedDial from '@mui/material/SpeedDial';
 import SpeedDialIcon from '@mui/material/SpeedDialIcon';
 import SpeedDialAction from '@mui/material/SpeedDialAction';
@@ -45,7 +42,10 @@ import { IconButton } from "@material-ui/core";
 import moment from 'moment';
 import Backdrop from '@mui/material/Backdrop';
 import Checkbox from '@mui/material/Checkbox';
-
+import CircularProgress from '@mui/material/CircularProgress';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
 
 
 const labels = {
@@ -115,6 +115,7 @@ const [states, setStates] = useState({
     name: '',
     phone:'',
     email:'',
+    firstname:'',
     leadSource:'',
     rate:0,
     active:false,
@@ -194,7 +195,8 @@ useEffect(() => {
       leadsource: (idedit && idedit.LeadSource) || '',
       rate: (idedit && idedit.Rating__c) || '',
       amount: (idedit && idedit.Amount__c) || '',
-      active: (idedit && idedit.Active__c) || ''
+      active: (idedit && idedit.Active__c) || '',
+      firstname: (idedit && idedit.FirstName) || ''
 
     }))
     setidedit(idedit && idedit.Id)
@@ -389,7 +391,7 @@ return (
                   <span className="item-header px-2">
                    username
                   </span>
-                  <span className="item-body">N/A</span>
+                  <span className="item-body">{s.FirstName || 'N/A'}</span>
                 </div>
                   <div className="item-wrapper">
             
@@ -408,8 +410,10 @@ return (
               <div className="item-wrapper flex-nowrap">
                 <div className="texts-truncate d-flex">
                   <span className="item-header">
-                    <span className="mdi mdi-email-outline px-2" />
-                    <span>email:</span>
+                  <a style={{textDecoration: 'auto'
+    ,color: 'red'}} href={`mailto:${s.Email}&text=Hi ${s.Name} From Psi Amman.`}>  <span className="mdi mdi-email-outline px-2" />Email:</a>
+
+                    <span></span>
                   </span>
                   <span
                     className="item-body texts-truncate d-inline-block"
@@ -447,13 +451,7 @@ return (
                 
                 </span>
               </div>
-              {/* <div className="item-wrapper">
-                <span className="item-header">
-                  <span className="mdi mdi-account-check px-2" />
-                  <span>Status:</span>
-                </span>
-                <span className="item-body">{s.Active__c || null}</span>
-              </div> */}
+         
               <div className="item-wrapper">
                 <span className="item-header">
                   <span className="mdi mdi-currency-usd px-2" />
@@ -468,7 +466,27 @@ return (
                 </span>
                 <span className="item-body">{s.LeadSource}</span>
               </div>
-           
+
+              <div className="item-wrapper-%">
+                <span className="item-header">
+                  <span className="mdi mdi-focus-field-horizontal px-2" />
+                  <span>Field Fill Status</span>
+                </span>
+                {/* <span className="item-body">{s.Fill__c || null}</span> */}
+     
+              </div>
+              <div>
+                <Box >
+      <Box sx={{ width: '100%', mr: 1 }}>
+        <LinearProgress variant="determinate" value={s.Fill__c } />
+      </Box>
+      <Box sx={{ minWidth: 35 }}>
+        <Typography variant="body2" color="text.secondary">{`${Math.round(
+         s.Fill__c 
+        )}%`}</Typography>
+      </Box>
+    </Box>
+      </div>  
               <Rating
         name="text-feedback"
         value={s.Rating__c}
@@ -551,6 +569,17 @@ return (
           value={states.name}
           onChange={(event) => {
             setStates((names) => ({ ...names, name: event.target.value })) }} />
+            </div>
+    <div>
+<TextField
+          required
+          id="outlined-required"
+          label="User Name"
+          variant="outlined"
+          error={states.firstname === '' ? "error" : null}
+          value={states.firstname}
+          onChange={(event) => {
+            setStates((names) => ({ ...names, firstname: event.target.value })) }} />
             </div>
             <div>
 <TextField

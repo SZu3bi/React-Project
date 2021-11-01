@@ -60,7 +60,8 @@ export const ContactPageupsert = (
       email: '',
       rate:0,
       active:false ,
-      amount:0
+      amount:0,
+      firstname:'' 
 
     });
   const [idedit, setidedit] = useState()
@@ -95,6 +96,7 @@ console.log(loading);
         phone: (DTO && DTO.Phone) || '',
         email: (DTO && DTO.Email) || '',
         leadsource: (DTO && DTO.LeadSource) || '',
+        firstname: (DTO && DTO.FirstName) || '',
         rate: (DTO && DTO.Rating__c) || '',
         active: (DTO && DTO.Active__c),
         amount: (DTO && DTO.Amount__c)
@@ -145,6 +147,15 @@ console.log(loading);
             value={state.name}
             onChange={(event) => {
               setState((item) => ({ ...item, name: event.target.value }))}} />
+        </div>
+        <div>
+          <TextField
+            error={state.firstname === '' ? "error" : null}
+            label="User Name"
+            variant="outlined"
+            value={state.firstname}
+            onChange={(event) => {
+              setState((item) => ({ ...item, firstname: event.target.value }))}} />
         </div>
         <div>
         

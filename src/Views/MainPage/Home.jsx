@@ -34,7 +34,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocalAtmIcon from '@mui/icons-material/LocalAtm';
 import{ ScrollPic }from "./ScrollPic/ScrollPic";
-
+import ContactPageIcon from '@mui/icons-material/ContactPage';
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -211,7 +211,7 @@ const print = ()=> {
         <Route render={({ history}) => (
       <IconButton color="inherit" className={classes.myClassName}>
 
-<HomeIcon  onClick={() => { history.push('/contact') }} ></HomeIcon>
+<ContactPageIcon  onClick={() => { history.push('/contact') }} ></ContactPageIcon>
 </IconButton>
 )} />
         <p>Contact</p>
@@ -231,10 +231,20 @@ const print = ()=> {
    <Route render={({ history}) => (
       <IconButton color="inherit" className={classes.myClassName}>
 
-<WorkIcon   onClick={() => { history.push('/TotalSummaryCard'); console.log("h",history) }}></WorkIcon>
+<LocalAtmIcon   onClick={() => { history.push('/TotalSummaryCard'); console.log("h",history) }}></LocalAtmIcon>
 </IconButton>
 )} />
      <p>Total Summary Card</p>
+      </MenuItem>
+      <MenuItem>
+   
+   <Route render={({ history}) => (
+        <IconButton color="inherit" className={classes.myClassName}>
+
+        <FavoriteIcon  onClick={() => { history.push('/Scroll') }} ></FavoriteIcon>
+        </IconButton>
+)} />
+     <p>Favorite</p>
       </MenuItem>
 
       <MenuItem>
@@ -343,6 +353,18 @@ const print = ()=> {
             
             </IconButton>
       
+    
+<IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              {/* <Badge badgeContent={4} color="error">
+                <MailIcon />
+              </Badge> */}
+                            <Route render={({ history}) => (
+      <IconButton color="inherit" className={classes.myClassName}>
+
+<ContactPageIcon  onClick={() => { history.push('/contact') }} ></ContactPageIcon>
+</IconButton>
+)} />
+            </IconButton>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -354,8 +376,9 @@ const print = ()=> {
 <WorkIcon   onClick={() => { history.push('/cases'); console.log("h",history) }}></WorkIcon>
 </IconButton>
 )} />
-              
-            </IconButton>
+
+</IconButton>
+         
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
@@ -371,17 +394,6 @@ const print = ()=> {
             </IconButton>
       
    
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              {/* <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge> */}
-                            <Route render={({ history}) => (
-      <IconButton color="inherit" className={classes.myClassName}>
-
-<HomeWorkIcon  onClick={() => { history.push('/contact') }} ></HomeWorkIcon>
-</IconButton>
-)} />
-            </IconButton>
    
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               {/* <Badge badgeContent={4} color="error">
