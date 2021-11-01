@@ -42,6 +42,8 @@ export const TotalSummaryCard = () => {
               <div className="tourDetailsPayment">
                 <div className="tourlabel">-{s.Name}</div>
                 {/* <span className="showdetail">Show Details</span> */}
+
+                <a href={`https://api.whatsapp.com/send/?phone=${s.Phone}&text=Hi ${s.Name} From Psi Amman.`} target="_blank">Send Whatsapp</a>
               </div>
               <div className="tourDetailsPayment">
                 <div className="tourlabelinfo">- Jordan-Amman</div>

@@ -90,7 +90,7 @@ purple: {
 },
 }));
 
-export const ContactPage = () => {
+export const ContactPage = (props) => {
 
   
   const [openD, setOpenD] = React.useState(false);
@@ -375,11 +375,11 @@ return (
 <div className="cards-header">
               <div className="item-wrapper">
               <img id="avatar" className="user-cover-image" src={psi} alt="lead"></img>
-              <div>Timer: {count}s</div>
+              {/* <div>Timer: {count}s</div>
       <div>
         <button onClick={startHandler}>Start</button>
         <button onClick={stopHandler}>Stop</button>
-      </div>
+      </div> */}
               </div>
               <div className="d-flex-column">
                 <div className="item-wrapper px-2">
@@ -421,10 +421,11 @@ return (
               </div>
               <div className="item-wrapper">
                 <span className="item-header">
-                  <span className="mdi mdi-whatsapp px-2" />
-                  <span>whatsapp:</span>
+                 
+                  <a style={{textDecoration: 'auto'
+    ,color: 'green'}} href={`https://api.whatsapp.com/send/?phone=${s.Phone}&text=Hi ${s.Name} From Psi Amman.`} target="_blank"> <span className="mdi mdi-whatsapp px-2" />WhatsApp</a>
+
                 </span>
-                <span className="item-body">{s.Phone || 'N/A'}</span>
               </div>
               <div className="item-wrapper">
                 <span className="item-header">

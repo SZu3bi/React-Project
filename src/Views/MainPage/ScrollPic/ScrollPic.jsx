@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { ButtonBase } from "@material-ui/core";
 import './ScrollPic.scss'
+import { ContactPage } from "../ContactPage";
 export const ScrollPic = () => {
   const main = [
 
@@ -121,7 +122,8 @@ export const ScrollPic = () => {
                     <div className="cards-bodycard">
                       <div className="pic-card">
                           <img    className="Image"  src={s.img}></img>
-                    
+                          {/* <div><ContactPage /></div> */}
+<div>{s.City}</div>
                       </div>
                       <div className="timelinecard">
                         <div className="linecard"></div>
