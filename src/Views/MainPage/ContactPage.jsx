@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useCallback,
-  useRef,
-  useReducer,
-} from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { showError, showSuccess } from "../../Helper/Tostify.Helper";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,7 +9,6 @@ import {
   CreateMainInfo_Contact,
   GetMainInfo_Contact,
   DeleteInfo_Contact,
-  EditInfo_Contact,
 } from "../../Services/APIServices_2";
 import { Source } from "./Option/Option";
 import { GetMainInfo_Case } from "../../Services/APIServices";
@@ -28,12 +21,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 import { deepOrange, deepPurple } from "@material-ui/core/colors";
-import Badge from "@material-ui/core/Badge";
-import PersonIcon from "@material-ui/icons/Person";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import psi from "../../Views/sales.png";
 import Menu from "@material-ui/core/Menu";
 import { Rating } from "@mui/material";
@@ -41,8 +28,6 @@ import StarIcon from "@mui/icons-material/Star";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
-import FileCopyIcon from "@mui/icons-material/FileCopyOutlined";
-import SaveIcon from "@mui/icons-material/Save";
 import PrintIcon from "@mui/icons-material/Print";
 import ShareIcon from "@mui/icons-material/Share";
 import AddIcon from "@mui/icons-material/Add";
@@ -57,19 +42,6 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Spinner } from "../MainPage/SpinnerComponent/Spinner";
-
-const labels = {
-  0.5: "Useless",
-  1: "Useless+",
-  1.5: "Poor",
-  2: "Poor+",
-  2.5: "Ok",
-  3: "Ok+",
-  3.5: "Good",
-  4: "Good+",
-  4.5: "Excellent",
-  5: "Excellent+",
-};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -98,24 +70,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const ContactPage = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [openD, setOpenD] = React.useState(false);
-  const handleOpenD = () => setOpenD(true);
-  const handleCloseD = () => setOpenD(false);
-
-  const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const [openContactAdd, setOpenContactAdd] = React.useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  const [open, setOpen] = useState(false);
-  const [result, setResult] = useState();
-  const [casedata, setCasedata] = useState();
-  const [EditVal, setEditVal] = useState();
-  const [loading, setLoading] = useState(true);
-  const [success, setSuccess] = useState(false);
-  console.log(success);
   const [states, setStates] = useState({
     name: "",
     phone: "",
@@ -127,137 +81,40 @@ export const ContactPage = (props) => {
     amount: 0,
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [openD, setOpenD] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [openContactAdd, setOpenContactAdd] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [result, setResult] = useState();
+  const [casedata, setCasedata] = useState();
+  const [EditVal, setEditVal] = useState();
+  const [loading, setLoading] = useState(true);
+  const [success, setSuccess] = useState(false);
+  const [collapseView, setCollapseView] = useState(false);
+  const [count, setCount] = useState(0);
+
+  const timerIdRef = useRef(0);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const handleOpenD = () => setOpenD(true);
+  const handleCloseD = () => setOpenD(false);
+  const classes = useStyles();
   const openvalchangeContact = () => {
     setOpen(false);
   };
-  /////////////////////////////////  API`s  ///////////////////////////////////////
 
-  /////  Get API
-  const GetAllData = useCallback(async () => {
-    const result = await GetMainInfo_Contact();
-    setIsLoading(true);
-    setLoading(true);
-    if (result) {
-      const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
-      setResult(sortedResult);
-      console.log("item ", result.data.length);
-    } else setResult(null);
-    setLoading(false);
-    setIsLoading(false);
-  }, []);
-
-  const CaseData = useCallback(async () => {
-    setLoading(true);
-    const result = await GetMainInfo_Case();
-    if (result) {
-      const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
-      setCasedata(sortedResult);
-      console.log("item length", result.data.length);
-    } else setCasedata(null);
-    setLoading(false);
-  }, []);
-
-  const handleEditButton = async () => {
-    setLoading(true);
-    openvalchangeContact();
-    showSuccess("Edit Successfully");
-
-    const result = await EditInfo_Contact(idedit, states);
-    if (result) {
-      GetAllData();
-      showSuccess("Edit Successfully");
-    } else showError("Edit Failed");
-    setLoading(false);
-  };
-
-  const [state, setState] = useState({
-    id: "",
-    name: "",
-    phone: "",
-    leadsource: "",
-    email: "",
-    rate: 0,
-    amount: 0,
-  });
-
-  const [idedit, setidedit] = useState();
-
-  useEffect(() => {
-    if (idedit) {
-      setStates((item) => ({
-        ...item,
-        id: (idedit && idedit.Id) || "",
-        name: (idedit && idedit.Name) || "",
-        phone: (idedit && idedit.Phone) || "",
-        email: (idedit && idedit.Email) || "",
-        leadsource: (idedit && idedit.LeadSource) || "",
-        rate: (idedit && idedit.Rating__c) || "",
-        amount: (idedit && idedit.Amount__c) || "",
-        active: (idedit && idedit.Active__c) || "",
-        firstname: (idedit && idedit.FirstName) || "",
-      }));
-      setidedit(idedit && idedit.Id);
-      console.log("Data>>>", idedit.Name);
+  const startHandler = () => {
+    if (timerIdRef.current) {
+      return;
     }
-  }, [idedit]);
-
-  console.log("Contact-data", result);
-  console.log("Case-data", casedata);
-
-  //   const clearState = () => {
-  //     setName({
-  //       subject: '',
-  //       status: '',
-  //       origin: '',
-  //       priority: '',
-  //       email: '',
-  //       type: ''
-  //     });
-  //   };
-
-  // const hundle = ()=>{
-  //   if (name.subject !== '') {
-  //     handleCreateButton();
-
-  //   }else
-  //       showError(('Fill Subject'));
-  // }
-
-  /////  Create API
-  const handleCreateButtons_2 = async () => {
-    setLoading(true);
-    const result = await CreateMainInfo_Contact(states);
-    if (result) {
-      clearState();
-      showSuccess("Create Successfully");
-      setSuccess(false);
-      GetAllData();
-      setLoading(true);
-      setTimeout(() => {
-        setSuccess(true);
-        setLoading(false);
-      }, 2000);
-      handleClose();
-    } else setLoading(false);
+    timerIdRef.current = setInterval(() => setCount((c) => c + 1), 1000);
+  };
+  const stopHandler = () => {
+    clearInterval(timerIdRef.current);
+    timerIdRef.current = 0;
   };
 
-  /////  Delete API
-  const handleDeleteButton = async (deletedId) => {
-    setLoading(true);
-    const result = await DeleteInfo_Contact(deletedId);
-
-    if (result) {
-      showSuccess("Deleted Successfully");
-      setSuccess(false);
-      GetAllData();
-      setLoading(true);
-      // setTimeout(() => {
-
-      //       }, 100);
-    } else {
-      showError("Delete Failed");
-    }
-  };
   const clearState = () => {
     setStates({
       name: "",
@@ -266,12 +123,6 @@ export const ContactPage = (props) => {
       leadSource: "",
     });
   };
-
-  /////////////////////////////////  API`s  ///////////////////////////////////////
-  useEffect(() => {
-    GetAllData();
-    CaseData();
-  }, [GetAllData, CaseData]);
 
   const handleClickOpen = (id) => {
     //   console.log('subject: ', name.subject);
@@ -300,8 +151,6 @@ export const ContactPage = (props) => {
     handleClickOpen();
   };
 
-  const [collapseView, setCollapseView] = useState(false);
-
   const handleChange = (panel) => (index, collapseView) => {
     setCollapseView(collapseView ? panel : false);
   };
@@ -309,24 +158,72 @@ export const ContactPage = (props) => {
   const info = (id, name) => {
     showSuccess(`${id}` + "\n" + `${name}`);
   };
-  console.log("collapseView", collapseView);
 
-  const timerIdRef = useRef(0);
-  const [count, setCount] = useState(0);
+  const GetAllData = useCallback(async () => {
+    const result = await GetMainInfo_Contact();
+    setIsLoading(true);
+    setLoading(true);
+    if (result) {
+      const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
+      setResult(sortedResult);
+      // console.log("item ", result.data.length);
+    } else setResult(null);
+    setLoading(false);
+    setIsLoading(false);
+  }, []);
 
-  const startHandler = () => {
-    if (timerIdRef.current) {
-      return;
+  const CaseData = useCallback(async () => {
+    setLoading(true);
+    const result = await GetMainInfo_Case();
+    if (result) {
+      const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
+      setCasedata(sortedResult);
+      // console.log("item length", result.data.length);
+    } else setCasedata(null);
+    setLoading(false);
+  }, []);
+
+  const handleCreateButtons_2 = async () => {
+    setLoading(true);
+    const result = await CreateMainInfo_Contact(states);
+    if (result) {
+      clearState();
+      showSuccess("Create Successfully");
+      setSuccess(false);
+      GetAllData();
+      setLoading(true);
+      setTimeout(() => {
+        setSuccess(true);
+        setLoading(false);
+      }, 2000);
+      handleClose();
+    } else setLoading(false);
+  };
+
+  const handleDeleteButton = async (deletedId) => {
+    setLoading(true);
+    const result = await DeleteInfo_Contact(deletedId);
+
+    if (result) {
+      showSuccess("Deleted Successfully");
+      setSuccess(false);
+      GetAllData();
+      setLoading(true);
+      // setTimeout(() => {
+
+      //       }, 100);
+    } else {
+      showError("Delete Failed");
     }
-    timerIdRef.current = setInterval(() => setCount((c) => c + 1), 1000);
   };
-  const stopHandler = () => {
-    clearInterval(timerIdRef.current);
-    timerIdRef.current = 0;
-  };
+
   useEffect(() => {
     return () => clearInterval(timerIdRef.current);
   }, []);
+  useEffect(() => {
+    GetAllData();
+    CaseData();
+  }, [GetAllData, CaseData]);
 
   return (
     <div className="Agents-wrapper view-wrapper">
@@ -338,8 +235,6 @@ export const ContactPage = (props) => {
           openvalchangeContact={openvalchangeContact}
         />
       )}
-      {/* <button onClick={top} id="myBtn" title="Go to top">Top</button> */}
-
       {loading ? (
         <CircularProgress />
       ) : (
@@ -359,9 +254,8 @@ export const ContactPage = (props) => {
           {result &&
             result.map((s, index) => (
               <div className="users-card-wrapper">
-
                 <div className="cards-wrapper">
-                <Spinner isActive={isLoading} isAbsolute/>
+                  <Spinner isActive={isLoading} isAbsolute />
 
                   <div className={s.Active__c === true ? "ribbon" : "ribbon2"}>
                     {s.Active__c === true ? "Active" : "Not Active"}

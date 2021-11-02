@@ -1,10 +1,8 @@
 import React, { useRef, useState, useEffect } from "react";
 import { ButtonBase } from "@material-ui/core";
-import './ScrollPic.scss'
-import { ContactPage } from "../ContactPage";
+import "./ScrollPic.scss";
 export const ScrollPic = () => {
   const main = [
-
     {
       name: "Amman City",
       inf: [
@@ -60,8 +58,6 @@ export const ScrollPic = () => {
     if (index !== active) {
       setactive(index);
     } else scrl.current.scrollLeft += shift;
-
-    console.log("index", index);
   };
 
   useEffect(() => {
@@ -76,7 +72,6 @@ export const ScrollPic = () => {
           <div className="cards-wrappercards">
             <div className="title">
               <div className="around-tour"> Dubai all around tour </div>
-         
             </div>
             <div className="tour-info">
               <span>
@@ -121,9 +116,9 @@ export const ScrollPic = () => {
                   m.inf.map((s, index) => (
                     <div className="cards-bodycard">
                       <div className="pic-card">
-                          <img    className="Image"  src={s.img}></img>
-                          {/* <div><ContactPage /></div> */}
-<div>{s.City}</div>
+                        <img className="Image" src={s.img}></img>
+                        {/* <div><ContactPage /></div> */}
+                        <div>{s.City}</div>
                       </div>
                       <div className="timelinecard">
                         <div className="linecard"></div>
@@ -157,7 +152,7 @@ export const ScrollPic = () => {
                       <span className="mdi mdi-chevron-left" />
                     </ButtonBase>
                   </div>
-                  <div style={{marginLeft: '5%'}}>
+                  <div style={{ marginLeft: "5%" }}>
                     <ButtonBase
                       className="btns-icons mx-2 mb-2 basebtnss"
                       onClick={() => {

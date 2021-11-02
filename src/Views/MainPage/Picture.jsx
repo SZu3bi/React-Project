@@ -1,49 +1,46 @@
-import React ,{ useEffect, useState, useCallback } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogContent from '@material-ui/core/DialogContent';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import React, { useEffect, useState, useCallback } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 //import psi from '../../Views/psi.png'
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import MobileStepper from '@material-ui/core/MobileStepper';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
-
-
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import MobileStepper from "@material-ui/core/MobileStepper";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
+import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
+import SwipeableViews from "react-swipeable-views";
+import { autoPlay } from "react-swipeable-views-utils";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-
 const tutorialSteps = [
   {
-    label: 'San Francisco – Oakland Bay Bridge, United States',
+    label: "San Francisco – Oakland Bay Bridge, United States",
     imgPath:
-      'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
+      "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60",
   },
   {
-    label: 'Bird',
+    label: "Bird",
     imgPath:
-      'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
+      "https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60",
   },
   {
-    label: 'Bali, Indonesia',
+    label: "Bali, Indonesia",
     imgPath:
-      'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80',
+      "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250&q=80",
   },
   {
-    label: 'NeONBRAND Digital Marketing, Las Vegas, United States',
+    label: "NeONBRAND Digital Marketing, Las Vegas, United States",
     imgPath:
-      'https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60',
+      "https://images.unsplash.com/photo-1518732714860-b62714ce0c59?auto=format&fit=crop&w=400&h=250&q=60",
   },
   {
-    label: 'Goč, Serbia',
+    label: "Goč, Serbia",
     imgPath:
-      'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
+      "https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60",
   },
 ];
 
@@ -53,33 +50,33 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   header: {
-    display: 'flex',
-    alignItems: 'center',
+    display: "flex",
+    alignItems: "center",
     height: 50,
     paddingLeft: theme.spacing(4),
     backgroundColor: theme.palette.background.default,
   },
   img: {
-    
-    display: 'block',
+    display: "block",
 
-    overflow: 'hidden',
-    width: '100%',
+    overflow: "hidden",
+    width: "100%",
   },
 }));
 
-export const Picture = ({openPicture}) => {
+export const Picture = ({ openPicture }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [pic, setPic] =useState(false);
+  const [pic, setPic] = useState(false);
   const maxSteps = tutorialSteps.length;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
   const open = () => {
-    setPic(true)  };
+    setPic(true);
+  };
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -89,13 +86,11 @@ export const Picture = ({openPicture}) => {
     setActiveStep(step);
   };
 
-    const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
-    return (
-          <div style={{    width: '50%',
-            margin: '1px auto'}}>
-
-<AutoPlaySwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  return (
+    <div style={{ width: "50%", margin: "1px auto" }}>
+      <AutoPlaySwipeableViews
+        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
@@ -103,7 +98,11 @@ export const Picture = ({openPicture}) => {
         {tutorialSteps.map((step, index) => (
           <div key={step.label}>
             {Math.abs(activeStep - index) <= 2 ? (
-              <img className={classes.img} src={step.imgPath} alt={step.label} />
+              <img
+                className={classes.img}
+                src={step.imgPath}
+                alt={step.label}
+              />
             ) : null}
           </div>
         ))}
@@ -114,29 +113,55 @@ export const Picture = ({openPicture}) => {
         variant="text"
         activeStep={activeStep}
         nextButton={
-          <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+          <Button
+            size="small"
+            onClick={handleNext}
+            disabled={activeStep === maxSteps - 1}
+          >
             Next
-            {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-          </Button>}
+            {theme.direction === "rtl" ? (
+              <KeyboardArrowLeft />
+            ) : (
+              <KeyboardArrowRight />
+            )}
+          </Button>
+        }
         backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>{theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}Back</Button>}
-        />
+          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+            {theme.direction === "rtl" ? (
+              <KeyboardArrowRight />
+            ) : (
+              <KeyboardArrowLeft />
+            )}
+            Back
+          </Button>
+        }
+      />
 
-<button onClick={open}> Open Pictures</button>
+      <button onClick={open}> Open Pictures</button>
 
-<Dialog
+      <Dialog
         fullScreen={fullScreen}
         open={pic}
-        maxWidth={'xl'}
-        aria-labelledby="responsive-dialog-title">
-        <DialogContent  >
+        maxWidth={"xl"}
+        aria-labelledby="responsive-dialog-title"
+      >
+        <DialogContent>
           <Paper square elevation={0} className={classes.header}>
-        <Typography>{tutorialSteps[activeStep].label}</Typography>
-      </Paper>
+            <Typography>{tutorialSteps[activeStep].label}</Typography>
+          </Paper>
 
-        <Button autoFocus onClick={()=>{setPic(false)}} color="primary">
-          Exit
-        </Button>
-</DialogContent>
-</Dialog>
-</div>)}
+          <Button
+            autoFocus
+            onClick={() => {
+              setPic(false);
+            }}
+            color="primary"
+          >
+            Exit
+          </Button>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+};

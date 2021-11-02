@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useCallback } from "react";
 import {
   Route,
-  Link,
   BrowserRouter as Router,
   useHistory,
   Redirect,
-  NavLink,
   Switch,
 } from "react-router-dom";
 import { MainPageView } from "./MainPageView";
@@ -37,7 +35,6 @@ import { GetMainInfo_Case } from "../../Services/APIServices";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import HomeWorkIcon from "@mui/icons-material/HomeWork";
 import PrintIcon from "@mui/icons-material/Print";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
@@ -96,29 +93,39 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-//sadsaddas
-export const Home = (handleClickOpen, handleCloseD, handleOpenD, openD) => {
+export const Home = () => {
   const [res, setRes] = useState();
   const [rese, setRese] = useState();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [state, setState] = useState({
+    name: "React",
+    isUserAuthenticated: true,
+  });
 
-  const Data = useCallback(async () => {
-    const result = await GetMainInfo_Contact();
-    if (result) {
-      const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
-      setRes(sortedResult);
-      console.log("item length", result.data.length);
-    } else setRes(null);
-  }, []);
-
-  const GetAllData = useCallback(async () => {
-    const result = await GetMainInfo_Case();
-    if (result) {
-      const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
-      setRese(sortedResult);
-      console.log("item ", result.data.length);
-    } else setRese(null);
-  }, []);
-
+  const classes = useStyles();
+  const history = useHistory();
+  const location = {
+    pathname: "/cases",
+  };
+  const handleClick = () => {
+    GlobalHistory.push("/cases");
+  };
+  const isMenuOpen = Boolean(anchorEl);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleMobileMenuClose = () => {
+    setMobileMoreAnchorEl(null);
+  };
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
+  const handleMobileMenuOpen = (event) => {
+    setMobileMoreAnchorEl(event.currentTarget);
+  };
   const refresh = () => {
     Data();
     GetAllData();
@@ -127,28 +134,21 @@ export const Home = (handleClickOpen, handleCloseD, handleOpenD, openD) => {
     window.print();
   };
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const Data = useCallback(async () => {
+    const result = await GetMainInfo_Contact();
+    if (result) {
+      const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
+      setRes(sortedResult);
+    } else setRes(null);
+  }, []);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+  const GetAllData = useCallback(async () => {
+    const result = await GetMainInfo_Case();
+    if (result) {
+      const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
+      setRese(sortedResult);
+    } else setRese(null);
+  }, []);
 
   useEffect(() => {
     Data();
@@ -201,7 +201,6 @@ export const Home = (handleClickOpen, handleCloseD, handleOpenD, openD) => {
               <HomeIcon
                 onClick={() => {
                   history.push("/home");
-                  console.log("h", history);
                 }}
               ></HomeIcon>
             </IconButton>
@@ -230,7 +229,6 @@ export const Home = (handleClickOpen, handleCloseD, handleOpenD, openD) => {
               <WorkIcon
                 onClick={() => {
                   history.push("/cases");
-                  console.log("h", history);
                 }}
               ></WorkIcon>
             </IconButton>
@@ -245,7 +243,6 @@ export const Home = (handleClickOpen, handleCloseD, handleOpenD, openD) => {
               <LocalAtmIcon
                 onClick={() => {
                   history.push("/TotalSummaryCard");
-                  console.log("h", history);
                 }}
               ></LocalAtmIcon>
             </IconButton>
@@ -309,21 +306,6 @@ export const Home = (handleClickOpen, handleCloseD, handleOpenD, openD) => {
     </Menu>
   );
 
-  const [state, setState] = useState({
-    name: "React",
-    isUserAuthenticated: true,
-  });
-  const classes = useStyles();
-
-  const history = useHistory();
-
-  const location = {
-    pathname: "/cases",
-  };
-  const handleClick = () => {
-    GlobalHistory.push("/cases");
-  };
-
   return (
     <div className="App no-printme">
       <Router>
@@ -366,7 +348,6 @@ export const Home = (handleClickOpen, handleCloseD, handleOpenD, openD) => {
                       color="inherit"
                       onClick={() => {
                         history.push("/Abouts");
-                        console.log("h", history);
                       }}
                     >
                       <IconButton
@@ -387,7 +368,6 @@ export const Home = (handleClickOpen, handleCloseD, handleOpenD, openD) => {
                       color="inherit"
                       onClick={() => {
                         history.push("/home");
-                        console.log("h", history);
                       }}
                     >
                       <IconButton
@@ -408,7 +388,6 @@ export const Home = (handleClickOpen, handleCloseD, handleOpenD, openD) => {
                       color="inherit"
                       onClick={() => {
                         history.push("/About");
-                        console.log("h", history);
                       }}
                     >
                       <IconButton
@@ -420,10 +399,6 @@ export const Home = (handleClickOpen, handleCloseD, handleOpenD, openD) => {
                     </IconButton>
                   )}
                 />
-
-                {/* <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge> */}
                 <Route
                   render={({ history }) => (
                     <IconButton
@@ -452,7 +427,6 @@ export const Home = (handleClickOpen, handleCloseD, handleOpenD, openD) => {
                       color="inherit"
                       onClick={() => {
                         history.push("/cases");
-                        console.log("h", history);
                       }}
                     >
                       <IconButton
@@ -485,10 +459,6 @@ export const Home = (handleClickOpen, handleCloseD, handleOpenD, openD) => {
                     </IconButton>
                   )}
                 />
-
-                {/* <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge> */}
                 <Route
                   render={({ history }) => (
                     <IconButton

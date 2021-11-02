@@ -1,23 +1,23 @@
-import React , { PureComponent } from "react";
-import psi from '../../Views/sales.png'
-import ReactCrop from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
-import ReactDOM from 'react-dom';
+import React, { PureComponent } from "react";
+import psi from "../../Views/sales.png";
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
+import ReactDOM from "react-dom";
 
 class About extends PureComponent {
   state = {
     src: null,
     crop: {
-      unit: '%',
+      unit: "%",
       width: 30,
-      aspect: 16 / 9
-    }
+      aspect: 16 / 9,
+    },
   };
 
   onSelectFile = (e) => {
     if (e.target.files && e.target.files.length > 0) {
       const reader = new FileReader();
-      reader.addEventListener('load', () =>
+      reader.addEventListener("load", () =>
         this.setState({ src: reader.result })
       );
       reader.readAsDataURL(e.target.files[0]);
@@ -44,24 +44,24 @@ class About extends PureComponent {
       const croppedImageUrl = await this.getCroppedImg(
         this.imageRef,
         crop,
-        'newFile.jpeg'
+        "newFile.jpeg"
       );
       this.setState({ croppedImageUrl });
     }
   }
 
   getCroppedImg(image, crop, fileName) {
-    const canvas = document.createElement('canvas');
+    const canvas = document.createElement("canvas");
     const pixelRatio = window.devicePixelRatio;
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext("2d");
 
     canvas.width = crop.width * pixelRatio * scaleX;
     canvas.height = crop.height * pixelRatio * scaleY;
 
     ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-    ctx.imageSmoothingQuality = 'high';
+    ctx.imageSmoothingQuality = "high";
 
     ctx.drawImage(
       image,
@@ -80,7 +80,7 @@ class About extends PureComponent {
         (blob) => {
           if (!blob) {
             //reject(new Error('Canvas is empty'));
-            console.error('Canvas is empty');
+            console.error("Canvas is empty");
             return;
           }
           blob.name = fileName;
@@ -88,7 +88,7 @@ class About extends PureComponent {
           this.fileUrl = window.URL.createObjectURL(blob);
           resolve(this.fileUrl);
         },
-        'image/jpeg',
+        "image/jpeg",
         1
       );
     });
@@ -116,23 +116,23 @@ class About extends PureComponent {
           <img alt="Crop" style={{ maxWidth: '100%' }} src={croppedImageUrl} />
         )} */}
         <section>
-  <span class="sliding">
-    <span>Sales </span>
-    <span>Force</span>
-    <span> - </span>
-    <span>Data</span>
-    <span></span>
-  </span>
-  <div class="wrappers">
-    <span class="sliding">
-      <span>Salah </span>
-      <span>Amjad</span>
-      <span> - </span>
-      <span>Alzuhbi</span>
-      <span></span>
-    </span>
-  </div>
-</section>
+          <span class="sliding">
+            <span>Sales </span>
+            <span>Force</span>
+            <span> - </span>
+            <span>Data</span>
+            <span></span>
+          </span>
+          <div class="wrappers">
+            <span class="sliding">
+              <span>Salah </span>
+              <span>Amjad</span>
+              <span> - </span>
+              <span>Alzuhbi</span>
+              <span></span>
+            </span>
+          </div>
+        </section>
       </div>
     );
   }

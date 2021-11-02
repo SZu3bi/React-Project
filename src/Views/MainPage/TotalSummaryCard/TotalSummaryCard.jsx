@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState,useEffect, useCallback } from "react";
 import "./TotalSummaryCard.scss";
 import {
   GetMainInfo_Contact,
@@ -14,7 +14,6 @@ export const TotalSummaryCard = () => {
     if (result) {
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setResult(sortedResult);
-      console.log("item ", result);
     } else setResult(null);
   }, []);
 
@@ -22,14 +21,17 @@ export const TotalSummaryCard = () => {
     const result = await GetAmount_Contact();
     if (result) {
       setamount(result);
-      console.log("Result ", result);
     } else setResult(0);
   }, []);
+
+
 
   useEffect(() => {
     TotalAmount();
     GetAllData();
   }, [GetAllData, TotalAmount]);
+
+
   return (
     <div className="card-wrappersummary">
       <div className="Paymentsummary">
@@ -43,7 +45,13 @@ export const TotalSummaryCard = () => {
                 <div className="tourlabel">-{s.Name}</div>
                 {/* <span className="showdetail">Show Details</span> */}
 
-                <a href={`https://api.whatsapp.com/send/?phone=${s.Phone}&text=Hi ${s.Name} From Psi Amman.`} target="_blank" rel="noreferrer">Send Whatsapp</a>
+                <a
+                  href={`https://api.whatsapp.com/send/?phone=${s.Phone}&text=Hi ${s.Name} From Psi Amman.`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Send Whatsapp
+                </a>
               </div>
               <div className="tourDetailsPayment">
                 <div className="tourlabelinfo">- Jordan-Amman</div>
@@ -56,16 +64,16 @@ export const TotalSummaryCard = () => {
         <div className="totalpricePayment">
           <div className="tourDetailsPayment">
             <div className="totallabel">-Total Amount</div>
-            
+
             <span className="price">{amount.data}</span>
           </div>
           <div className="tourDetailsPayment">
             <div className="totallabel">-Discount 20%</div>
-            <span className="price">{amount.data * 0.20}</span>
+            <span className="price">{amount.data * 0.2}</span>
           </div>
           <div className="tourDetailsPayment">
             <div className="finalpricelabel">-Total Amount After Discount</div>
-            <div  className="finalprice">{amount.data - (amount.data * 0.20) }</div>
+            <div className="finalprice">{amount.data - amount.data * 0.2}</div>
           </div>
         </div>
       </div>
