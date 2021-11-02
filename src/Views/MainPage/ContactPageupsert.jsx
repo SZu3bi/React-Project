@@ -56,8 +56,6 @@ export const ContactPageupsert = ({
     firstname: "",
   });
 
-  // console.log(loading);
-
   const handleEditButton = async () => {
     setLoading(true);
     openvalchangeContact();

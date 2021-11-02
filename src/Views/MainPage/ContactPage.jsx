@@ -120,7 +120,11 @@ export const ContactPage = (props) => {
       name: "",
       phone: "",
       email: "",
+      firstname: "",
       leadSource: "",
+      rate: 0,
+      active: false,
+      amount: 0,
     });
   };
 
@@ -161,7 +165,7 @@ export const ContactPage = (props) => {
 
   const GetAllData = useCallback(async () => {
     const result = await GetMainInfo_Contact();
-    setIsLoading(true);
+
     setLoading(true);
     if (result) {
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
@@ -169,7 +173,7 @@ export const ContactPage = (props) => {
       // console.log("item ", result.data.length);
     } else setResult(null);
     setLoading(false);
-    setIsLoading(false);
+ 
   }, []);
 
   const CaseData = useCallback(async () => {
@@ -203,15 +207,10 @@ export const ContactPage = (props) => {
   const handleDeleteButton = async (deletedId) => {
     setLoading(true);
     const result = await DeleteInfo_Contact(deletedId);
-
     if (result) {
-      showSuccess("Deleted Successfully");
-      setSuccess(false);
       GetAllData();
+      showSuccess("Deleted Successfully");
       setLoading(true);
-      // setTimeout(() => {
-
-      //       }, 100);
     } else {
       showError("Delete Failed");
     }
@@ -220,6 +219,8 @@ export const ContactPage = (props) => {
   useEffect(() => {
     return () => clearInterval(timerIdRef.current);
   }, []);
+
+
   useEffect(() => {
     GetAllData();
     CaseData();
@@ -254,12 +255,12 @@ export const ContactPage = (props) => {
           {result &&
             result.map((s, index) => (
               <div className="users-card-wrapper">
-                <div className="cards-wrapper">
+                <div className={s.Active__c === true ? "cards-wrapper-active" : "cards-wrapper-notactive"}>
                   <Spinner isActive={isLoading} isAbsolute />
 
-                  <div className={s.Active__c === true ? "ribbon" : "ribbon2"}>
+                  {/* <div className={s.Active__c === true ? "ribbon" : "ribbon2"}>
                     {s.Active__c === true ? "Active" : "Not Active"}
-                  </div>
+                  </div> */}
                   <div className="cards-header">
                     <div className="item-wrapper">
                       <img
@@ -294,6 +295,13 @@ export const ContactPage = (props) => {
                         <span>mobile:</span>
                       </span>
                       <span className="item-body">{s.Phone || "N/A"}</span>
+                    </div>
+                    <div className="item-wrapper">
+                      <span className="item-header">
+                        <span className="mdi mdi-phone px-2" />
+                        <span>Active:</span>
+                      </span>
+                      <span className="item-body"> {s.Active__c === true ? "Active" : "Not Active"}</span>
                     </div>
                     <div className="item-wrapper flex-nowrap">
                       <div className="texts-truncate d-flex">
@@ -445,14 +453,15 @@ export const ContactPage = (props) => {
           </div>
           <div>
             <ToastContainer />
+
+
             <Dialog
               fullScreen={fullScreen}
               open={openContactAdd}
               className="D1"
               maxWidth={"xl"}
               onClose={handleClose}
-              aria-labelledby="responsive-dialog-title"
-            >
+              aria-labelledby="responsive-dialog-title">
               <DialogContent>
                 <ToastContainer />
                 {loading ? (
@@ -592,7 +601,7 @@ export const ContactPage = (props) => {
                   aria-label="contained primary button group"
                 >
                   <Button onClick={handleCreateButtons_2}>Save</Button>
-                  {/* <Button color='inherit' onClick={() => {clearState()} }>Clear</Button> */}
+                  <Button color='inherit' onClick={() => {clearState()} }>Clear</Button>
                   <Button color="secondary" onClick={handleClose}>
                     Exit
                   </Button>

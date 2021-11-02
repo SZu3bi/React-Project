@@ -335,8 +335,22 @@ export const Home = () => {
                   inputProps={{ "aria-label": "search" }}
                 />
               </Search>
-              <img style={{ width: "5%" }} src={psi} alt="lead"></img>
-
+              <Route
+                  render={({ history }) => (
+              <IconButton
+                      size="large"
+                      aria-label="show 17 new notifications"
+                      color="inherit"
+                      style={{    display: 'flex',justifyContent: 'flex-start',width: '5%'}}
+                      onClick={() => {
+                        history.push("/home");
+                      }}
+                    >
+              <img style={{ width: "100%" }} src={psi} alt="lead"></img>
+</IconButton>
+                     )}
+                     />
+                
               <Box sx={{ flexGrow: 1 }} />
 
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
@@ -380,7 +394,7 @@ export const Home = () => {
                   )}
                 />
 
-                <Route
+                {/* <Route
                   render={({ history }) => (
                     <IconButton
                       size="large"
@@ -398,7 +412,7 @@ export const Home = () => {
                       </IconButton>
                     </IconButton>
                   )}
-                />
+                /> */}
                 <Route
                   render={({ history }) => (
                     <IconButton
@@ -553,7 +567,7 @@ export const Home = () => {
           <Route path="/about" component={HistoryPage} />
           <Route exact path="/cases" component={MainPageView} />
           <Route exact path="/contact" component={ContactPage} />
-          <Route exact path="/history" component={HistoryPage} />
+          {/* <Route exact path="/history" component={HistoryPage} /> */}
           <Route exact path="/home" component={DataTable} />
           <Route exact path="/TotalSummaryCard" component={TotalSummaryCard} />
           <Route exact path="/TripTour" component={TripTour} />
