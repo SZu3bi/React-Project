@@ -391,7 +391,7 @@ button.primary.ghost {
   border: 1px solid #e6e6e6;
   color: black;
   min-width: 300px;
-  background: linear-gradient(38deg, rgba(255,255,255,1) 88%, rgba(222,0,0,1) 98%);
+  background: linear-gradient(38deg, rgba(255,255,255,1) 88%, rgba(222,0,0,1) 95%);
   position: relative;
   padding: 2%;
 }
@@ -403,7 +403,7 @@ button.primary.ghost {
   border: 1px solid #e6e6e6;
   color: #121212;
   min-width: 300px;
-  background: linear-gradient(38deg, rgba(255,255,255,1) 88%, rgba(17,190,0,1) 98%);
+  background: linear-gradient(38deg, rgba(255,255,255,1) 88%, rgba(17,190,0,1) 95%);
   position: relative;
   padding: 2%;
 }
@@ -414,7 +414,11 @@ button.primary.ghost {
 } */
 .button:hover {
   cursor: pointer;
-  color: #f50057;
+  color: #fa0101;
+}
+.button-edit:hover {
+  cursor: pointer;
+  color: #07cc32;
 }
 
 .item-wrapper {

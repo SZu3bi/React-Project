@@ -13,6 +13,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+import { Box } from "@mui/system";
+
 
 export const DataTable = () => {
   const [result, setResult] = useState();
@@ -23,7 +27,7 @@ export const DataTable = () => {
   const [rowsPerPage2, setRowsPerPage2] = React.useState(2);
   const [loading, setLoading] = useState(true);
   const [count, setcount] = useState();
-  const [countCon, setcountCon] = useState();
+  const [countcase, setcountcase] = useState();
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -42,28 +46,33 @@ export const DataTable = () => {
   };
 
   const GetAllData = useCallback(async () => {
-    setLoading(true);
+   
     const result = await GetMainInfo_Contact();
     if (result) {
+      setTimeout(() => {
+        setLoading(false); 
+      }, 3000);
+    
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setResult(sortedResult);
-      console.log("Array Result", result);
       setcount(result.data.length);
     } else setResult(null);
-    setLoading(false);
+  
   }, []);
 
   const GetAllData_Case = useCallback(async () => {
-    setLoading(true);
+ 
     const result = await GetMainInfo_Case();
+    setcountcase(result.data.length);
     if (result) {
+      setTimeout(() => {
+        setLoading(false); 
+      }, 3000);
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setres(sortedResult);
-      // setcountCon(res.length);
-      // console.log('case length',res.length);
-      console.log('case',res);
+      console.log('case',result);
     } else setres(null);
-    setLoading(false);
+   
   }, []);
 
   useEffect(() => {
@@ -73,12 +82,25 @@ export const DataTable = () => {
 
   return (
     <div style={{ width: "90%", margin: "1px auto" }}>
-      {loading ? (
-        <CircularProgress />
-      ) : (
+  
         <div>
-          {count !== 0 ? (
+                     {loading ? (
+
+<div style={{display: 'flex'
+  ,justifyContent: 'center'}}>
+  <Box sx={{ width: 800 }}>
+      <Skeleton />
+      <Skeleton animation="wave" />
+      <Skeleton animation={false} />
+    </Box>
+</div>
+
+
+// <CircularProgress />
+) : (
+ 
             <div>
+               {count !== 0 ? (
               <TableContainer
                 component={Paper}
                 style={{ borderRadius: "20px" }}
@@ -141,6 +163,7 @@ export const DataTable = () => {
                         )
                         .map((s, index) => (
                           <TableRow>
+                            
                             <TableCell
                              style={{
                               fontSize: "20px",
@@ -204,15 +227,30 @@ export const DataTable = () => {
                   onPageChange={handleChangePage}
                   onRowsPerPageChange={handleChangeRowsPerPage}
                 />
-              </TableContainer>
-            </div>
-          ) : (
-            "No Data"
-          )}
+              </TableContainer>) :'No Contact'}
+            </div> 
+)}
+        
           <br />
 
-          {countCon  !== 0 ? (
+          {loading ? (
+
+<div style={{display: 'flex'
+  ,justifyContent: 'center'}}>
+  <Box sx={{ width: 800 }}>
+      <Skeleton />
+      <Skeleton animation="wave" />
+      <Skeleton animation={false} />
+    </Box>
+</div>
+
+
+// <CircularProgress />
+) : (
+
+ 
             <div>
+               {countcase !==0 ? (
               <TableContainer
                 component={Paper}
                 style={{ borderRadius: "20px" }}
@@ -360,12 +398,12 @@ export const DataTable = () => {
                   onRowsPerPageChange={handleChangeRowsPerPage2}
                 />
               </TableContainer>
+               ) : 'No Cases'}
             </div>
-          ) : (
-            "No Data"
+           
           )}
         </div>
-      )}
+   
     </div>
   );
 };

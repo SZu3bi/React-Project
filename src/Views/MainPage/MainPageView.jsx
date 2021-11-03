@@ -42,6 +42,9 @@ import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import PrintIcon from "@mui/icons-material/Print";
 import ShareIcon from "@mui/icons-material/Share";
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+
 
 const getSteps = () => {
   return [
@@ -90,9 +93,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const MainPageView = () => {
-  const [openD, setOpenD] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [openn, setOpenn] = React.useState(false);
+  const [openD, setOpenD] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openn, setOpenn] = useState(false);
   const [o, setO] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
@@ -105,7 +108,7 @@ export const MainPageView = () => {
   const [success, setSuccess] = useState(false);
   const [collapseView, setCollapseView] = useState(false);
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const [state, setState] = useState({
     subject: "",
     status: "",
@@ -134,22 +137,28 @@ export const MainPageView = () => {
   const handleCloseD = () => setOpenD(false);
 
   const GetAllData = useCallback(async () => {
-    setLoading(true);
+  
     const result = await GetMainInfo_Case();
     if (result) {
+      setTimeout(() => {
+        setLoading(false); 
+      }, 3000);
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setres(sortedResult);
     } else setres(null);
-    setLoading(false);
+   
   }, []);
   const GetContact = useCallback(async () => {
-    setLoading(true);
+ 
     const result = await GetMainInfo_Contact();
     if (result) {
+      setTimeout(() => {
+        setLoading(false); 
+      }, 3000);
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setrescon(sortedResult);
     } else setres(null);
-    setLoading(false);
+  
   }, []);
 
   const clearState = () => {
@@ -169,34 +178,30 @@ export const MainPageView = () => {
   };
 
   const handleCreateButton = async () => {
-    setLoading(true);
+    setOpenD(false);
     const result = await CreateMainInfo_Case(state);
-    if (result) {
+    if (result)
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
       state.subject = "";
       clearState();
       handleReset();
       showSuccess("Create Successfully");
-      setSuccess(false);
       GetAllData();
-      setLoading(true);
-      setTimeout(() => {
-        setSuccess(true);
-        setLoading(false);
-      }, 2000);
       handleClose();
-    } else setLoading(false);
+    
   };
 
   const handleDeleteButton = async (deletedId) => {
-    setLoading(true);
+ 
     const result = await DeleteInfo_Case(deletedId);
     if (result) {
       setTimeout(() => {
-        showSuccess("Deleted Successfully");
-        setSuccess(false);
-        GetAllData();
-        setLoading(true);
-      }, 100);
+        setLoading(false);
+      }, 2000);
+      showSuccess("Deleted Successfully");
+      GetAllData();
     } else showError("Delete Failed");
   };
 
@@ -364,14 +369,26 @@ export const MainPageView = () => {
         )}
         {o && <ReportPage open={o} openReport={openReport} />}
         {p && <Picture open={p} openPicture={openPicture} />}
-        {loading ? (
-          <CircularProgress />
-        ) : (
+       
           <div>
             <div style={{ display: "inline-block" }}></div>
             {res &&
               res.map((s, index) => (
                 <div className="users-card-wrapper">
+                             {loading ? (
+
+<div style={{display: 'flex'
+  ,justifyContent: 'center'}}>
+<Stack spacing={1}>
+<Skeleton variant="text" />
+<Skeleton variant="circular" width={50} height={50} />
+<Skeleton variant="rectangular" width={350} height={200} />
+</Stack>
+</div>
+
+
+// <CircularProgress />
+) : (
                   <div className="cards-wrapper">
                     <div className="cards-header">
                       <div className="item-wrapper">
@@ -480,7 +497,7 @@ export const MainPageView = () => {
                         ></DeleteForeverIcon>
                       </IconButton>
                     </div>
-                  </div>
+                  </div>)}
                 </div>
               ))}
 
@@ -599,7 +616,7 @@ export const MainPageView = () => {
               </Dialog>
             </div>
           </div>
-        )}
+     
       </div>
     </div>
   );

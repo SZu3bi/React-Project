@@ -42,6 +42,9 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Spinner } from "../MainPage/SpinnerComponent/Spinner";
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -165,26 +168,27 @@ export const ContactPage = (props) => {
 
   const GetAllData = useCallback(async () => {
     const result = await GetMainInfo_Contact();
-
-    setLoading(true);
+    
     if (result) {
+      setTimeout(() => {
+        setLoading(false); 
+      }, 3000);
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setResult(sortedResult);
-      // console.log("item ", result.data.length);
     } else setResult(null);
-    setLoading(false);
  
   }, []);
 
+
   const CaseData = useCallback(async () => {
-    setLoading(true);
     const result = await GetMainInfo_Case();
     if (result) {
+      setTimeout(() => {
+        setLoading(false); 
+      }, 3000);
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setCasedata(sortedResult);
-      // console.log("item length", result.data.length);
     } else setCasedata(null);
-    setLoading(false);
   }, []);
 
   const handleCreateButtons_2 = async () => {
@@ -244,9 +248,7 @@ export const ContactPage = (props) => {
           openvalchangeContact={openvalchangeContact}
         />
       )}
-      {loading ? (
-        <CircularProgress />
-      ) : (
+    
         <div>
           <div style={{ display: "inline-block" }}>
             <Menu
@@ -263,12 +265,22 @@ export const ContactPage = (props) => {
           {result &&
             result.map((s, index) => (
               <div className="users-card-wrapper">
+                  {loading ? (
+
+<div style={{display: 'flex'
+  ,justifyContent: 'center'}}>
+<Stack spacing={1}>
+<Skeleton variant="text" />
+<Skeleton variant="circular" width={50} height={50} />
+<Skeleton variant="rectangular" width={350} height={200} />
+</Stack>
+</div>
+
+
+// <CircularProgress />
+) : (
                 <div className={s.Active__c === true ? "cards-wrapper-active" : "cards-wrapper-notactive"}>
                   <Spinner isActive={isLoading} isAbsolute />
-
-                  {/* <div className={s.Active__c === true ? "ribbon" : "ribbon2"}>
-                    {s.Active__c === true ? "Active" : "Not Active"}
-                  </div> */}
                   <div className="cards-header">
                     <div className="item-wrapper">
                       <img
@@ -418,7 +430,7 @@ export const ContactPage = (props) => {
                     />
                   </div>
                   <div className="item-wrapper actions">
-                    <IconButton size="small" color="inherit" className="button">
+                    <IconButton size="small" color="inherit" className="button-edit">
                       <EditIcon
                         onClick={() => {
                           setOpen(true);
@@ -432,7 +444,7 @@ export const ContactPage = (props) => {
                       ></DeleteForeverIcon>
                     </IconButton>
                   </div>
-                </div>
+                </div>)}
               </div>
             ))}
 
@@ -633,7 +645,7 @@ export const ContactPage = (props) => {
             </Dialog>
           </div>
         </div>
-      )}
+    
     </div>
   );
 };
