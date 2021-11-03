@@ -532,16 +532,25 @@ export const MainPageView = () => {
                               >
                                 Back
                               </Button>
-                              <Button
+                              {activeStep === steps.length - 1 ? null :     <Button
                                 variant="contained"
                                 color="primary"
                                 onClick={handleNext}
                                 className={classes.button}
                               >
-                                {activeStep === steps.length - 1
-                                  ? "Finish"
-                                  : "Next"}
-                              </Button>
+                              
+                                Next
+                              </Button>}
+                              {activeStep === steps.length - 1 ?        <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={hundle}
+                                className={classes.button}
+                              >
+                               
+                                  Finish
+                                 
+                              </Button> : null}
                             </div>
                           </div>
                         </StepContent>
@@ -573,7 +582,7 @@ export const MainPageView = () => {
                     color="primary"
                     aria-label="contained primary button group"
                   >
-                    <Button onClick={hundle}>Save</Button>
+                    {/* <Button onClick={hundle}>Save</Button> */}
                     <Button
                       color="inherit"
                       onClick={() => {

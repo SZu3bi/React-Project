@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "25ch",
+      width: "30ch",
     },
     display: "flex",
     flexWrap: "wrap",
@@ -215,6 +215,14 @@ export const ContactPage = (props) => {
       showError("Delete Failed");
     }
   };
+
+
+  
+  const handleStaffRatingChange = (event) => {
+    setStates((item) => ({ ...item, rate: event.target.value }));
+  };
+
+
 
   useEffect(() => {
     return () => clearInterval(timerIdRef.current);
@@ -468,11 +476,24 @@ export const ContactPage = (props) => {
                   <CircularProgress size={50} />
                 ) : (
                   <div className="div1">
+                       <div>
+
+<Checkbox
+
+  checked={states.active}
+  onChange={(event) => {
+    setStates((item) => ({ ...item, active: event.target.checked }));
+  }}
+  label="Active"
+  color="success"
+></Checkbox><span>Active</span>
+</div>
                     <form
                       className={classes.root}
                       noValidate
                       autoComplete="off"
                     >
+                      
                       <div>
                         <TextField
                           required
@@ -576,20 +597,22 @@ export const ContactPage = (props) => {
                           ))}
                         </TextField>
                       </div>
-                      <div>
-                        <Checkbox
-                          value={states.active}
-                          onChange={(event) => {
-                            setStates((item) => ({
-                              ...item,
-                              active: event.target.checked,
-                            }));
-                          }}
-                          label="Active"
-                          color="success"
-                        ></Checkbox>
-                      </div>
+    
+
+                   
+       
                     </form>
+                    <div className="rate-class">
+          <Rating
+            name="text-feedback"
+            value={states.rate}
+            precision={0.5}
+            emptyIcon={
+              <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+            }
+            onChange={handleStaffRatingChange}
+          /><span>Rate</span>
+          </div>
                   </div>
                 )}
               </DialogContent>

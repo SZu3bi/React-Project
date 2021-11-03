@@ -198,16 +198,19 @@ export const ContactPageupsert = ({
             </TextField>
           </div>
           <div>
+          <div>
+
             <Checkbox
+           
               checked={state.active}
               onChange={(event) => {
                 setState((item) => ({ ...item, active: event.target.checked }));
               }}
               label="Active"
               color="success"
-            ></Checkbox>
+            ></Checkbox><span>Active</span>
           </div>
-
+<div className="rate-class">
           <Rating
             name="text-feedback"
             value={state.rate}
@@ -216,7 +219,9 @@ export const ContactPageupsert = ({
               <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
             }
             onChange={handleStaffRatingChange}
-          />
+          /><span>Rate</span>
+          </div>
+          </div>
         </form>
       </div>
 
