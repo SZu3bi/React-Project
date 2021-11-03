@@ -1,140 +1,53 @@
-import React, { PureComponent } from "react";
-import psi from "../../Views/sales.png";
-import ReactCrop from "react-image-crop";
+import React, { useCallback, useEffect, useState } from "react";
 import "react-image-crop/dist/ReactCrop.css";
-import ReactDOM from "react-dom";
+import {
+  GetMainInfo_Contact
+} from "../../Services/APIServices_2";
 
-class About extends PureComponent {
-  state = {
-    src: null,
-    crop: {
-      unit: "%",
-      width: 30,
-      aspect: 16 / 9,
-    },
-  };
 
-  onSelectFile = (e) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const reader = new FileReader();
-      reader.addEventListener("load", () =>
-        this.setState({ src: reader.result })
-      );
-      reader.readAsDataURL(e.target.files[0]);
-    }
-  };
+export const About = () => {
 
-  // If you setState the crop in here you should return false.
-  onImageLoaded = (image) => {
-    this.imageRef = image;
-  };
 
-  onCropComplete = (crop) => {
-    this.makeClientCrop(crop);
-  };
 
-  onCropChange = (crop, percentCrop) => {
-    // You could also use percentCrop:
-    // this.setState({ crop: percentCrop });
-    this.setState({ crop });
-  };
+  const [result, setResult] = useState();
 
-  async makeClientCrop(crop) {
-    if (this.imageRef && crop.width && crop.height) {
-      const croppedImageUrl = await this.getCroppedImg(
-        this.imageRef,
-        crop,
-        "newFile.jpeg"
-      );
-      this.setState({ croppedImageUrl });
-    }
-  }
+  const GetAllData = useCallback(async () => {
+    const result = await GetMainInfo_Contact();
+    if (result) {
+      setTimeout(() => {
+      
+      }, 3000);
+      const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
+      setResult(sortedResult);
+    } else setResult(null);
+ 
+  }, []);
 
-  getCroppedImg(image, crop, fileName) {
-    const canvas = document.createElement("canvas");
-    const pixelRatio = window.devicePixelRatio;
-    const scaleX = image.naturalWidth / image.width;
-    const scaleY = image.naturalHeight / image.height;
-    const ctx = canvas.getContext("2d");
 
-    canvas.width = crop.width * pixelRatio * scaleX;
-    canvas.height = crop.height * pixelRatio * scaleY;
 
-    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-    ctx.imageSmoothingQuality = "high";
+  useEffect(() => {
+    GetAllData();
+  }, [GetAllData]);
 
-    ctx.drawImage(
-      image,
-      crop.x * scaleX,
-      crop.y * scaleY,
-      crop.width * scaleX,
-      crop.height * scaleY,
-      0,
-      0,
-      crop.width * scaleX,
-      crop.height * scaleY
-    );
 
-    return new Promise((resolve, reject) => {
-      canvas.toBlob(
-        (blob) => {
-          if (!blob) {
-            //reject(new Error('Canvas is empty'));
-            console.error("Canvas is empty");
-            return;
-          }
-          blob.name = fileName;
-          window.URL.revokeObjectURL(this.fileUrl);
-          this.fileUrl = window.URL.createObjectURL(blob);
-          resolve(this.fileUrl);
-        },
-        "image/jpeg",
-        1
-      );
-    });
-  }
-
-  render() {
-    const { crop, croppedImageUrl, src } = this.state;
-
-    return (
+     return (
       <div className="App">
-        {/* <div>
-          <input type="file" accept="image/*" onChange={this.onSelectFile} />
-        </div>
-        {src && (
-          <ReactCrop
-            src={src}
-            crop={crop}
-            ruleOfThirds
-            onImageLoaded={this.onImageLoaded}
-            onComplete={this.onCropComplete}
-            onChange={this.onCropChange}
-          />
-        )}
-        {croppedImageUrl && (
-          <img alt="Crop" style={{ maxWidth: '100%' }} src={croppedImageUrl} />
-        )} */}
-        <section>
-          <span class="sliding">
-            <span>Sales </span>
-            <span>Force</span>
-            <span> - </span>
-            <span>Data</span>
-            <span></span>
-          </span>
-          <div class="wrappers">
-            <span class="sliding">
-              <span>Salah </span>
-              <span>Amjad</span>
-              <span> - </span>
-              <span>Alzuhbi</span>
-              <span></span>
-            </span>
-          </div>
-        </section>
+       
+
+<div class="content">
+  <div class="content__container">
+    <p class="content__container__text">
+      Hello
+    </p>
+    
+    <ul class="content__container__list">
+    {result &&
+            result.map((s, index) => (
+      <li class="content__container__list__item">{s.Name}</li>))}
+
+    </ul>
+  </div>
+</div>
       </div>
     );
-  }
-}
-export default About;
+  };

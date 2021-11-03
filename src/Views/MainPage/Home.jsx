@@ -10,7 +10,7 @@ import { MainPageView } from "./MainPageView";
 import { TotalSummaryCard } from "./TotalSummaryCard/TotalSummaryCard";
 import { TripTour } from "./TripTour/TripTour";
 import { HistoryPage } from "./HistoryPage";
-import About from "./About";
+import {About} from "./About";
 import WorkIcon from "@material-ui/icons/Work";
 import { GlobalHistory } from "../../Helper/Middleware.Helper";
 import HomeIcon from "@material-ui/icons/Home";

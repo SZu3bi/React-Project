@@ -4,6 +4,7 @@ export * from './MainPage/ContactPageupsert';
 export * from './MainPage/HistoryPage';
 export * from './MainPage/DataTable';
 export * from './MainPage/DataTable';
+export * from './MainPage/About';
 export * from './MainPage/TotalSummaryCard/TotalSummaryCard';
 export * from './MainPage/TripTour/TripTour';
 export * from './MainPage/ScrollPic/ScrollPic';

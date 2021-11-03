@@ -1,4 +1,5 @@
 import './App.css';
+import './Style.scss';
 
 // import { MainPageView } from './Views';
 import { Home } from './Views/MainPage/Home';
