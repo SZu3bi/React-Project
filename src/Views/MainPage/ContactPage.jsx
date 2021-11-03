@@ -254,7 +254,7 @@ export const ContactPage = (props) => {
         {result &&
           result.map((s, index) => (
             <div className="users-card-wrapper">
-              {!loading ? (
+              {loading ? (
                 <div className="users-card-wrapper">
                   <Stack spacing={1}>
                     <Skeleton variant="text" />
