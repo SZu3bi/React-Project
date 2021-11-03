@@ -74,6 +74,32 @@ export const TotalSummaryCard = () => {
           </div>
         </div>
       </div> */}
+
+{result &&
+          result.map((s, index) => (
+
+<div class="cc">
+  <div class="cc__front">
+    <div class="cc__brand">
+      <div class="cc__brand-logo">
+        <span class="cc__logo-circle cc__logo-circle--left"></span>
+        <span class="cc__logo-circle cc__logo-circle--right"></span>
+      </div>
+      <span class="cc__brand-text">Mastercard</span>
+    </div>
+    <div class="cc__number">
+      <span class="cc__number-dot"></span>
+      <span class="cc__number-dot"></span>
+      <span class="cc__digits">{s.Name}</span>
+    </div>
+    <div class="cc__balance-text">$ {s.Amount__c}</div>
+  </div>
+
+</div>
+          ))}
+
+
+
     </div>
   );
 };
