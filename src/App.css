@@ -488,6 +488,11 @@ button.primary.ghost {
 .item-header {
   font-weight: bold;
   margin-bottom: 0.25rem;
+
+}
+.item-header-ellipsis {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
   text-overflow: ellipsis;
   overflow: hidden;
   width: 160px;

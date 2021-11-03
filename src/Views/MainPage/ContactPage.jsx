@@ -288,10 +288,10 @@ export const ContactPage = (props) => {
                     </div>
                     <div className="d-flex-column">
                       <div className="item-wrapper px-2">
-                        <span className="item-header">{s.Name}</span>
+                        <span className="item-header-ellipsis">{s.Name}</span>
                       </div>
                       <div className="item-wrapper">
-                        <span className="item-header px-2">username</span>
+                        <span className="item-header-ellipsis px-2">username</span>
                         <span className="item-body">
                           {s.FirstName || "N/A"}
                         </span>
