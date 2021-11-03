@@ -480,6 +480,11 @@ button.primary.ghost {
 .item-header {
   font-weight: bold;
   margin-bottom: 0.25rem;
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  width: 160px; 
+  height: 1.2em; 
+  white-space: nowrap;
 }
 
 .mb-3 {

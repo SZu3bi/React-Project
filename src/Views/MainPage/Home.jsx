@@ -198,6 +198,20 @@ export const Home = () => {
         <Route
           render={({ history }) => (
             <IconButton color="inherit" className={classes.myClassName}>
+              <InfoIcon
+                onClick={() => {
+                  history.push("/Abouts");
+                }}
+              ></InfoIcon>
+            </IconButton>
+          )}
+        />
+        <p>Home</p>
+      </MenuItem>
+      <MenuItem>
+        <Route
+          render={({ history }) => (
+            <IconButton color="inherit" className={classes.myClassName}>
               <HomeIcon
                 onClick={() => {
                   history.push("/home");
