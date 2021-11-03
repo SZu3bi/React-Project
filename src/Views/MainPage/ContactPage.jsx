@@ -95,7 +95,10 @@ export const ContactPage = (props) => {
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState(false);
   const [collapseView, setCollapseView] = useState(false);
-  const [count, setCount] = useState(0);
+  const [count, setcount] = useState();
+  const [Count, setCount] = useState();
+  const [countcase, setcountcase] = useState();
+
 
   const timerIdRef = useRef(0);
   const theme = useTheme();
@@ -168,8 +171,8 @@ export const ContactPage = (props) => {
 
   const GetAllData = useCallback(async () => {
     const result = await GetMainInfo_Contact();
-    
     if (result) {
+      setcount(result.data.length);
       setTimeout(() => {
         setLoading(false); 
       }, 3000);
@@ -194,18 +197,15 @@ export const ContactPage = (props) => {
   const handleCreateButtons_2 = async () => {
     setLoading(true);
     const result = await CreateMainInfo_Contact(states);
-    if (result) {
+    if (result) 
       clearState();
       showSuccess("Create Successfully");
       setSuccess(false);
       GetAllData();
-      setLoading(true);
-      setTimeout(() => {
-        setSuccess(true);
-        setLoading(false);
-      }, 2000);
+      setLoading(false);
+   
       handleClose();
-    } else setLoading(false);
+ 
   };
 
   const handleDeleteButton = async (deletedId) => {
@@ -279,6 +279,9 @@ export const ContactPage = (props) => {
 
 // <CircularProgress />
 ) : (
+
+
+  
                 <div className={s.Active__c === true ? "cards-wrapper-active" : "cards-wrapper-notactive"}>
                   <Spinner isActive={isLoading} isAbsolute />
                   <div className="cards-header">
@@ -444,6 +447,8 @@ export const ContactPage = (props) => {
                       ></DeleteForeverIcon>
                     </IconButton>
                   </div>
+
+                
                 </div>)}
               </div>
             ))}
@@ -485,7 +490,11 @@ export const ContactPage = (props) => {
               <DialogContent>
                 <ToastContainer />
                 {loading ? (
-                  <CircularProgress size={50} />
+                <Box >
+                <Skeleton />
+                <Skeleton animation="wave" />
+                <Skeleton animation={false} />
+              </Box>
                 ) : (
                   <div className="div1">
                        <div>

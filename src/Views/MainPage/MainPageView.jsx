@@ -44,6 +44,7 @@ import PrintIcon from "@mui/icons-material/Print";
 import ShareIcon from "@mui/icons-material/Share";
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
+import Box from "@mui/material/Box";
 
 
 const getSteps = () => {
@@ -105,9 +106,8 @@ export const MainPageView = () => {
   const [rescon, setrescon] = useState();
   const [EditVal, setEditVal] = useState();
   const [loading, setLoading] = useState(true);
-  const [success, setSuccess] = useState(false);
-  const [collapseView, setCollapseView] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [countcase, setcountcase] = useState();
+
   const [activeStep, setActiveStep] = useState(0);
   const [state, setState] = useState({
     subject: "",
@@ -140,6 +140,8 @@ export const MainPageView = () => {
   
     const result = await GetMainInfo_Case();
     if (result) {
+      setcountcase(result.data.length);
+
       setTimeout(() => {
         setLoading(false); 
       }, 3000);
@@ -355,6 +357,7 @@ export const MainPageView = () => {
   }
 
   return (
+   
     <div className="overflow">
       <div className="Agents-wrapper view-wrapper">
         {open && (
@@ -389,6 +392,7 @@ export const MainPageView = () => {
 
 // <CircularProgress />
 ) : (
+
                   <div className="cards-wrapper">
                     <div className="cards-header">
                       <div className="item-wrapper">
@@ -497,8 +501,10 @@ export const MainPageView = () => {
                         ></DeleteForeverIcon>
                       </IconButton>
                     </div>
+               
                   </div>)}
                 </div>
+                
               ))}
 
             <div className="speedDial no-printme">
@@ -533,6 +539,13 @@ export const MainPageView = () => {
                 onClose={handleClose}
                 aria-labelledby="responsive-dialog-title"
               >
+                    {loading ? (
+                <Box >
+                <Skeleton />
+                <Skeleton animation="wave" />
+                <Skeleton animation={false} />
+              </Box>
+                ) : (
                 <DialogContent>
                   <Stepper activeStep={activeStep} orientation="vertical">
                     {steps.map((label, index) => (
@@ -591,7 +604,7 @@ export const MainPageView = () => {
                   ) : (
                     <div className="div1"></div>
                   )}
-                </DialogContent>
+                </DialogContent>)}
                 <DialogActions style={{ justifyContent: "center" }}>
                   <ButtonGroup
                     variant="contained"
@@ -618,6 +631,8 @@ export const MainPageView = () => {
           </div>
      
       </div>
+
     </div>
+     
   );
 };
