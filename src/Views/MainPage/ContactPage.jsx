@@ -22,6 +22,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useTheme } from "@material-ui/core/styles";
 import { deepOrange, deepPurple } from "@material-ui/core/colors";
 import psi from "../../Views/sales.png";
+import nocontact from "../../Views/nodata.png";
 import Menu from "@material-ui/core/Menu";
 import { Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
@@ -44,6 +45,22 @@ import LinearProgress from "@mui/material/LinearProgress";
 import { Spinner } from "../MainPage/SpinnerComponent/Spinner";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
+import Modal from '@mui/material/Modal';
+import { Filter } from "@material-ui/icons";
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -97,6 +114,13 @@ export const ContactPage = (props) => {
   const [count, setcount] = useState();
   const [Count, setCount] = useState();
   const [countcase, setcountcase] = useState();
+
+
+  const [openm, setOpenm] = React.useState(false);
+  const handleOpenm = () => setOpenm(true);
+  const handleClosem = () => setOpenm(false);
+
+
 
   const timerIdRef = useRef(0);
   const theme = useTheme();
@@ -203,12 +227,13 @@ export const ContactPage = (props) => {
   };
 
   const handleDeleteButton = async (deletedId) => {
-    setLoading(true);
+    setLoading(false);
+    setOpenm(false);
     const result = await DeleteInfo_Contact(deletedId);
     if (result) {
       GetAllData();
       showSuccess("Deleted Successfully");
-      setLoading(true);
+    
     } else {
       showError("Delete Failed");
     }
@@ -238,19 +263,13 @@ export const ContactPage = (props) => {
         />
       )}
 
-      <div>
-        <div style={{ display: "inline-block" }}>
-          <Menu
-            id="simple-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={Boolean(anchorEl)}
-            onClose={CloseAdd}
-          >
-            <MenuItem onClick={CloseAdd}>Add New</MenuItem>
-          </Menu>
-        </div>
 
+
+      <div>
+{count !==0 ? (
+
+        
+<div>
         {result &&
           result.map((s, index) => (
             <div className="users-card-wrapper">
@@ -436,11 +455,32 @@ export const ContactPage = (props) => {
                         }}
                       ></EditIcon>
                     </IconButton>
+                    <div>
+                      
                     <IconButton size="small" color="inherit" className="button">
-                      <DeleteForeverIcon
-                        onClick={() => handleDeleteButton(s.Id)}
+                    <DeleteForeverIcon
+                       onClick={handleOpenm}
                       ></DeleteForeverIcon>
                     </IconButton>
+      <Modal
+        open={openm}
+        onClose={handleClosem}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+
+        "Do you really want to delete this Contact?"
+
+        <Button
+                        onClick={() => handleDeleteButton(s.Id)}
+                      >Yes</Button>
+        <Button
+                        onClick={handleClosem}
+                      >No</Button>
+        </Box>
+      </Modal>
+    </div>
                   </div>
                 </div>
               )}
@@ -448,6 +488,10 @@ export const ContactPage = (props) => {
           ))}
 
         <br />
+</div>):<div >
+         <img style={{ borderRadius: '5px' , filter: 'drop-shadow(2px 4px 6px black)' ,width: '45%'}} src={nocontact}></img>
+         </div>}
+
         <div className="speedDial no-printme">
           <Backdrop open={openD} />
           <SpeedDial

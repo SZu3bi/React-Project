@@ -45,6 +45,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import nocontact from "../../Views/nodata.png";
 
 const getSteps = () => {
   return [
@@ -365,8 +366,14 @@ export const MainPageView = () => {
         {o && <ReportPage open={o} openReport={openReport} />}
         {p && <Picture open={p} openPicture={openPicture} />}
 
+        
+    
         <div>
           <div style={{ display: "inline-block" }}></div>
+          {countcase !==0 ? (
+
+        
+<div>
           {res &&
             res.map((s, index) => (
               <div className="users-card-wrapper">
@@ -496,7 +503,9 @@ export const MainPageView = () => {
                 )}
               </div>
             ))}
-
+            </div>): <div >
+         <img style={{ borderRadius: '5px' , filter: 'drop-shadow(2px 4px 6px black)' ,width: '45%'}} src={nocontact}></img>
+         </div>}
           <div className="speedDial no-printme">
             <Backdrop open={openD} />
             <SpeedDial

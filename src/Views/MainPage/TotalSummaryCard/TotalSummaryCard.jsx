@@ -34,16 +34,14 @@ export const TotalSummaryCard = () => {
 
   return (
     <div className="card-wrappersummary">
-      <div className="Paymentsummary">
+      {/* <div className="Paymentsummary">
         <div className="totalsummaryPayment">Total Summary</div>
 
-        {/* tour details */}
         {result &&
           result.map((s, index) => (
             <div className="tourPayment">
               <div className="tourDetailsPayment">
                 <div className="tourlabel">-{s.Name}</div>
-                {/* <span className="showdetail">Show Details</span> */}
 
                 <a
                   href={`https://api.whatsapp.com/send/?phone=${s.Phone}&text=Hi ${s.Name} From Psi Amman.`}
@@ -60,7 +58,6 @@ export const TotalSummaryCard = () => {
             </div>
           ))}
 
-        {/* TotalPriceDiv */}
         <div className="totalpricePayment">
           <div className="tourDetailsPayment">
             <div className="totallabel">-Total Amount</div>
@@ -76,7 +73,7 @@ export const TotalSummaryCard = () => {
             <div className="finalprice">{amount.data - amount.data * 0.2}</div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

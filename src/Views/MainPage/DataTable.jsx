@@ -11,9 +11,12 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import TablePagination from "@mui/material/TablePagination";
 import Skeleton from '@mui/material/Skeleton';
-
+import { Rating } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
 import { Box } from "@mui/system";
-
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import { deepOrange, deepPurple } from '@mui/material/colors';
 
 export const DataTable = () => {
   const [result, setResult] = useState();
@@ -114,6 +117,17 @@ export const DataTable = () => {
                         }}
                         align="center"
                       >
+                        User
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          fontSize: "16px",
+                          fontFamily: "revert",
+                          fontWeight: "bold",
+                          color: "#ffffff",
+                        }}
+                        align="center"
+                      >
                         Name
                       </TableCell>
                       <TableCell
@@ -147,6 +161,17 @@ export const DataTable = () => {
                         }}
                         align="center"
                       >
+                        Rate
+                      </TableCell>
+                      <TableCell
+                        style={{
+                          fontSize: "16px",
+                          fontFamily: "revert",
+                          fontWeight: "bold",
+                          color: "#ffffff",
+                        }}
+                        align="center"
+                      >
                         LeadSource
                       </TableCell>
                     </TableRow>
@@ -161,6 +186,22 @@ export const DataTable = () => {
                         .map((s, index) => (
                           <TableRow>
                             
+                            <TableCell
+                             style={{
+                              fontSize: "20px",
+                              backgroundColor: "#ffffff",
+                              height: "27px",
+                              fontFamily: "revert",
+                              color: "rgb(248 18 1)",
+                            }}
+                              align="center"
+                            >
+                             <Stack direction="row" spacing={2}>
+
+      <Avatar sx={{ bgcolor: deepOrange[500] }}> {s.Name.charAt(0)}</Avatar>
+   
+    </Stack>
+                            </TableCell>
                             <TableCell
                              style={{
                               fontSize: "20px",
@@ -207,6 +248,29 @@ export const DataTable = () => {
                               }}
                               align="center"
                             >
+                                  <Rating
+                      name="text-feedback"
+                      value={s.Rating__c}
+                      readOnly
+                      precision={0.5}
+                      emptyIcon={
+                        <StarIcon
+                          style={{ opacity: 0.55 }}
+                          fontSize="inherit"
+                        />
+                      }
+                    />
+                            </TableCell>
+                            <TableCell
+                              style={{
+                                fontSize: "15px",
+                                backgroundColor: "#ffffff",
+                                height: "27px",
+                                fontFamily: "revert",
+                                color: "#121212",
+                              }}
+                              align="center"
+                            >
                               {s.LeadSource}
                             </TableCell>
                           </TableRow>
@@ -224,7 +288,15 @@ export const DataTable = () => {
                   onPageChange={handleChangePage}
                   onRowsPerPageChange={handleChangeRowsPerPage}
                 />
-              </TableContainer>) :'No Contact'}
+              </TableContainer>) :
+                  <div style={{    display: 'flex',justifyContent: 'center',fontSize: 'xx-large'}}>
+               
+                  <div className="glitcH" title="No Contact">No Contact<span className="mdi mdi-alert-circle px-2" /></div>
+                  
+                  </div>
+              
+              
+             }
             </div> 
 )}
         
@@ -395,7 +467,14 @@ export const DataTable = () => {
                   onRowsPerPageChange={handleChangeRowsPerPage2}
                 />
               </TableContainer>
-               ) : 'No Cases'}
+               ) :
+               
+               <div style={{    display: 'flex',justifyContent: 'center',fontSize: 'xx-large'}}>
+               
+               <div className="glitcH" title="No Case">No Case<span className="mdi mdi-alert-circle px-2" /></div>
+               
+               </div>
+               }
             </div>
            
           )}
