@@ -42,10 +42,9 @@ import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import PrintIcon from "@mui/icons-material/Print";
 import ShareIcon from "@mui/icons-material/Share";
-import Skeleton from '@mui/material/Skeleton';
-import Stack from '@mui/material/Stack';
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-
 
 const getSteps = () => {
   return [
@@ -137,30 +136,26 @@ export const MainPageView = () => {
   const handleCloseD = () => setOpenD(false);
 
   const GetAllData = useCallback(async () => {
-  
     const result = await GetMainInfo_Case();
     if (result) {
       setcountcase(result.data.length);
 
       setTimeout(() => {
-        setLoading(false); 
+        setLoading(false);
       }, 3000);
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setres(sortedResult);
     } else setres(null);
-   
   }, []);
   const GetContact = useCallback(async () => {
- 
     const result = await GetMainInfo_Contact();
     if (result) {
       setTimeout(() => {
-        setLoading(false); 
+        setLoading(false);
       }, 3000);
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setrescon(sortedResult);
     } else setres(null);
-  
   }, []);
 
   const clearState = () => {
@@ -186,17 +181,15 @@ export const MainPageView = () => {
       setTimeout(() => {
         setLoading(false);
       }, 2000);
-      state.subject = "";
-      clearState();
-      handleReset();
-      showSuccess("Create Successfully");
-      GetAllData();
-      handleClose();
-    
+    state.subject = "";
+    clearState();
+    handleReset();
+    showSuccess("Create Successfully");
+    GetAllData();
+    handleClose();
   };
 
   const handleDeleteButton = async (deletedId) => {
- 
     const result = await DeleteInfo_Case(deletedId);
     if (result) {
       setTimeout(() => {
@@ -357,7 +350,6 @@ export const MainPageView = () => {
   }
 
   return (
-   
     <div className="overflow">
       <div className="Agents-wrapper view-wrapper">
         {open && (
@@ -372,27 +364,26 @@ export const MainPageView = () => {
         )}
         {o && <ReportPage open={o} openReport={openReport} />}
         {p && <Picture open={p} openPicture={openPicture} />}
-       
-          <div>
-            <div style={{ display: "inline-block" }}></div>
-            {res &&
-              res.map((s, index) => (
-                <div className="users-card-wrapper">
-                             {loading ? (
 
-<div style={{display: 'flex'
-  ,justifyContent: 'center'}}>
-<Stack spacing={1}>
-<Skeleton variant="text" />
-<Skeleton variant="circular" width={50} height={50} />
-<Skeleton variant="rectangular" width={350} height={200} />
-</Stack>
-</div>
-
-
-// <CircularProgress />
-) : (
-
+        <div>
+          <div style={{ display: "inline-block" }}></div>
+          {res &&
+            res.map((s, index) => (
+              <div className="users-card-wrapper">
+                {loading ? (
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Stack spacing={1}>
+                      <Skeleton variant="text" />
+                      <Skeleton variant="circular" width={50} height={50} />
+                      <Skeleton
+                        variant="rectangular"
+                        width={350}
+                        height={200}
+                      />
+                    </Stack>
+                  </div>
+                ) : (
+                  // <CircularProgress />
                   <div className="cards-wrapper">
                     <div className="cards-header">
                       <div className="item-wrapper">
@@ -501,51 +492,50 @@ export const MainPageView = () => {
                         ></DeleteForeverIcon>
                       </IconButton>
                     </div>
-               
-                  </div>)}
-                </div>
-                
+                  </div>
+                )}
+              </div>
+            ))}
+
+          <div className="speedDial no-printme">
+            <Backdrop open={openD} />
+            <SpeedDial
+              ariaLabel="SpeedDial uncontrolled open example"
+              icon={<SpeedDialIcon />}
+              onClose={handleCloseD}
+              onOpen={handleOpenD}
+              open={openD}
+              direction="left"
+            >
+              {actions.map((action) => (
+                <SpeedDialAction
+                  id={action.id}
+                  key={action.name}
+                  icon={action.icon}
+                  tooltipTitle={action.name}
+                  onClick={() => handleClickOpen(action.id)}
+                />
               ))}
+            </SpeedDial>
+          </div>
 
-            <div className="speedDial no-printme">
-              <Backdrop open={openD} />
-              <SpeedDial
-                ariaLabel="SpeedDial uncontrolled open example"
-                icon={<SpeedDialIcon />}
-                onClose={handleCloseD}
-                onOpen={handleOpenD}
-                open={openD}
-                direction="left"
-              >
-                {actions.map((action) => (
-                  <SpeedDialAction
-                    id={action.id}
-                    key={action.name}
-                    icon={action.icon}
-                    tooltipTitle={action.name}
-                    onClick={() => handleClickOpen(action.id)}
-                  />
-                ))}
-              </SpeedDial>
-            </div>
+          <div>
+            <ToastContainer />
 
-            <div>
-              <ToastContainer />
-
-              <Dialog
-                fullScreen={fullScreen}
-                open={openn}
-                maxWidth={"xl"}
-                onClose={handleClose}
-                aria-labelledby="responsive-dialog-title"
-              >
-                    {loading ? (
-                <Box >
-                <Skeleton />
-                <Skeleton animation="wave" />
-                <Skeleton animation={false} />
-              </Box>
-                ) : (
+            <Dialog
+              fullScreen={fullScreen}
+              open={openn}
+              maxWidth={"xl"}
+              onClose={handleClose}
+              aria-labelledby="responsive-dialog-title"
+            >
+              {loading ? (
+                <Box>
+                  <Skeleton />
+                  <Skeleton animation="wave" />
+                  <Skeleton animation={false} />
+                </Box>
+              ) : (
                 <DialogContent>
                   <Stepper activeStep={activeStep} orientation="vertical">
                     {steps.map((label, index) => (
@@ -562,25 +552,26 @@ export const MainPageView = () => {
                               >
                                 Back
                               </Button>
-                              {activeStep === steps.length - 1 ? null :     <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={handleNext}
-                                className={classes.button}
-                              >
-                              
-                                Next
-                              </Button>}
-                              {activeStep === steps.length - 1 ?        <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={hundle}
-                                className={classes.button}
-                              >
-                               
+                              {activeStep === steps.length - 1 ? null : (
+                                <Button
+                                  variant="contained"
+                                  color="primary"
+                                  onClick={handleNext}
+                                  className={classes.button}
+                                >
+                                  Next
+                                </Button>
+                              )}
+                              {activeStep === steps.length - 1 ? (
+                                <Button
+                                  variant="contained"
+                                  color="primary"
+                                  onClick={hundle}
+                                  className={classes.button}
+                                >
                                   Finish
-                                 
-                              </Button> : null}
+                                </Button>
+                              ) : null}
                             </div>
                           </div>
                         </StepContent>
@@ -604,35 +595,33 @@ export const MainPageView = () => {
                   ) : (
                     <div className="div1"></div>
                   )}
-                </DialogContent>)}
-                <DialogActions style={{ justifyContent: "center" }}>
-                  <ButtonGroup
-                    variant="contained"
-                    size="large"
-                    color="primary"
-                    aria-label="contained primary button group"
+                </DialogContent>
+              )}
+              <DialogActions style={{ justifyContent: "center" }}>
+                <ButtonGroup
+                  variant="contained"
+                  size="large"
+                  color="primary"
+                  aria-label="contained primary button group"
+                >
+                  {/* <Button onClick={hundle}>Save</Button> */}
+                  <Button
+                    color="inherit"
+                    onClick={() => {
+                      clearState();
+                    }}
                   >
-                    {/* <Button onClick={hundle}>Save</Button> */}
-                    <Button
-                      color="inherit"
-                      onClick={() => {
-                        clearState();
-                      }}
-                    >
-                      Clear
-                    </Button>
-                    <Button color="secondary" onClick={handleClose}>
-                      Exit
-                    </Button>
-                  </ButtonGroup>
-                </DialogActions>
-              </Dialog>
-            </div>
+                    Clear
+                  </Button>
+                  <Button color="secondary" onClick={handleClose}>
+                    Exit
+                  </Button>
+                </ButtonGroup>
+              </DialogActions>
+            </Dialog>
           </div>
-     
+        </div>
       </div>
-
     </div>
-     
   );
 };

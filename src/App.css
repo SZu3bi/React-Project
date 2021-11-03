@@ -377,9 +377,9 @@ button.primary.ghost {
   flex-direction: column;
   border-radius: 1rem;
   border: 1px solid #e6e6e6;
-  color:black;
+  color: black;
   min-width: 300px;
-  background-color: rgba(255,255,255,1);
+  background-color: rgba(255, 255, 255, 1);
   position: relative;
   padding: 2%;
 }
@@ -391,7 +391,11 @@ button.primary.ghost {
   border: 1px solid #e6e6e6;
   color: black;
   min-width: 300px;
-  background: linear-gradient(38deg, rgba(255,255,255,1) 88%, rgba(222,0,0,1) 95%);
+  background: linear-gradient(
+    38deg,
+    rgba(255, 255, 255, 1) 88%,
+    rgba(222, 0, 0, 1) 95%
+  );
   position: relative;
   padding: 2%;
 }
@@ -403,7 +407,11 @@ button.primary.ghost {
   border: 1px solid #e6e6e6;
   color: #121212;
   min-width: 300px;
-  background: linear-gradient(38deg, rgba(255,255,255,1) 88%, rgba(17,190,0,1) 95%);
+  background: linear-gradient(
+    38deg,
+    rgba(255, 255, 255, 1) 88%,
+    rgba(17, 190, 0, 1) 95%
+  );
   position: relative;
   padding: 2%;
 }
@@ -481,9 +489,9 @@ button.primary.ghost {
   font-weight: bold;
   margin-bottom: 0.25rem;
   text-overflow: ellipsis;
-  overflow: hidden; 
-  width: 160px; 
-  height: 1.2em; 
+  overflow: hidden;
+  width: 160px;
+  height: 1.2em;
   white-space: nowrap;
 }
 
@@ -619,8 +627,7 @@ section {
   }
 }
 
-
-.rate-class{
+.rate-class {
   display: flex;
   align-items: center;
   flex-direction: column;

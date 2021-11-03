@@ -42,9 +42,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Spinner } from "../MainPage/SpinnerComponent/Spinner";
-import Skeleton from '@mui/material/Skeleton';
-import Stack from '@mui/material/Stack';
-
+import Skeleton from "@mui/material/Skeleton";
+import Stack from "@mui/material/Stack";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -98,7 +97,6 @@ export const ContactPage = (props) => {
   const [count, setcount] = useState();
   const [Count, setCount] = useState();
   const [countcase, setcountcase] = useState();
-
 
   const timerIdRef = useRef(0);
   const theme = useTheme();
@@ -174,20 +172,18 @@ export const ContactPage = (props) => {
     if (result) {
       setcount(result.data.length);
       setTimeout(() => {
-        setLoading(false); 
+        setLoading(false);
       }, 3000);
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setResult(sortedResult);
     } else setResult(null);
- 
   }, []);
-
 
   const CaseData = useCallback(async () => {
     const result = await GetMainInfo_Case();
     if (result) {
       setTimeout(() => {
-        setLoading(false); 
+        setLoading(false);
       }, 3000);
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setCasedata(sortedResult);
@@ -197,15 +193,13 @@ export const ContactPage = (props) => {
   const handleCreateButtons_2 = async () => {
     setLoading(true);
     const result = await CreateMainInfo_Contact(states);
-    if (result) 
-      clearState();
-      showSuccess("Create Successfully");
-      setSuccess(false);
-      GetAllData();
-      setLoading(false);
-   
-      handleClose();
- 
+    if (result) clearState();
+    showSuccess("Create Successfully");
+    setSuccess(false);
+    GetAllData();
+    setLoading(false);
+
+    handleClose();
   };
 
   const handleDeleteButton = async (deletedId) => {
@@ -220,18 +214,13 @@ export const ContactPage = (props) => {
     }
   };
 
-
-  
   const handleStaffRatingChange = (event) => {
     setStates((item) => ({ ...item, rate: event.target.value }));
   };
 
-
-
   useEffect(() => {
     return () => clearInterval(timerIdRef.current);
   }, []);
-
 
   useEffect(() => {
     GetAllData();
@@ -248,41 +237,40 @@ export const ContactPage = (props) => {
           openvalchangeContact={openvalchangeContact}
         />
       )}
-    
-        <div>
-          <div style={{ display: "inline-block" }}>
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={CloseAdd}
-            >
-              <MenuItem onClick={CloseAdd}>Add New</MenuItem>
-            </Menu>
-          </div>
 
-          {result &&
-            result.map((s, index) => (
-              <div className="users-card-wrapper">
-                  {loading ? (
+      <div>
+        <div style={{ display: "inline-block" }}>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={CloseAdd}
+          >
+            <MenuItem onClick={CloseAdd}>Add New</MenuItem>
+          </Menu>
+        </div>
 
-<div style={{display: 'flex'
-  ,justifyContent: 'center'}}>
-<Stack spacing={1}>
-<Skeleton variant="text" />
-<Skeleton variant="circular" width={50} height={50} />
-<Skeleton variant="rectangular" width={350} height={200} />
-</Stack>
-</div>
-
-
-// <CircularProgress />
-) : (
-
-
-  
-                <div className={s.Active__c === true ? "cards-wrapper-active" : "cards-wrapper-notactive"}>
+        {result &&
+          result.map((s, index) => (
+            <div className="users-card-wrapper">
+              {!loading ? (
+                <div className="users-card-wrapper">
+                  <Stack spacing={1}>
+                    <Skeleton variant="text" />
+                    <Skeleton variant="circular" width={50} height={50} />
+                    <Skeleton variant="rectangular" width={300} height={200} />
+                  </Stack>
+                </div>
+              ) : (
+                // <CircularProgress />
+                <div
+                  className={
+                    s.Active__c === true
+                      ? "cards-wrapper-active"
+                      : "cards-wrapper-notactive"
+                  }
+                >
                   <Spinner isActive={isLoading} isAbsolute />
                   <div className="cards-header">
                     <div className="item-wrapper">
@@ -324,7 +312,10 @@ export const ContactPage = (props) => {
                         <span className="mdi mdi-phone px-2" />
                         <span>Active:</span>
                       </span>
-                      <span className="item-body"> {s.Active__c === true ? "Active" : "Not Active"}</span>
+                      <span className="item-body">
+                        {" "}
+                        {s.Active__c === true ? "Active" : "Not Active"}
+                      </span>
                     </div>
                     <div className="item-wrapper flex-nowrap">
                       <div className="texts-truncate d-flex">
@@ -433,7 +424,11 @@ export const ContactPage = (props) => {
                     />
                   </div>
                   <div className="item-wrapper actions">
-                    <IconButton size="small" color="inherit" className="button-edit">
+                    <IconButton
+                      size="small"
+                      color="inherit"
+                      className="button-edit"
+                    >
                       <EditIcon
                         onClick={() => {
                           setOpen(true);
@@ -447,214 +442,216 @@ export const ContactPage = (props) => {
                       ></DeleteForeverIcon>
                     </IconButton>
                   </div>
+                </div>
+              )}
+            </div>
+          ))}
 
-                
-                </div>)}
-              </div>
+        <br />
+        <div className="speedDial no-printme">
+          <Backdrop open={openD} />
+          <SpeedDial
+            ariaLabel="SpeedDial uncontrolled open example"
+            icon={<SpeedDialIcon />}
+            onClose={handleCloseD}
+            onOpen={handleOpenD}
+            open={openD}
+            direction="left"
+          >
+            {actions.map((action) => (
+              <SpeedDialAction
+                id={action.id}
+                key={action.name}
+                icon={action.icon}
+                tooltipTitle={action.name}
+                onClick={() => handleClickOpen(action.id)}
+                // onClick={()=>console.log("id",action.id)}
+              />
             ))}
-
-          <br />
-          <div className="speedDial no-printme">
-            <Backdrop open={openD} />
-            <SpeedDial
-              ariaLabel="SpeedDial uncontrolled open example"
-              icon={<SpeedDialIcon />}
-              onClose={handleCloseD}
-              onOpen={handleOpenD}
-              open={openD}
-              direction="left"
-            >
-              {actions.map((action) => (
-                <SpeedDialAction
-                  id={action.id}
-                  key={action.name}
-                  icon={action.icon}
-                  tooltipTitle={action.name}
-                  onClick={() => handleClickOpen(action.id)}
-                  // onClick={()=>console.log("id",action.id)}
-                />
-              ))}
-            </SpeedDial>
-          </div>
-          <div>
-            <ToastContainer />
-
-
-            <Dialog
-              fullScreen={fullScreen}
-              open={openContactAdd}
-              className="D1"
-              maxWidth={"xl"}
-              onClose={handleClose}
-              aria-labelledby="responsive-dialog-title">
-              <DialogContent>
-                <ToastContainer />
-                {loading ? (
-                <Box >
-                <Skeleton />
-                <Skeleton animation="wave" />
-                <Skeleton animation={false} />
-              </Box>
-                ) : (
-                  <div className="div1">
-                       <div>
-
-<Checkbox
-
-  checked={states.active}
-  onChange={(event) => {
-    setStates((item) => ({ ...item, active: event.target.checked }));
-  }}
-  label="Active"
-  color="success"
-></Checkbox><span>Active</span>
-</div>
-                    <form
-                      className={classes.root}
-                      noValidate
-                      autoComplete="off"
-                    >
-                      
-                      <div>
-                        <TextField
-                          required
-                          id="outlined-required"
-                          label="Name"
-                          variant="outlined"
-                          error={states.name === "" ? "error" : null}
-                          value={states.name}
-                          onChange={(event) => {
-                            setStates((names) => ({
-                              ...names,
-                              name: event.target.value,
-                            }));
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <TextField
-                          required
-                          id="outlined-required"
-                          label="User Name"
-                          variant="outlined"
-                          error={states.firstname === "" ? "error" : null}
-                          value={states.firstname}
-                          onChange={(event) => {
-                            setStates((names) => ({
-                              ...names,
-                              firstname: event.target.value,
-                            }));
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <TextField
-                          required
-                          id="outlined-required"
-                          label="Phone"
-                          variant="outlined"
-                          error={states.phone === "" ? "error" : null}
-                          value={states.phone}
-                          onChange={(event) => {
-                            setStates((item) => ({
-                              ...item,
-                              phone: event.target.value,
-                            }));
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <TextField
-                          required
-                          id="outlined-required"
-                          label="Email"
-                          variant="outlined"
-                          error={states.email === "" ? "error" : null}
-                          value={states.email}
-                          onChange={(event) => {
-                            setStates((item) => ({
-                              ...item,
-                              email: event.target.value,
-                            }));
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <TextField
-                          required
-                          id="outlined-required"
-                          label="Amount"
-                          variant="outlined"
-                          error={states.amount === "" ? "error" : null}
-                          value={states.amount}
-                          onChange={(event) => {
-                            setStates((item) => ({
-                              ...item,
-                              amount: event.target.value,
-                            }));
-                          }}
-                        />
-                      </div>
-                      <div>
-                        <TextField
-                          select
-                          error={states.leadSource === "" ? "error" : null}
-                          className={classes.textField}
-                          label="Lead Source"
-                          helperText="Please select lead Source"
-                          variant="outlined"
-                          value={states.leadSource}
-                          onChange={(event) => {
-                            setStates((item) => ({
-                              ...item,
-                              leadSource: event.target.value,
-                            }));
-                          }}
-                        >
-                          {Source.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                              {option.label}
-                            </MenuItem>
-                          ))}
-                        </TextField>
-                      </div>
-    
-
-                   
-       
-                    </form>
-                    <div className="rate-class">
-          <Rating
-            name="text-feedback"
-            value={states.rate}
-            precision={0.5}
-            emptyIcon={
-              <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-            }
-            onChange={handleStaffRatingChange}
-          /><span>Rate</span>
-          </div>
-                  </div>
-                )}
-              </DialogContent>
-              <DialogActions style={{ justifyContent: "center" }}>
-                <ButtonGroup
-                  variant="contained"
-                  size="large"
-                  color="primary"
-                  aria-label="contained primary button group"
-                >
-                  <Button onClick={handleCreateButtons_2}>Save</Button>
-                  <Button color='inherit' onClick={() => {clearState()} }>Clear</Button>
-                  <Button color="secondary" onClick={handleClose}>
-                    Exit
-                  </Button>
-                </ButtonGroup>
-              </DialogActions>
-            </Dialog>
-          </div>
+          </SpeedDial>
         </div>
-    
+        <div>
+          <ToastContainer />
+
+          <Dialog
+            fullScreen={fullScreen}
+            open={openContactAdd}
+            className="D1"
+            maxWidth={"xl"}
+            onClose={handleClose}
+            aria-labelledby="responsive-dialog-title"
+          >
+            <DialogContent>
+              <ToastContainer />
+              {loading ? (
+                <Box>
+                  <Skeleton />
+                  <Skeleton animation="wave" />
+                  <Skeleton animation={false} />
+                </Box>
+              ) : (
+                <div className="div1">
+                  <div>
+                    <Checkbox
+                      checked={states.active}
+                      onChange={(event) => {
+                        setStates((item) => ({
+                          ...item,
+                          active: event.target.checked,
+                        }));
+                      }}
+                      label="Active"
+                      color="success"
+                    ></Checkbox>
+                    <span>Active</span>
+                  </div>
+                  <form className={classes.root} noValidate autoComplete="off">
+                    <div>
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label="Name"
+                        variant="outlined"
+                        error={states.name === "" ? "error" : null}
+                        value={states.name}
+                        onChange={(event) => {
+                          setStates((names) => ({
+                            ...names,
+                            name: event.target.value,
+                          }));
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label="User Name"
+                        variant="outlined"
+                        error={states.firstname === "" ? "error" : null}
+                        value={states.firstname}
+                        onChange={(event) => {
+                          setStates((names) => ({
+                            ...names,
+                            firstname: event.target.value,
+                          }));
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label="Phone"
+                        variant="outlined"
+                        error={states.phone === "" ? "error" : null}
+                        value={states.phone}
+                        onChange={(event) => {
+                          setStates((item) => ({
+                            ...item,
+                            phone: event.target.value,
+                          }));
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label="Email"
+                        variant="outlined"
+                        error={states.email === "" ? "error" : null}
+                        value={states.email}
+                        onChange={(event) => {
+                          setStates((item) => ({
+                            ...item,
+                            email: event.target.value,
+                          }));
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label="Amount"
+                        variant="outlined"
+                        error={states.amount === "" ? "error" : null}
+                        value={states.amount}
+                        onChange={(event) => {
+                          setStates((item) => ({
+                            ...item,
+                            amount: event.target.value,
+                          }));
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <TextField
+                        select
+                        error={states.leadSource === "" ? "error" : null}
+                        className={classes.textField}
+                        label="Lead Source"
+                        helperText="Please select lead Source"
+                        variant="outlined"
+                        value={states.leadSource}
+                        onChange={(event) => {
+                          setStates((item) => ({
+                            ...item,
+                            leadSource: event.target.value,
+                          }));
+                        }}
+                      >
+                        {Source.map((option) => (
+                          <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                    </div>
+                  </form>
+                  <div className="rate-class">
+                    <Rating
+                      name="text-feedback"
+                      value={states.rate}
+                      precision={0.5}
+                      emptyIcon={
+                        <StarIcon
+                          style={{ opacity: 0.55 }}
+                          fontSize="inherit"
+                        />
+                      }
+                      onChange={handleStaffRatingChange}
+                    />
+                    <span>Rate</span>
+                  </div>
+                </div>
+              )}
+            </DialogContent>
+            <DialogActions style={{ justifyContent: "center" }}>
+              <ButtonGroup
+                variant="contained"
+                size="large"
+                color="primary"
+                aria-label="contained primary button group"
+              >
+                <Button onClick={handleCreateButtons_2}>Save</Button>
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    clearState();
+                  }}
+                >
+                  Clear
+                </Button>
+                <Button color="secondary" onClick={handleClose}>
+                  Exit
+                </Button>
+              </ButtonGroup>
+            </DialogActions>
+          </Dialog>
+        </div>
+      </div>
     </div>
   );
 };

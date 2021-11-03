@@ -10,7 +10,7 @@ import { MainPageView } from "./MainPageView";
 import { TotalSummaryCard } from "./TotalSummaryCard/TotalSummaryCard";
 import { TripTour } from "./TripTour/TripTour";
 import { HistoryPage } from "./HistoryPage";
-import {About} from "./About";
+import { About } from "./About";
 import WorkIcon from "@material-ui/icons/Work";
 import { GlobalHistory } from "../../Helper/Middleware.Helper";
 import HomeIcon from "@material-ui/icons/Home";
@@ -350,21 +350,25 @@ export const Home = () => {
                 />
               </Search>
               <Route
-                  render={({ history }) => (
-              <IconButton
-                      size="large"
-                      aria-label="show 17 new notifications"
-                      color="inherit"
-                      style={{    display: 'flex',justifyContent: 'flex-start',width: '5%'}}
-                      onClick={() => {
-                        history.push("/home");
-                      }}
-                    >
-              <img style={{ width: "100%" }} src={psi} alt="lead"></img>
-</IconButton>
-                     )}
-                     />
-                
+                render={({ history }) => (
+                  <IconButton
+                    size="large"
+                    aria-label="show 17 new notifications"
+                    color="inherit"
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      width: "5%",
+                    }}
+                    onClick={() => {
+                      history.push("/home");
+                    }}
+                  >
+                    <img style={{ width: "100%" }} src={psi} alt="lead"></img>
+                  </IconButton>
+                )}
+              />
+
               <Box sx={{ flexGrow: 1 }} />
 
               <Box sx={{ display: { xs: "none", md: "flex" } }}>

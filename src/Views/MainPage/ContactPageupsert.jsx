@@ -16,8 +16,6 @@ import { Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import Checkbox from "@mui/material/Checkbox";
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiTextField-root": {
@@ -34,8 +32,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-export const ContactPageupsert = ({openvalchangeContact,GetAllData,DTO,open,}) => {
+export const ContactPageupsert = ({
+  openvalchangeContact,
+  GetAllData,
+  DTO,
+  open,
+}) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -196,29 +198,32 @@ export const ContactPageupsert = ({openvalchangeContact,GetAllData,DTO,open,}) =
             </TextField>
           </div>
           <div>
-          <div>
-
-            <Checkbox
-           
-              checked={state.active}
-              onChange={(event) => {
-                setState((item) => ({ ...item, active: event.target.checked }));
-              }}
-              label="Active"
-              color="success"
-            ></Checkbox><span>Active</span>
-          </div>
-<div className="rate-class">
-          <Rating
-            name="text-feedback"
-            value={state.rate}
-            precision={0.5}
-            emptyIcon={
-              <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
-            }
-            onChange={handleStaffRatingChange}
-          /><span>Rate</span>
-          </div>
+            <div>
+              <Checkbox
+                checked={state.active}
+                onChange={(event) => {
+                  setState((item) => ({
+                    ...item,
+                    active: event.target.checked,
+                  }));
+                }}
+                label="Active"
+                color="success"
+              ></Checkbox>
+              <span>Active</span>
+            </div>
+            <div className="rate-class">
+              <Rating
+                name="text-feedback"
+                value={state.rate}
+                precision={0.5}
+                emptyIcon={
+                  <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
+                }
+                onChange={handleStaffRatingChange}
+              />
+              <span>Rate</span>
+            </div>
           </div>
         </form>
       </div>
