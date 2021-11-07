@@ -7,8 +7,8 @@ export const GetMainInfo_Case = async () => {
       Authorization: `Bearer ${config.token}`,
     },
   })
-    .then((data_2) => data_2)
-    .catch((error) => showError("Get Main Info Filed"));
+    .then((data_2) => data_2);
+    // .catch((error) => showError(""));
   return result;
 };
 

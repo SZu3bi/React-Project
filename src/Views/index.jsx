@@ -9,3 +9,4 @@ export * from './MainPage/TotalSummaryCard/TotalSummaryCard';
 export * from './MainPage/TripTour/TripTour';
 export * from './MainPage/ScrollPic/ScrollPic';
 export * from './MainPage/SpinnerComponent/Spinner';
+export * from './MainPage/SectionTabs';

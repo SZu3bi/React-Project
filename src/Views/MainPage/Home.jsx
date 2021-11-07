@@ -42,6 +42,7 @@ import { ScrollPic } from "./ScrollPic/ScrollPic";
 import ContactPageIcon from "@mui/icons-material/ContactPage";
 import HistoryIcon from "@mui/icons-material/History";
 import InfoIcon from "@mui/icons-material/Info";
+import { SectionTabs } from "./SectionTabs";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -206,7 +207,7 @@ export const Home = () => {
             </IconButton>
           )}
         />
-        <p>Home</p>
+        <p>Info</p>
       </MenuItem>
       <MenuItem>
         <Route
@@ -340,7 +341,7 @@ export const Home = () => {
               >
                 <PrintIcon onClick={print} />
               </IconButton>
-              <Search>
+              {/* <Search>
                 <SearchIconWrapper>
                   <SearchIcon />
                 </SearchIconWrapper>
@@ -348,7 +349,7 @@ export const Home = () => {
                   placeholder="Search…"
                   inputProps={{ "aria-label": "search" }}
                 />
-              </Search>
+              </Search> */}
               <Route
                 render={({ history }) => (
                   <IconButton
@@ -364,7 +365,7 @@ export const Home = () => {
                       history.push("/home");
                     }}
                   >
-                    <img style={{ width: "100%" }} src={psi} alt="lead"></img>
+                    <img className="logoimg" src={psi} alt="lead"></img>
                   </IconButton>
                 )}
               />
@@ -590,7 +591,7 @@ export const Home = () => {
           <Route exact path="/TotalSummaryCard" component={TotalSummaryCard} />
           <Route exact path="/TripTour" component={TripTour} />
           <Route exact path="/Scroll" component={ScrollPic} />
-          <Route exact path="/Abouts" component={About} />
+          <Route exact path="/Abouts" component={SectionTabs} />
         </Switch>
       </Router>
     </div>

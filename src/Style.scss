@@ -15,7 +15,7 @@
     font-weight: 600;
     overflow: hidden;
     height: 40px;
-    padding: 0 40px;
+      // padding: 0 40px;
 
     &:before {
       content: "[";
@@ -48,7 +48,7 @@
     &__text {
       display: inline;
       float: left;
-      margin: 0;
+      margin: 11px;
     }
 
     &__list {
@@ -229,128 +229,156 @@
   }
 }
 
-
-
-
-
-.glitcH{
+.glitcH {
   animation: glitch 1s linear infinite;
 }
 
-@keyframes glitch{
-  2%,64%{
-    transform: translate(2px,0) skew(0deg);
+@keyframes glitch {
+  2%,
+  64% {
+    transform: translate(2px, 0) skew(0deg);
   }
-  4%,60%{
-    transform: translate(-2px,0) skew(0deg);
+  4%,
+  60% {
+    transform: translate(-2px, 0) skew(0deg);
   }
-  62%{
-    transform: translate(0,0) skew(5deg); 
+  62% {
+    transform: translate(0, 0) skew(5deg);
   }
 }
 
 .glitcH:before,
-.glitcH:after{
+.glitcH:after {
   content: attr(title);
   position: absolute;
   left: 0;
 }
 
-.glitcH:before{
+.glitcH:before {
   animation: glitchTop 1s linear infinite;
   clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
 }
 
-@keyframes glitchTop{
-  2%,64%{
-    transform: translate(2px,-2px);
+@keyframes glitchTop {
+  2%,
+  64% {
+    transform: translate(2px, -2px);
   }
-  4%,60%{
-    transform: translate(-2px,2px);
+  4%,
+  60% {
+    transform: translate(-2px, 2px);
   }
-  62%{
-    transform: translate(13px,-1px) skew(-13deg); 
+  62% {
+    transform: translate(13px, -1px) skew(-13deg);
   }
 }
 
-.glitcH:after{
+.glitcH:after {
   animation: glitchBotom 1.5s linear infinite;
   clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
   -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
 }
 
-@keyframes glitchBotom{
-  2%,64%{
-    transform: translate(-2px,0);
+@keyframes glitchBotom {
+  2%,
+  64% {
+    transform: translate(-2px, 0);
   }
-  4%,60%{
-    transform: translate(-2px,0);
+  4%,
+  60% {
+    transform: translate(-2px, 0);
   }
-  62%{
-    transform: translate(-22px,5px) skew(21deg); 
+  62% {
+    transform: translate(-22px, 5px) skew(21deg);
   }
 }
 
-
-
-
-
-.glitcH-2{
+.glitcH-2 {
   animation: glitch 1s linear infinite;
 }
 
-@keyframes glitch{
-  2%,64%{
-    transform: translate(2px,0) skew(0deg);
+@keyframes glitch {
+  2%,
+  64% {
+    transform: translate(2px, 0) skew(0deg);
   }
-  4%,60%{
-    transform: translate(-2px,0) skew(0deg);
+  4%,
+  60% {
+    transform: translate(-2px, 0) skew(0deg);
   }
-  62%{
-    transform: translate(0,0) skew(5deg); 
+  62% {
+    transform: translate(0, 0) skew(5deg);
   }
 }
 
 .glitcH-2:before,
-.glitcH-2:after{
+.glitcH-2:after {
   content: attr(title);
   position: absolute;
   left: 0;
 }
 
-.glitcH-2:before{
+.glitcH-2:before {
   animation: glitchTop 1s linear infinite;
   clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
 }
 
-@keyframes glitchTop{
-  2%,64%{
-    transform: translate(2px,-2px);
+@keyframes glitchTop {
+  2%,
+  64% {
+    transform: translate(2px, -2px);
   }
-  4%,60%{
-    transform: translate(-2px,2px);
+  4%,
+  60% {
+    transform: translate(-2px, 2px);
   }
-  62%{
-    transform: translate(13px,-1px) skew(-13deg); 
+  62% {
+    transform: translate(13px, -1px) skew(-13deg);
   }
 }
 
-.glitcH-2:after{
+.glitcH-2:after {
   animation: glitchBotom 1.5s linear infinite;
   clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
   -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
 }
 
-@keyframes glitchBotom{
-  2%,64%{
-    transform: translate(-2px,0);
+@keyframes glitchBotom {
+  2%,
+  64% {
+    transform: translate(-2px, 0);
   }
-  4%,60%{
-    transform: translate(-2px,0);
+  4%,
+  60% {
+    transform: translate(-2px, 0);
   }
-  62%{
-    transform: translate(-22px,5px) skew(21deg); 
+  62% {
+    transform: translate(-22px, 5px) skew(21deg);
   }
+}
+
+.MuiBox-root {
+  border-radius: 15px;
+
+  .confirmbtn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+.logoimg {
+  width: 50px;
+}
+
+
+.gribcon{
+  display:flex;
+  justify-content:center ;
+   width: 75%;
+   @media (max-width:550px) {
+     width: 95%;
+   }
 }

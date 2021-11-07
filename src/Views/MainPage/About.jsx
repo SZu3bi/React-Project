@@ -203,7 +203,7 @@ export const About = () => {
 
     <div className="App">
       
-      <div class="content">
+    <div class="content">
         <div class="content__container">
           <p class="content__container__text">Hello</p>
 
@@ -215,6 +215,7 @@ export const About = () => {
           </ul>
         </div>
       </div>
+
     </div>
     </div>
   );

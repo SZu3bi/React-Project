@@ -117,7 +117,9 @@ export const MainPageView = () => {
     contact: "",
   });
   const handleNext = () => {
+
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  
   };
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -170,15 +172,18 @@ export const MainPageView = () => {
   };
 
   const hundle = () => {
+  
     if (state.subject !== "") {
       handleCreateButton();
+    
+
     } else showError("Fill Subject");
   };
 
   const handleCreateButton = async () => {
     setOpenD(false);
     const result = await CreateMainInfo_Case(state);
-    if (result)
+    if (result){
       setTimeout(() => {
         setLoading(false);
       }, 2000);
@@ -188,6 +193,10 @@ export const MainPageView = () => {
     showSuccess("Create Successfully");
     GetAllData();
     handleClose();
+    }else{
+      handleClose();
+      GetAllData();
+    }
   };
 
   const handleDeleteButton = async (deletedId) => {
@@ -507,7 +516,7 @@ export const MainPageView = () => {
          <img style={{ borderRadius: '5px' , filter: 'drop-shadow(2px 4px 6px black)' ,width: '45%'}} src={nocontact}></img>
          </div>}
           <div className="speedDial no-printme">
-            <Backdrop open={openD} />
+            {/* <Backdrop open={openD} /> */}
             <SpeedDial
               ariaLabel="SpeedDial uncontrolled open example"
               icon={<SpeedDialIcon />}
@@ -571,6 +580,7 @@ export const MainPageView = () => {
                                   Next
                                 </Button>
                               )}
+                                
                               {activeStep === steps.length - 1 ? (
                                 <Button
                                   variant="contained"

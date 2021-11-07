@@ -78,11 +78,7 @@ body {
   cursor: default;
 }
 
-/* .textfield {
-    width: 50%;
-    margin-left: 20px;
-    margin-right: 20px;
-} */
+
 
 .dialog {
   width: 85%;
@@ -456,9 +452,10 @@ button.primary.ghost {
   flex: 0 1 auto;
   margin-bottom: 0.5rem;
   padding: 0 0.5rem;
-
+  justify-content: center;
   width: 25%;
   min-width: 300px;
+
 }
 
 .user-cover-image {
@@ -495,7 +492,7 @@ button.primary.ghost {
   margin-bottom: 0.25rem;
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 160px;
+  width: 100px;
   height: 1.2em;
   white-space: nowrap;
 }

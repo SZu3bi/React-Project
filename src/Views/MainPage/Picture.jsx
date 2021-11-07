@@ -138,7 +138,7 @@ export const Picture = ({ openPicture }) => {
         }
       />
 
-      <button onClick={open}> Open Pictures</button>
+      {/* <button onClick={open}> Open Pictures</button>
 
       <Dialog
         fullScreen={fullScreen}
@@ -161,7 +161,7 @@ export const Picture = ({ openPicture }) => {
             Exit
           </Button>
         </DialogContent>
-      </Dialog>
+      </Dialog> */}
     </div>
   );
 };

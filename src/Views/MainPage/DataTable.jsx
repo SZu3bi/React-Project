@@ -57,21 +57,24 @@ export const DataTable = () => {
       setResult(sortedResult);
       setcount(result.data.length);
     } else setResult(null);
-  
+    // setcount(0);
+
   }, []);
 
   const GetAllData_Case = useCallback(async () => {
  
     const result = await GetMainInfo_Case();
-    setcountcase(result.data.length);
     if (result) {
       setTimeout(() => {
         setLoading(false); 
       }, 3000);
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setres(sortedResult);
+      setcountcase(result.data.length);
       console.log('case',result);
     } else setres(null);
+    // setcountcase(0);
+
    
   }, []);
 
@@ -190,9 +193,12 @@ export const DataTable = () => {
                              style={{
                               fontSize: "20px",
                               backgroundColor: "#ffffff",
-                              height: "27px",
+                              height: "30px",
                               fontFamily: "revert",
                               color: "rgb(248 18 1)",
+                              display: "flex",
+                              justifyContent: "center"
+                          
                             }}
                               align="center"
                             >

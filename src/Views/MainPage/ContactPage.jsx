@@ -23,7 +23,6 @@ import { useTheme } from "@material-ui/core/styles";
 import { deepOrange, deepPurple } from "@material-ui/core/colors";
 import psi from "../../Views/sales.png";
 import nocontact from "../../Views/nodata.png";
-import Menu from "@material-ui/core/Menu";
 import { Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import SpeedDial from "@mui/material/SpeedDial";
@@ -38,29 +37,25 @@ import { IconButton } from "@material-ui/core";
 import moment from "moment";
 import Backdrop from "@mui/material/Backdrop";
 import Checkbox from "@mui/material/Checkbox";
-import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Spinner } from "../MainPage/SpinnerComponent/Spinner";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
-import Modal from '@mui/material/Modal';
-import { Filter } from "@material-ui/icons";
+import Modal from "@mui/material/Modal";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
-
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -101,9 +96,9 @@ export const ContactPage = (props) => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  const [openD, setOpenD] = React.useState(false);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [openContactAdd, setOpenContactAdd] = React.useState(false);
+  const [openD, setOpenD] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openContactAdd, setOpenContactAdd] = useState(false);
   const [open, setOpen] = useState(false);
   const [result, setResult] = useState();
   const [casedata, setCasedata] = useState();
@@ -114,19 +109,20 @@ export const ContactPage = (props) => {
   const [count, setcount] = useState();
   const [Count, setCount] = useState();
   const [countcase, setcountcase] = useState();
-
-
-  const [openm, setOpenm] = React.useState(false);
+  const [openm, setOpenm] = useState(false);
   const handleOpenm = () => setOpenm(true);
   const handleClosem = () => setOpenm(false);
-
-
-
   const timerIdRef = useRef(0);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const handleOpenD = () => setOpenD(true);
-  const handleCloseD = () => setOpenD(false);
+
+
+  const handleCloseD = () => 
+  {
+  setOpenD(false);
+  }
+  
   const classes = useStyles();
   const openvalchangeContact = () => {
     setOpen(false);
@@ -138,6 +134,7 @@ export const ContactPage = (props) => {
     }
     timerIdRef.current = setInterval(() => setCount((c) => c + 1), 1000);
   };
+
   const stopHandler = () => {
     clearInterval(timerIdRef.current);
     timerIdRef.current = 0;
@@ -170,7 +167,6 @@ export const ContactPage = (props) => {
 
   const actions = [
     { icon: <AddIcon />, name: "Add", id: 1 },
-
     { icon: <PrintIcon />, name: "Print", id: 3 },
     { icon: <ShareIcon />, name: "Share", id: 4 },
   ];
@@ -191,6 +187,8 @@ export const ContactPage = (props) => {
     showSuccess(`${id}` + "\n" + `${name}`);
   };
 
+
+
   const GetAllData = useCallback(async () => {
     const result = await GetMainInfo_Contact();
     if (result) {
@@ -203,27 +201,41 @@ export const ContactPage = (props) => {
     } else setResult(null);
   }, []);
 
-  const CaseData = useCallback(async () => {
-    const result = await GetMainInfo_Case();
-    if (result) {
-      setTimeout(() => {
-        setLoading(false);
-      }, 3000);
-      const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
-      setCasedata(sortedResult);
-    } else setCasedata(null);
-  }, []);
+  // const CaseData = useCallback(async () => {
+  //   const result = await GetMainInfo_Case();
+  //   if (result) {
+  //     setTimeout(() => {
+  //       setLoading(false);
+  //     }, 3000);
+  //     const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
+  //     setCasedata(sortedResult);
+  //   } else setCasedata(null);
+  // }, []);
+
+
+  
+  const hundle = () => {
+    if (states.name !== "") {
+      handleCreateButtons_2();
+
+    } else showError("Fill Name ");
+  };
 
   const handleCreateButtons_2 = async () => {
     setLoading(true);
+    handleCloseD();
     const result = await CreateMainInfo_Contact(states);
-    if (result) clearState();
+    if (result){
+     clearState();
     showSuccess("Create Successfully");
     setSuccess(false);
     GetAllData();
     setLoading(false);
-
     handleClose();
+    }else{
+      GetAllData();
+      handleClose();
+    }
   };
 
   const handleDeleteButton = async (deletedId) => {
@@ -233,7 +245,6 @@ export const ContactPage = (props) => {
     if (result) {
       GetAllData();
       showSuccess("Deleted Successfully");
-    
     } else {
       showError("Delete Failed");
     }
@@ -249,8 +260,8 @@ export const ContactPage = (props) => {
 
   useEffect(() => {
     GetAllData();
-    CaseData();
-  }, [GetAllData, CaseData]);
+    // CaseData();
+  }, [GetAllData]);
 
   return (
     <div className="Agents-wrapper view-wrapper">
@@ -263,237 +274,284 @@ export const ContactPage = (props) => {
         />
       )}
 
-
-
       <div>
-{count !==0 ? (
-
-        
-<div>
-        {result &&
-          result.map((s, index) => (
-            <div className="users-card-wrapper">
-              {loading ? (
+        {count !== 0 ? (
+          <div>
+            {result &&
+              result.map((s, index) => (
                 <div className="users-card-wrapper">
-                  <Stack spacing={1}>
-                    <Skeleton variant="text" />
-                    <Skeleton variant="circular" width={50} height={50} />
-                    <Skeleton variant="rectangular" width={300} height={200} />
-                  </Stack>
-                </div>
-              ) : (
-                // <CircularProgress />
-                <div
-                  className={
-                    s.Active__c === true
-                      ? "cards-wrapper-active"
-                      : "cards-wrapper-notactive"
-                  }
-                >
-                  <Spinner isActive={isLoading} isAbsolute />
-                  <div className="cards-header">
-                    <div className="item-wrapper">
-                      <img
-                        id="avatar"
-                        className="user-cover-image"
-                        src={psi}
-                        alt="lead"
-                      ></img>
-                      {/* <div>Timer: {count}s</div>
+                  {loading ? (
+                    <div className="users-card-wrapper">
+                      <Stack spacing={1}>
+                        <Skeleton variant="text" />
+                        <Skeleton variant="circular" width={50} height={50} />
+                        <Skeleton
+                          variant="rectangular"
+                          width={300}
+                          height={200}
+                        />
+                      </Stack>
+                    </div>
+                  ) : (
+                    // <CircularProgress />
+                    <div
+                      className={
+                        s.Active__c === true
+                          ? "cards-wrapper-active"
+                          : "cards-wrapper-notactive"
+                      }
+                    >
+                      <Spinner isActive={isLoading} isAbsolute />
+                      <div className="cards-header">
+                        <div className="item-wrapper">
+                          <img
+                            id="avatar"
+                            className="user-cover-image"
+                            src={psi}
+                            alt="lead"
+                          ></img>
+                          {/* <div>Timer: {count}s</div>
       <div>
         <button onClick={startHandler}>Start</button>
         <button onClick={stopHandler}>Stop</button>
       </div> */}
-                    </div>
-                    <div className="d-flex-column">
-                      <div className="item-wrapper px-2">
-                        <span className="item-header-ellipsis">{s.Name}</span>
+                        </div>
+                        <div className="d-flex-column">
+                          <div className="item-wrapper px-2">
+                            
+                            <span className="item-header-ellipsis">
+                             
+                            </span>
+                          </div>
+                          {/* <div className="item-wrapper">
+                            <span className="item-header-ellipsis px-2">
+                              username
+                            </span>
+                            <span className="item-body">
+                              {s.FirstName || "N/A"}
+                            </span>
+                          </div> */}
+                          <div className="item-wrapper"></div>
+                        </div>
                       </div>
-                      <div className="item-wrapper">
-                        <span className="item-header-ellipsis px-2">username</span>
-                        <span className="item-body">
-                          {s.FirstName || "N/A"}
-                        </span>
-                      </div>
-                      <div className="item-wrapper"></div>
-                    </div>
-                  </div>
-                  <div className="cards-body">
-                    <div className="item-wrapper">
-                      <span className="item-header">
-                        <span className="mdi mdi-phone px-2" />
-                        <span>mobile:</span>
-                      </span>
-                      <span className="item-body">{s.Phone || "N/A"}</span>
-                    </div>
-                    <div className="item-wrapper">
-                      <span className="item-header">
-                        <span className="mdi mdi-phone px-2" />
-                        <span>Active:</span>
-                      </span>
-                      <span className="item-body">
-                        {" "}
-                        {s.Active__c === true ? "Active" : "Not Active"}
-                      </span>
-                    </div>
-                    <div className="item-wrapper flex-nowrap">
-                      <div className="texts-truncate d-flex">
-                        <span className="item-header">
-                          <a
-                            style={{ textDecoration: "auto", color: "red" }}
-                            href={`mailto:${s.Email}&text=Hi ${s.Name} From Psi Amman.`}
-                          >
+                      <div className="cards-body">
+                        <div className="item-wrapper">
+                          <span className="item-header">
+                            <span className="mdi mdi-account px-2" />
+                            <span>Name:</span>
+                          </span>
+                          <span className="item-header-ellipsis"> {s.Name}</span>
+                        </div>
+                        <div className="item-wrapper">
+                          <span className="item-header">
+                            <span className="mdi mdi-phone px-2" />
+                            <span>mobile:</span>
+                          </span>
+                          <span className="item-body">{s.Phone || "N/A"}</span>
+                        </div>
+                        {/* <div className="item-wrapper">
+                          <span className="item-header">
+                            <span className="mdi mdi-phone px-2" />
+                            <span>Active:</span>
+                          </span>
+                          <span className="item-body">
                             {" "}
-                            <span className="mdi mdi-email-outline px-2" />
-                            Email:
-                          </a>
+                            {s.Active__c === true ? "Active" : "Not Active"}
+                          </span>
+                        </div> */}
+                        <div className="item-wrapper flex-nowrap">
+                          <div className="texts-truncate d-flex">
+                            <span className="item-header">
+                              <a
+                                style={{ textDecoration: "auto", color: "red" }}
+                                href={`mailto:${s.Email}&text=Hi ${s.Name} From Psi Amman.`}
+                              >
+                                {" "}
+                                <span className="mdi mdi-email-outline px-2" />
+                                Email:
+                              </a>
 
-                          <span></span>
-                        </span>
-                        <span
-                          className="item-body texts-truncate d-inline-block"
-                          // title={email|| 'N/A'}
+                              <span></span>
+                            </span>
+                            <span
+                              className="item-body texts-truncate d-inline-block"
+                              // title={email|| 'N/A'}
+                            >
+                              {s.Email || "N/A"}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="item-wrapper">
+                          <span className="item-header">
+                            <a
+                              style={{ textDecoration: "auto", color: "green" }}
+                              href={`https://api.whatsapp.com/send/?phone=${s.Phone}&text=Hi ${s.Name} From Psi Amman.`}
+                              target="_blank"
+                            >
+                              {" "}
+                              <span className="mdi mdi-whatsapp px-2" />
+                              WhatsApp
+                            </a>
+                          </span>
+                        </div>
+                        <div className="item-wrapper">
+                          <span className="item-header">
+                            <span className="mdi mdi-map-marker px-2" />
+                            <span>nationality:</span>
+                          </span>
+                          <span className="item-body">Jordan</span>
+                        </div>
+                        <div className="item-wrapper">
+                          <span className="item-header">
+                            <span className="mdi mdi-calendar-blank px-2" />
+                            <span>register:</span>
+                          </span>
+                          <span className="item-body">
+                            {/* {s.CreatedDate} */}
+                            {(s.CreatedDate &&
+                              moment(s.CreatedDate).format("DD/MM/YYYY")) ||
+                              "N/A"}
+                          </span>
+                        </div>
+
+                        <div className="item-wrapper">
+                          <span className="item-header">
+                            <span className="mdi mdi-currency-usd px-2" />
+                            <span>Amount:</span>
+                          </span>
+                          <span className="item-body">{s.Amount__c}</span>
+                        </div>
+                        <div className="item-wrapper mb-3">
+                          <span className="item-header">
+                            <span className="mdi mdi-file-document-edit px-2" />
+                            <span>data-source:</span>
+                          </span>
+                          <span className="item-body">{s.LeadSource}</span>
+                        </div>
+
+                        <div className="item-wrapper-%">
+                          <span className="item-header">
+                            <span className="mdi mdi-focus-field-horizontal px-2" />
+                            <span>Field Fill Status</span>
+                          </span>
+                          {/* <span className="item-body">{s.Fill__c || null}</span> */}
+                        </div>
+                        <div>
+                          <Box>
+                            <Box sx={{ width: "100%", mr: 1 }}>
+                              <LinearProgress
+                                variant="determinate"
+                                value={s.Fill__c}
+                              />
+                            </Box>
+                            <Box sx={{ minWidth: 35 }}>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                              >{`${Math.round(s.Fill__c)}%`}</Typography>
+                            </Box>
+                          </Box>
+                        </div>
+                        <Rating
+                          name="text-feedback"
+                          value={s.Rating__c}
+                          readOnly
+                          precision={0.5}
+                          emptyIcon={
+                            <StarIcon
+                              style={{ opacity: 0.55 }}
+                              fontSize="inherit"
+                            />
+                          }
+                        />
+                      </div>
+                      <div className="item-wrapper actions">
+                        <IconButton
+                          size="small"
+                          color="inherit"
+                          className="button-edit"
                         >
-                          {s.Email || "N/A"}
-                        </span>
+                          <EditIcon
+                            onClick={() => {
+                              setOpen(true);
+                              setEditVal(s);
+                            }}
+                          ></EditIcon>
+                        </IconButton>
+                        <div>
+                          <IconButton
+                            size="small"
+                            color="inherit"
+                            className="button"
+                          >
+                            <DeleteForeverIcon
+                              onClick={handleOpenm}
+                            ></DeleteForeverIcon>
+                          </IconButton>
+                          <Modal
+                            open={openm}
+                            onClose={handleClosem}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                            className="MuiBox-root"
+                          >
+                            <Box sx={style}>
+                              <div>
+                                <div>
+                                  {" "}
+                                  "Do you really want to delete this Contact?"
+                                </div>
+                                <br/>
+                                <div className="confirmbtn">
+                                  <ButtonGroup
+                                    variant="contained"
+                                    size="large"
+                                    color="secondary"
+                                    aria-label="contained primary button group"
+                                  >
+                                    <Button
+                                      onClick={() => {
+                                        handleDeleteButton(s.Id);
+                                      }}
+                                    >
+                                      Yes
+                                    </Button>
+                                    <Button
+                                      color="primary"
+                                      onClick={handleClosem}
+                                    >
+                                      No
+                                    </Button>
+                                  </ButtonGroup>
+                                 
+                                </div>
+                              </div>
+                            </Box>
+                          </Modal>
+                        </div>
                       </div>
                     </div>
-                    <div className="item-wrapper">
-                      <span className="item-header">
-                        <a
-                          style={{ textDecoration: "auto", color: "green" }}
-                          href={`https://api.whatsapp.com/send/?phone=${s.Phone}&text=Hi ${s.Name} From Psi Amman.`}
-                          target="_blank"
-                        >
-                          {" "}
-                          <span className="mdi mdi-whatsapp px-2" />
-                          WhatsApp
-                        </a>
-                      </span>
-                    </div>
-                    <div className="item-wrapper">
-                      <span className="item-header">
-                        <span className="mdi mdi-map-marker px-2" />
-                        <span>nationality:</span>
-                      </span>
-                      <span className="item-body">Jordan</span>
-                    </div>
-                    <div className="item-wrapper">
-                      <span className="item-header">
-                        <span className="mdi mdi-calendar-blank px-2" />
-                        <span>register:</span>
-                      </span>
-                      <span className="item-body">
-                        {/* {s.CreatedDate} */}
-                        {(s.CreatedDate &&
-                          moment(s.CreatedDate).format("DD/MM/YYYY")) ||
-                          "N/A"}
-                      </span>
-                    </div>
-
-                    <div className="item-wrapper">
-                      <span className="item-header">
-                        <span className="mdi mdi-currency-usd px-2" />
-                        <span>Amount:</span>
-                      </span>
-                      <span className="item-body">{s.Amount__c}</span>
-                    </div>
-                    <div className="item-wrapper mb-3">
-                      <span className="item-header">
-                        <span className="mdi mdi-file-document-edit px-2" />
-                        <span>data-source:</span>
-                      </span>
-                      <span className="item-body">{s.LeadSource}</span>
-                    </div>
-
-                    <div className="item-wrapper-%">
-                      <span className="item-header">
-                        <span className="mdi mdi-focus-field-horizontal px-2" />
-                        <span>Field Fill Status</span>
-                      </span>
-                      {/* <span className="item-body">{s.Fill__c || null}</span> */}
-                    </div>
-                    <div>
-                      <Box>
-                        <Box sx={{ width: "100%", mr: 1 }}>
-                          <LinearProgress
-                            variant="determinate"
-                            value={s.Fill__c}
-                          />
-                        </Box>
-                        <Box sx={{ minWidth: 35 }}>
-                          <Typography
-                            variant="body2"
-                            color="text.secondary"
-                          >{`${Math.round(s.Fill__c)}%`}</Typography>
-                        </Box>
-                      </Box>
-                    </div>
-                    <Rating
-                      name="text-feedback"
-                      value={s.Rating__c}
-                      readOnly
-                      precision={0.5}
-                      emptyIcon={
-                        <StarIcon
-                          style={{ opacity: 0.55 }}
-                          fontSize="inherit"
-                        />
-                      }
-                    />
-                  </div>
-                  <div className="item-wrapper actions">
-                    <IconButton
-                      size="small"
-                      color="inherit"
-                      className="button-edit"
-                    >
-                      <EditIcon
-                        onClick={() => {
-                          setOpen(true);
-                          setEditVal(s);
-                        }}
-                      ></EditIcon>
-                    </IconButton>
-                    <div>
-                      
-                    <IconButton size="small" color="inherit" className="button">
-                    <DeleteForeverIcon
-                       onClick={handleOpenm}
-                      ></DeleteForeverIcon>
-                    </IconButton>
-      <Modal
-        open={openm}
-        onClose={handleClosem}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-
-        "Do you really want to delete this Contact?"
-
-        <Button
-                        onClick={() => handleDeleteButton(s.Id)}
-                      >Yes</Button>
-        <Button
-                        onClick={handleClosem}
-                      >No</Button>
-        </Box>
-      </Modal>
-    </div>
-                  </div>
+                  )}
                 </div>
-              )}
-            </div>
-          ))}
+              ))}
 
-        <br />
-</div>):<div >
-         <img style={{ borderRadius: '5px' , filter: 'drop-shadow(2px 4px 6px black)' ,width: '45%'}} src={nocontact}></img>
-         </div>}
+            <br />
+          </div>
+        ) : (
+          <div>
+            <img
+              style={{
+                borderRadius: "5px",
+                filter: "drop-shadow(2px 4px 6px black)",
+                width: "45%",
+              }}
+              src={nocontact}
+            ></img>
+          </div>
+        )}
 
         <div className="speedDial no-printme">
-          <Backdrop open={openD} />
+          {/* <Backdrop open={openD} /> */}
           <SpeedDial
             ariaLabel="SpeedDial uncontrolled open example"
             icon={<SpeedDialIcon />}
@@ -679,7 +737,7 @@ export const ContactPage = (props) => {
                 color="primary"
                 aria-label="contained primary button group"
               >
-                <Button onClick={handleCreateButtons_2}>Save</Button>
+                <Button onClick={hundle}>Save</Button>
                 <Button
                   color="inherit"
                   onClick={() => {
