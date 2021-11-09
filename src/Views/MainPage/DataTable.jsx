@@ -56,6 +56,7 @@ export const DataTable = () => {
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setResult(sortedResult);
       setcount(result.data.length);
+      console.log('Contact',result);
     } else setResult(null);
     // setcount(0);
 
