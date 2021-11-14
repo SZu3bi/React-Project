@@ -3,5 +3,6 @@
   "AddressCon": "https://samjad-dev-ed.my.salesforce.com/services/apexrest/ContactAPI",
   "AddressH": "https://samjad-dev-ed.my.salesforce.com/services/apexrest/historyApi",
   "AddressAmount": "https://samjad-dev-ed.my.salesforce.com/services/apexrest/ContactAmount",
-  "Token": "00D4W000002S5BH!ARoAQHctNWj7uSEkRd4NqCj4rSFz.Suo76ql.rMnJFUgvzGD93JQhRLEu7cndhwa.e2BTDZnYBk6LNur4YjT2E72qD07XgHt"
+  "Clone":"https://samjad-dev-ed.my.salesforce.com/services/apexrest/cloneAPI",
+  "Token": "00D4W000002S5BH!ARoAQGOobCnKCnazJURQDS2NtXNwvWTMbVvm.nzPeEHCaGzA7YE7WVjSpIb9ks07ccmGNskDBs7bwh1iyJanftrvtaC4Wsw1"
 }

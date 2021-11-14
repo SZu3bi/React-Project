@@ -30,7 +30,7 @@ export const SectionPills =() => {
         
           </div> */}
           <GridContainer>
-            <GridItem xs={12} sm={12} md={8} lg={6}>
+            {/* <GridItem xs={12} sm={12} md={8} lg={6}>
               <NavPills
                 color="primary"
                 tabs={[
@@ -70,7 +70,7 @@ export const SectionPills =() => {
                   },
                 ]}
               />
-            </GridItem>
+            </GridItem> */}
             <GridItem xs={12} sm={12} md={12} lg={6}>
               <NavPills
                 color="rose"
@@ -107,7 +107,7 @@ export const SectionPills =() => {
           </GridContainer>
           <div>
 
-            <SectionNavbars/>
+            {/* <SectionNavbars/> */}
           </div>
         </div>
       </div>

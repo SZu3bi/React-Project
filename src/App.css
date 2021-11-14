@@ -634,3 +634,9 @@ section {
   align-items: center;
   flex-direction: column;
 }
+textarea {
+  width: 0;
+  height: 0;
+  padding: 0;
+  opacity: 0;
+}

@@ -9,6 +9,7 @@ import {
   CreateMainInfo_Contact,
   GetMainInfo_Contact,
   DeleteInfo_Contact,
+  Clone_Contact,
 } from "../../Services/APIServices_2";
 import { Source } from "./Option/Option";
 import { GetMainInfo_Case } from "../../Services/APIServices";
@@ -23,7 +24,7 @@ import { useTheme } from "@material-ui/core/styles";
 import { deepOrange, deepPurple } from "@material-ui/core/colors";
 import psi from "../../Views/sales.png";
 import nocontact from "../../Views/nodata.png";
-import { Rating } from "@mui/material";
+import { Rating, Tooltip } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
@@ -33,7 +34,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { IconButton } from "@material-ui/core";
+import { Fab, IconButton } from "@material-ui/core";
 import moment from "moment";
 import Backdrop from "@mui/material/Backdrop";
 import Checkbox from "@mui/material/Checkbox";
@@ -249,10 +250,39 @@ export const ContactPage = (props) => {
       showError("Delete Failed");
     }
   };
+  const clone = async (clonedId) => {
+    setLoading(false);
+    setOpenm(false);
+    const result = await Clone_Contact(clonedId);
+    if (!(result && result.LeadSource && result.LeadSource == 'Web' )) {
+      showSuccess('Contact cloned successfully');
+      GetAllData();
+
+      setIsLoading(false);
+    } else { showError('Contact clone failed');}
+  };
 
   const handleStaffRatingChange = (event) => {
     setStates((item) => ({ ...item, rate: event.target.value }));
   };
+
+  const textArea = useRef(null);
+
+  const textAreaRefnum = useRef(null);
+  const copyTextToClipboard = (Id) => {
+    if (Id) {
+      const context = textArea.current;
+      context.value = Id;
+      context.select();
+      document.execCommand('copy');
+      showSuccess(`Copy id successfully  (${Id})`);
+      console.log('id', Id)
+
+    
+    }
+  };
+
+  
 
   useEffect(() => {
     return () => clearInterval(timerIdRef.current);
@@ -304,17 +334,50 @@ export const ContactPage = (props) => {
                       <Spinner isActive={isLoading} isAbsolute />
                       <div className="cards-header">
                         <div className="item-wrapper">
+                        <div style={{display:'flex'}}>
+                          <div>
                           <img
                             id="avatar"
                             className="user-cover-image"
                             src={psi}
                             alt="lead"
                           ></img>
+                          </div>
                           {/* <div>Timer: {count}s</div>
       <div>
         <button onClick={startHandler}>Start</button>
         <button onClick={stopHandler}>Stop</button>
       </div> */}
+         <div style={{marginLeft:'15%'}}>
+                        
+                        {(((s &&
+                        s.LeadSource === 'Web') && (
+                           <Tooltip title="Clone">
+                              <Fab
+                                size='small'
+                                aria-label='clone'
+                                label='clone'
+                                onClick={() => clone(s.Id)}
+                              >
+                                <span className='mdi mdi-animation-outline mdi-18px' />
+                              </Fab>
+                            </Tooltip>
+                         
+                        )) ||
+                        '')}
+                        {/* <Tooltip title="Clone">
+                              <Fab
+                                size='small'
+                                aria-label='clone'
+                                label='clone'
+                                onClick={() => clone(s.Id)}
+                              >
+                                <span className='mdi mdi-animation-outline mdi-18px' />
+                              </Fab>
+                            </Tooltip> */}
+                    
+                       </div>
+                       </div>
                         </div>
                         <div className="d-flex-column">
                           <div className="item-wrapper px-2">
@@ -341,6 +404,26 @@ export const ContactPage = (props) => {
                             <span>Name:</span>
                           </span>
                           <span className="item-header-ellipsis"> {s.Name}</span>
+                   
+                        </div>
+                        <div className="item-wrapper">
+                          <span className="item-header">
+                            <span className="mdi mdi-account px-2" />
+                            <span>Id:</span>
+                            {s.Id}
+                            <textarea readOnly aria-disabled value={s.Id} ref={textArea} />
+
+                          </span>
+                          <Tooltip title="Copy">
+                          <span
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              copyTextToClipboard(s && s.Id);
+                            }}
+                            className='mdi mdi-content-copy'
+                          />
+                        </Tooltip>
                         </div>
                         <div className="item-wrapper">
                           <span className="item-header">

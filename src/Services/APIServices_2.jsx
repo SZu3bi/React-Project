@@ -57,6 +57,20 @@ export const DeleteInfo_Contact = async (id) => {
     .catch((error) => showError("Delete Filed"));
   return result;
 };
+export const Clone_Contact = async (id , body) => {
+  const result = await HttpServices_2.post_con(
+    `${config_2.server_address_Contact_Clone}/${id}`,
+    body,
+    {
+      headers: {
+        Authorization: `Bearer ${config_2.token_2}`,
+      },
+    }
+  )
+    .then((data) => data)
+    .catch((error) => showError("Clone Filed"));
+  return result;
+};
 
 export const EditInfo_Contact = async (id, body) => {
   const result = await HttpServices_2.put_con(
