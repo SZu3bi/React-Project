@@ -44,6 +44,7 @@ import HistoryIcon from "@mui/icons-material/History";
 import InfoIcon from "@mui/icons-material/Info";
 import { SectionTabs } from "./SectionTabs";
 import {SectionPills} from "./SectionPills";
+import {EarningCard} from "./EarningCard";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -592,7 +593,7 @@ export const Home = () => {
           <Route exact path="/TotalSummaryCard" component={TotalSummaryCard} />
           <Route exact path="/TripTour" component={TripTour} />
           <Route exact path="/Scroll" component={ScrollPic} />
-          <Route exact path="/Abouts" component={SectionPills} />
+          <Route exact path="/Abouts" component={EarningCard} />
         </Switch>
       </Router>
     </div>

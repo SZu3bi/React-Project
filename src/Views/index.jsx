@@ -12,3 +12,5 @@ export * from './MainPage/SpinnerComponent/Spinner';
 export * from './MainPage/SectionTabs';
 export * from './MainPage/SectionPills';
 export * from './MainPage/SectionNavbars';
+export * from './MainPage/EarningCard';
+export * from './MainPage/TotalOrderLineChartCard';

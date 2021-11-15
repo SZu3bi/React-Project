@@ -352,6 +352,14 @@ export const ContactPage = (props) => {
                         
                         {(((s &&
                         s.LeadSource === 'Web') && (
+                          <div style={{display: 'flex'}}>
+                            <div style={{    display: 'flex',
+    alignItems: 'center' , marginRight: '10%',
+    fontFamily: 'cursive',
+    fontWeight: 'bold'}}>
+                            <span>Clone</span>
+                            </div>
+                            <div>
                            <Tooltip title="Clone">
                               <Fab
                                 size='small'
@@ -362,6 +370,8 @@ export const ContactPage = (props) => {
                                 <span className='mdi mdi-animation-outline mdi-18px' />
                               </Fab>
                             </Tooltip>
+                            </div>
+                            </div>
                          
                         )) ||
                         '')}
