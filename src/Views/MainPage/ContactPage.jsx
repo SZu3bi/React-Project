@@ -254,7 +254,7 @@ export const ContactPage = (props) => {
     setLoading(false);
     setOpenm(false);
     const result = await Clone_Contact(clonedId);
-    if (!(result && result.LeadSource && result.LeadSource == 'Web' )) {
+    if (!(result && result.LeadSource && result.LeadSource !== 'Web' )) {
       showSuccess('Contact cloned successfully');
       GetAllData();
 
@@ -429,7 +429,7 @@ export const ContactPage = (props) => {
                             onClick={(e) => {
                               e.stopPropagation();
                               e.preventDefault();
-                              copyTextToClipboard(s && s.Id);
+                              copyTextToClipboard(s.Id);
                             }}
                             className='mdi mdi-content-copy'
                           />
