@@ -45,6 +45,7 @@ import { Spinner } from "../MainPage/SpinnerComponent/Spinner";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import Modal from "@mui/material/Modal";
+import token from '../../config/token-address.json'
 
 const style = {
   position: "absolute",
@@ -95,6 +96,8 @@ export const ContactPage = (props) => {
     active: false,
     amount: 0,
   });
+
+ 
 
   const [isLoading, setIsLoading] = useState(false);
   const [openD, setOpenD] = useState(false);
@@ -188,17 +191,20 @@ export const ContactPage = (props) => {
     showSuccess(`${id}` + "\n" + `${name}`);
   };
 
+ 
 
 
   const GetAllData = useCallback(async () => {
     const result = await GetMainInfo_Contact();
     if (result) {
+
       setcount(result.data.length);
       setTimeout(() => {
         setLoading(false);
       }, 3000);
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setResult(sortedResult);
+
     } else setResult(null);
   }, []);
 
@@ -282,13 +288,17 @@ export const ContactPage = (props) => {
     }
   };
 
-  
+
 
   useEffect(() => {
     return () => clearInterval(timerIdRef.current);
   }, []);
 
   useEffect(() => {
+  
+    // var retrievedObject = JSON.parse(localStorage.getItem('tokenapi'));
+    // localStorage.setItem(token.Token , JSON.stringify(retrievedObject));
+
     GetAllData();
     // CaseData();
   }, [GetAllData]);

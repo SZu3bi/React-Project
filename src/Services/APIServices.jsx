@@ -1,10 +1,15 @@
 import { config, HttpServices } from "../config";
 import { showError } from "../Helper/Tostify.Helper";
 
+
+var retrievedObject = JSON.parse(localStorage.getItem('tokenapi'));
+
+
+
 export const GetMainInfo_Case = async () => {
   const result = await HttpServices.get(`${config.server_address}`, {
     headers: {
-      Authorization: `Bearer ${config.token}`,
+      Authorization: `Bearer ${retrievedObject}`,
     },
   })
     .then((data_2) => data_2);

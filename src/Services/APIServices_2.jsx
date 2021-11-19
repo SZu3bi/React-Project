@@ -1,12 +1,21 @@
+
 import { HttpServices_2, config_2 } from "../config";
 import { showError } from "../Helper/Tostify.Helper";
+
+
+
+
+let retrievedObject = JSON.parse(localStorage.getItem('tokenapi'));
+
+    localStorage.setItem('tokenapi' , JSON.stringify(retrievedObject));
+
 
 export const GetMainInfo_Contact = async () => {
   const result = await HttpServices_2.get_con(
     `${config_2.server_address_Contact}`,
     {
       headers: {
-        Authorization: `Bearer ${config_2.token_2}`,
+        Authorization: `Bearer ${retrievedObject}`,
       },
     }
   )
