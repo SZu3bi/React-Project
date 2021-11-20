@@ -15,7 +15,7 @@ export const GetMainInfo_Contact = async () => {
     `${config_2.server_address_Contact}`,
     {
       headers: {
-        Authorization: `Bearer ${retrievedObject}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokenapi'))}`,
       },
     }
   )
@@ -29,7 +29,7 @@ export const GetAmount_Contact = async () => {
     `${config_2.server_address_Contact_Amonut}`,
     {
       headers: {
-        Authorization: `Bearer ${config_2.token_2}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokenapi'))}`,
       },
     }
   )
@@ -44,7 +44,7 @@ export const CreateMainInfo_Contact = async (contact) => {
     contact,
     {
       headers: {
-        Authorization: `Bearer ${config_2.token_2}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokenapi'))}`,
       },
     }
   )
@@ -58,7 +58,7 @@ export const DeleteInfo_Contact = async (id) => {
     `${config_2.server_address_Contact}/${id}`,
     {
       headers: {
-        Authorization: `Bearer ${config_2.token_2}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokenapi'))}`,
       },
     }
   )
@@ -72,7 +72,7 @@ export const Clone_Contact = async (id , body) => {
     body,
     {
       headers: {
-        Authorization: `Bearer ${config_2.token_2}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokenapi'))}`,
       },
     }
   )
@@ -87,7 +87,7 @@ export const EditInfo_Contact = async (id, body) => {
     body,
     {
       headers: {
-        Authorization: `Bearer ${config_2.token_2}`,
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokenapi'))}`,
       },
     }
   )

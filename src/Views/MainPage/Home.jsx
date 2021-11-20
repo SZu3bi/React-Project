@@ -45,7 +45,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { SectionTabs } from "./SectionTabs";
 import {SectionPills} from "./SectionPills";
 import {EarningCard} from "./EarningCard";
-import {Login} from "./Login";
+import {Login} from "./Login/Login";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -158,6 +158,10 @@ export const Home = () => {
     Data();
     GetAllData();
   }, [Data, GetAllData]);
+
+  useEffect(() => {
+    localStorage.getItem('tokenapi');
+  }, []);
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (

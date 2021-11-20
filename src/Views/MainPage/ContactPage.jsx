@@ -295,13 +295,11 @@ export const ContactPage = (props) => {
   }, []);
 
   useEffect(() => {
-  
-    // var retrievedObject = JSON.parse(localStorage.getItem('tokenapi'));
-    // localStorage.setItem(token.Token , JSON.stringify(retrievedObject));
-
     GetAllData();
-    // CaseData();
   }, [GetAllData]);
+  useEffect(() => {
+    localStorage.getItem('tokenapi');
+  }, []);
 
   return (
     <div className="Agents-wrapper view-wrapper">
@@ -643,6 +641,7 @@ export const ContactPage = (props) => {
         ) : (
           <div>
             <img
+            alt="ss"
               style={{
                 borderRadius: "5px",
                 filter: "drop-shadow(2px 4px 6px black)",
