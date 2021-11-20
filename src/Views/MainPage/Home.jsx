@@ -97,7 +97,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Home = () => {
+export const Home = ({
+  closeHome
+
+}) => {
   const [res, setRes] = useState();
   const [rese, setRese] = useState();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -141,6 +144,8 @@ export const Home = () => {
 
   const logout =()=>{
     localStorage.setItem('tokenapi',null);
+    closeHome();
+
 
   }
 
@@ -386,7 +391,7 @@ export const Home = () => {
               <Box sx={{ flexGrow: 1 }} />
 
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                <Route
+                {/* <Route
                   render={({ history }) => (
                     <IconButton
                       size="large"
@@ -404,7 +409,7 @@ export const Home = () => {
                       </IconButton>
                     </IconButton>
                   )}
-                />
+                /> */}
 
                 <Route
                   render={({ history }) => (
@@ -605,7 +610,7 @@ export const Home = () => {
           <Route exact path="/TripTour" component={TripTour} />
           <Route exact path="/Scroll" component={ScrollPic} />
           {/* <Route exact path="/Abouts" component={EarningCard} /> */}
-          <Route exact path="/Abouts" component={Login} />
+          {/* <Route exact path="/Abouts" component={Login} /> */}
         </Switch>
       </Router>
     </div>

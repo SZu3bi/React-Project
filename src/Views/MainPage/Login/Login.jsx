@@ -6,12 +6,13 @@ import "./Login.scss";
 import { showError, showSuccess } from '../../../Helper/Tostify.Helper';
 import { ToastContainer } from 'react-toastify';
 import psi from "../../../Views/sales.png";
+import { Home } from '../Home';
 
 export const  Login =() =>{
 
   const [tokenapi, settokenapi] = useState();
 
-
+const[cmp , setcmp] = useState(true);
   const [states, setStates] = useState({
     username: "",
     password: ""
@@ -25,7 +26,7 @@ export const  Login =() =>{
     const client_Secret='4BCC027C085744A0D20F5141589CF93F0A265937D13B2BAA7FC0F610EDAE116D';
   const  your_refresh_token = 'YqOC4NL7ixGAWBlzh376tblJi';
 
-  const handleLogin = () => {
+  const handleLogin = (props) => {
    
                 // 'https://samjad-dev-ed.my.salesforce.com/services/oauth2/token?grant_type=password&client_id=3MVG9l2zHsylwlpRT5qAzO2.FdO9_6HqBTzuUidVrxVFWQjDq3.5Od_fmnlJOZZIkfFH95QZkgZYbfhhbtE64&client_secret=4BCC027C085744A0D20F5141589CF93F0A265937D13B2BAA7FC0F610EDAE116D&username=samjad@gmail.com&password=Salah112233YqOC4NL7ixGAWBlzh376tblJi&'
 
@@ -33,10 +34,16 @@ export const  Login =() =>{
         .then((response) => {
 
           settokenapi(response.data.access_token);
+        
           localStorage.setItem('tokenapi', JSON.stringify(tokenapi));
           console.log(response.data.access_token)
           console.log(retrievedObject);
           showSuccess("Login Successfully");
+
+          setTimeout(() => {
+            setcmp(false);
+          }, 500);
+        
       
         })
         .catch((error) => {
@@ -54,6 +61,10 @@ export const  Login =() =>{
 
       }
 
+      const closeHome = () =>{
+        setcmp(true);
+      }
+
       useEffect(() => {
 
         if(tokenapi!==undefined)
@@ -65,11 +76,12 @@ export const  Login =() =>{
       var retrievedObject = localStorage.getItem('tokenapi');
 
       return (
+<div>
+        {cmp ? (
               <div className='login-wrapper'>
 
       <div className='login-content-wrapper'>
         
-      <ToastContainer />
         <div className='box-section-wrapper'>
        
 
@@ -119,24 +131,29 @@ export const  Login =() =>{
                   </Button>
                 </div>
                 <br/>
-              <div>
+              {/* <div>
                   <Button class="glow-on-hover" onClick={ ()=>logout()}>
                     <span>Logout</span>
                   </Button>
-                </div>
+                </div> */}
                 {/* <div>
                 {tokenapi}
                 </div> */}
               </div>
             </form>
+            
 
           </div>
         </div>
       </div>
-  
-    </div>
-                   );
+      <ToastContainer />
+    </div>):(<div>
+<Home closeHome={closeHome}/>
+    </div>)}
 
+
+    </div>
+);
 }
 
 
