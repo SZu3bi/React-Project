@@ -10,9 +10,7 @@ import psi from "../../../Views/sales.png";
 export const  Login =() =>{
 
   const [tokenapi, settokenapi] = useState();
-  const [state , setState] = useState();
-  const username = useFormInput('');
-  const password = useFormInput('');
+
 
   const [states, setStates] = useState({
     username: "",
@@ -44,6 +42,15 @@ export const  Login =() =>{
         .catch((error) => {
           console.error(error)
         });
+
+      }
+
+      const logout =()=>{
+        localStorage.setItem('tokenapi',null);
+
+        setStates({
+          username: "",
+          password: "",})
 
       }
 
@@ -111,6 +118,12 @@ export const  Login =() =>{
                     <span>Login</span>
                   </Button>
                 </div>
+                <br/>
+              <div>
+                  <Button class="glow-on-hover" onClick={ ()=>logout()}>
+                    <span>Logout</span>
+                  </Button>
+                </div>
                 {/* <div>
                 {tokenapi}
                 </div> */}
@@ -125,17 +138,7 @@ export const  Login =() =>{
                    );
 
 }
-const useFormInput = initialValue => {
-  const [value, setValue] = useState(initialValue);
- 
-  const handleChange = e => {
-    setValue(e.target.value);
-  }
-  return {
-    value,
-    onChange: handleChange
-  }
-}
+
 
 // &username=samjad@gmail.com&password=Salah112233YqOC4NL7ixGAWBlzh376tblJi&
 // https://login.salesforce.com/services/oauth2/callback

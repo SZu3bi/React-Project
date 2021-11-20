@@ -138,6 +138,12 @@ export const Home = () => {
     window.print();
   };
 
+
+  const logout =()=>{
+    localStorage.setItem('tokenapi',null);
+
+  }
+
   const Data = useCallback(async () => {
     const result = await GetMainInfo_Contact();
     if (result) {
@@ -180,8 +186,8 @@ export const Home = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}>Profile</MenuItem> */}
+      <MenuItem onClick={logout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -323,7 +329,7 @@ export const Home = () => {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>User</p>
       </MenuItem>
     </Menu>
   );
