@@ -51,7 +51,7 @@ export const DataTable = () => {
     if (result) {
       setTimeout(() => {
         setLoading(false); 
-      }, 3000);
+      }, 1500);
     
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setResult(sortedResult);
@@ -68,7 +68,7 @@ export const DataTable = () => {
     if (result) {
       setTimeout(() => {
         setLoading(false); 
-      }, 3000);
+      }, 1500);
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setres(sortedResult);
       setcountcase(result.data.length);

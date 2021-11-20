@@ -16,7 +16,7 @@ import { GlobalHistory } from "../../Helper/Middleware.Helper";
 import HomeIcon from "@material-ui/icons/Home";
 import { ContactPage } from "./ContactPage";
 import { DataTable } from "./DataTable";
-import { IconButton } from "@material-ui/core";
+import { IconButton, Tooltip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -230,13 +230,17 @@ export const Home = ({
       <MenuItem>
         <Route
           render={({ history }) => (
-            <IconButton color="inherit" className={classes.myClassName}>
+            <Tooltip title="Home">
+
+            <IconButton color="inherit" className={classes.myClassName} >
               <HomeIcon
+            
                 onClick={() => {
                   history.push("/home");
                 }}
               ></HomeIcon>
             </IconButton>
+            </Tooltip>
           )}
         />
         <p>Home</p>
@@ -370,6 +374,8 @@ export const Home = ({
               </Search> */}
               <Route
                 render={({ history }) => (
+                  <Tooltip title="Home">
+
                   <IconButton
                     size="large"
                     aria-label="show 17 new notifications"
@@ -385,6 +391,7 @@ export const Home = ({
                   >
                     <img className="logoimg" src={psi} alt="lead"></img>
                   </IconButton>
+                  </Tooltip>
                 )}
               />
 
@@ -413,6 +420,7 @@ export const Home = ({
 
                 <Route
                   render={({ history }) => (
+                    <Tooltip title="Home">
                     <IconButton
                       size="large"
                       aria-label="show 17 new notifications"
@@ -428,6 +436,7 @@ export const Home = ({
                         <HomeIcon></HomeIcon>
                       </IconButton>
                     </IconButton>
+                    </Tooltip>
                   )}
                 />
 
@@ -452,6 +461,7 @@ export const Home = ({
                 /> */}
                 <Route
                   render={({ history }) => (
+                    <Tooltip title="Contact">
                     <IconButton
                       size="large"
                       aria-label="show 4 new mails"
@@ -467,11 +477,14 @@ export const Home = ({
                         <ContactPageIcon></ContactPageIcon>
                       </IconButton>
                     </IconButton>
+                    </Tooltip>
                   )}
                 />
 
                 <Route
                   render={({ history }) => (
+                    <Tooltip title="Cases">
+
                     <IconButton
                       size="large"
                       aria-label="show 17 new notifications"
@@ -487,11 +500,14 @@ export const Home = ({
                         <WorkIcon></WorkIcon>
                       </IconButton>
                     </IconButton>
+                    </Tooltip>
                   )}
                 />
 
                 <Route
                   render={({ history }) => (
+                    <Tooltip title="Total Summary">
+
                     <IconButton
                       size="large"
                       aria-label="show 17 new notifications"
@@ -508,10 +524,13 @@ export const Home = ({
                         <LocalAtmIcon></LocalAtmIcon>
                       </IconButton>
                     </IconButton>
+                    </Tooltip>
                   )}
                 />
                 <Route
                   render={({ history }) => (
+                    <Tooltip title="Favorite">
+
                     <IconButton
                       size="large"
                       aria-label="show 4 new mails"
@@ -527,37 +546,39 @@ export const Home = ({
                         <FavoriteIcon></FavoriteIcon>
                       </IconButton>
                     </IconButton>
+                    </Tooltip>
                   )}
                 />
+                                    <Tooltip title="Contact Count">
+
                 <IconButton
                   size="large"
-                  aria-label="show 17 new notifications"
                   color="inherit"
                 >
                   <Badge
                     badgeContent={
-                      undefined !== res && res !== null && res.length
-                    }
+                      undefined !== res && res !== null && res.length}
                     color="error"
                   >
                     <PermContactCalendarIcon />
                   </Badge>
                 </IconButton>
+                </Tooltip>
+                <Tooltip title="Case Count">
+
                 <IconButton
                   size="large"
-                  aria-label="show 17 new notifications"
                   color="inherit"
                 >
                   <Badge
                     badgeContent={
-                      undefined !== rese && rese !== null && rese.length
-                    }
+                      undefined !== rese && rese !== null && rese.length}
                     color="error"
                   >
                     <BusinessCenterIcon />
                   </Badge>
                 </IconButton>
-
+</Tooltip>
                 <IconButton
                   size="large"
                   edge="end"
