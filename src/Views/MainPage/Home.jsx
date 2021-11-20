@@ -595,7 +595,7 @@ export const Home = ({
             path="/"
             render={() => {
               return state.isUserAuthenticated ? (
-                <Redirect to="/Abouts" />
+                <Redirect to="/home" />
               ) : (
                 <Redirect to="/contact" />
               );
