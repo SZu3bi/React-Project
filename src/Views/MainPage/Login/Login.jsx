@@ -11,6 +11,7 @@ import { Home } from '../Home';
 export const  Login =() =>{
 
   const [tokenapi, settokenapi] = useState();
+  const [errors, seterror] = useState();
 
 const[cmp , setcmp] = useState(true);
   const [states, setStates] = useState({
@@ -33,8 +34,8 @@ const[cmp , setcmp] = useState(true);
       axios.post(`${AUTHORIZATION_URL}?grant_type=${RESPONSE_TYPE}&client_id=${CLIENT_ID}&client_secret=${client_Secret}&username=${states.username}&password=${states.password}YqOC4NL7ixGAWBlzh376tblJi`)
         .then((response) => {
 
+
           settokenapi(response.data.access_token);
-        
           localStorage.setItem('tokenapi', JSON.stringify(tokenapi));
           console.log(response.data.access_token)
           console.log(retrievedObject);
@@ -43,10 +44,13 @@ const[cmp , setcmp] = useState(true);
           setTimeout(() => {
             setcmp(false);
           }, 500);
-        
+       
       
         })
         .catch((error) => {
+          console.log(error,'error');
+          showError("Login Fail");
+
           console.error(error)
         });
 
@@ -64,6 +68,8 @@ const[cmp , setcmp] = useState(true);
       const closeHome = () =>{
         setcmp(true);
       }
+
+ 
 
       useEffect(() => {
 
@@ -122,7 +128,7 @@ const[cmp , setcmp] = useState(true);
                         }}
                       />
               <div className='d-flex-v-center-h-between mb-3'>
-     
+
               </div>
               <div className='d-flex-v-center-h-end'>
               <div>
