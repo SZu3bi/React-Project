@@ -2,13 +2,15 @@ import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Middleware } from "../../../Helper/Middleware.Helper";
 import { Button, TextField } from '@material-ui/core';
-import "./Login.scss";
+import "./LoginForm.scss";
 import { showError, showSuccess } from '../../../Helper/Tostify.Helper';
 import { ToastContainer } from 'react-toastify';
 import psi from "../../../Views/sales.png";
 import { Home } from '../Home';
 import {configlogin} from '../../../config/configlogin'
-export const  Login =() =>{
+
+
+export const  LoginForm =() =>{
 
   const [tokenapi, settokenapi] = useState();
   const [errors, seterror] = useState();
@@ -74,22 +76,23 @@ const[cmp , setcmp] = useState(true);
       var retrievedObject = localStorage.getItem('tokenapi');
 
       return (
-<div>
-        {cmp ? (
-              <div className='login-wrapper'>
+<div >
+<ToastContainer />
 
-      <div className='login-content-wrapper'>
-        
-        <div className='box-section-wrapper'>
-       
-
-          <div className='box-content'>
-            <div className='d-flex-v-center-h-between'>
+{cmp ? (
+<div >
+<div className='d-flex-v-center-h-between'>
             <img  style={{    width: '15%'}} src={psi} alt="lead"></img>
             </div>
-            <form noValidate className='form-wrapper'>
-         
-            <TextField
+<form noValidate>
+  <h2><span class="entypo-login"><i class="fa fa-sign-in"></i></span> Login</h2>
+  <Button class="buttonlogin" onClick={ ()=>handleLogin()}><span class="entypo-lock"><i class="fa fa-lock"></i></span></Button>
+  <span class="entypo-user inputUserIcon">
+     <i class="fa fa-user"></i>
+   </span>
+
+   <input
+     className="pass"
                         required
                         id="outlined-required"
                         label="User Name"
@@ -103,9 +106,9 @@ const[cmp , setcmp] = useState(true);
                           }));
                         }}
                       />
-               <TextField
+               <input
                         required
-                      
+                      className="pass"
                         id="outlined-required"
                         label="password"
                         variant="outlined"
@@ -119,33 +122,20 @@ const[cmp , setcmp] = useState(true);
                           }));
                         }}
                       />
-              <div className='d-flex-v-center-h-between mb-3'>
 
-              </div>
-              <div className='d-flex-v-center-h-end'>
-              <div>
-                  <Button class="glow-on-hover" onClick={ ()=>handleLogin()}>
-                    <span>Login</span>
-                  </Button>
-                </div>
-                <br/>
-              </div>
-            </form>
-            
+  <span class="entypo-key inputPassIcon">
+     <i class="fa fa-key"></i>
+   </span>
 
-          </div>
-        </div>
-      </div>
-      <ToastContainer />
-    </div>):(<div>
-<Home closeHome={closeHome}/>
-    </div>)}
+</form>
+</div>):(<div>
+    <Home closeHome={closeHome}/>
 
 
-    </div>
-);
+</div>)}
+
+</div>
+
+
+      );
 }
-
-
-
-

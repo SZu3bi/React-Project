@@ -3,14 +3,14 @@ import './Style.scss';
 
 // import { MainPageView } from './Views';
 import { Home } from './Views/MainPage/Home';
-import { Login } from './Views/MainPage/Login/Login';
+import { LoginForm } from './Views/MainPage/LoginForm/LoginForm';
 
 
 function App() {
   return (
     <div className='App'>
       <div className='App-header'>
-        <Login />
+        <LoginForm />
       </div>
     </div>
   );
