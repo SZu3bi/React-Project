@@ -68,14 +68,14 @@ input:focus {
   position:absolute;
   top:68px;
   right: 80px;
-  color:white;
+  color:rgb(224, 103, 22);
 }
 
 .inputPassIcon {
   position:absolute;
   top:136px;
   right: 80px;
-  color:white;
+  color:rgb(224, 103, 22);
 }
 
 input::-webkit-input-placeholder {
@@ -85,3 +85,5 @@ input::-webkit-input-placeholder {
 input:focus::-webkit-input-placeholder {
   color: #e74c3c;
 }
+
+

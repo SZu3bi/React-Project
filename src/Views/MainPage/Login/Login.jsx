@@ -15,8 +15,8 @@ export const  Login =() =>{
 
 const[cmp , setcmp] = useState(true);
   const [states, setStates] = useState({
-    username: "",
-    password: ""
+    username: null,
+    password: null
   });
 
 
@@ -75,7 +75,9 @@ const[cmp , setcmp] = useState(true);
 
       return (
 <div>
+  
         {cmp ? (
+          
               <div className='login-wrapper'>
 
       <div className='login-content-wrapper'>
@@ -95,7 +97,9 @@ const[cmp , setcmp] = useState(true);
                         label="User Name"
                         variant="outlined"
                         error={states.username === "" ? "error" : null}
-                        value={states.username}
+                        value={states.username || ''}
+                        autoComplete="User Name"
+
                         onChange={(event) => {
                           setStates((item) => ({
                             ...item,
@@ -111,7 +115,9 @@ const[cmp , setcmp] = useState(true);
                         variant="outlined"
                         type="password"
                         error={states.password === "" ? "error" : null}
-                        value={states.password}
+                        value={states.password || ''}
+              
+
                         onChange={(event) => {
                           setStates((item) => ({
                             ...item,
