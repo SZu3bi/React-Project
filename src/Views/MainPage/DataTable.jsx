@@ -194,16 +194,14 @@ export const DataTable = () => {
                              style={{
                               fontSize: "20px",
                               backgroundColor: "#ffffff",
-                              height: "30px",
+                              height: "27px",
                               fontFamily: "revert",
                               color: "rgb(248 18 1)",
-                              display: "flex",
-                              justifyContent: "center"
                           
                             }}
                               align="center"
                             >
-                             <Stack direction="row" spacing={2}>
+                             <Stack direction="row" spacing={1}>
 
       <Avatar sx={{ bgcolor: deepOrange[500] }}> {s.Name.charAt(0)}</Avatar>
    
