@@ -17,8 +17,8 @@ export const  LoginForm =() =>{
 
 const[cmp , setcmp] = useState(true);
   const [states, setStates] = useState({
-    username: "",
-    password: ""
+    username: "samjad@gmail.com",
+    password: "Salah112233"
   });
 
 
@@ -93,6 +93,7 @@ const[cmp , setcmp] = useState(true);
 
    <input
      className="pass"
+     defaultValue="The Godfather"
                         required
                         id="outlined-required"
                         label="User Name"
