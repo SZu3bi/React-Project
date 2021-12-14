@@ -529,6 +529,13 @@ export const ContactPage = (props) => {
                           </span>
                           <span className="item-body">{s.LeadSource}</span>
                         </div>
+                        <div className="item-wrapper mb-3">
+                          <span className="item-header">
+                            <span className="mdi mdi-file-document-edit px-2" />
+                            <span>User:</span>
+                          </span>
+                          <span className="item-body">{s.User_Name__c}</span>
+                        </div>
 
                         <div className="item-wrapper-%">
                           <span className="item-header">

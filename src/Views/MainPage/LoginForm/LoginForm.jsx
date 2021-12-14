@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import psi from "../../../Views/sales.png";
 import { Home } from '../Home';
 import {configlogin} from '../../../config/configlogin'
+import {configlogin_2} from '../../../config/configlogin'
 
 
 export const  LoginForm =() =>{
@@ -16,39 +17,61 @@ export const  LoginForm =() =>{
   const [errors, seterror] = useState();
 
 const[cmp , setcmp] = useState(true);
+ 
   const [states, setStates] = useState({
-    username: "samjad@gmail.com",
-    password: "Salah112233"
+    username: "",
+    password: "",
+    token:""
   });
 
+ 
+  const handleLogin = useCallback(async () => {
+    if(states.username === "Zaid-Lawi@gmail.com"){
+      axios.post(`${configlogin.server_address}?grant_type=${configlogin.RESPONSE_TYPE}&client_id=${configlogin.CLIENT_ID}&client_secret=${configlogin.client_Secret}&username=${states.username}&password=${states.password}QTVgM8rTi9wIU3iCnY8GJ1YLi`)
+      .then((response) => {
+        settokenapi(response.data.access_token);
+        localStorage.setItem('tokenapi', JSON.stringify(tokenapi));
+        console.log(response.data.access_token)
+        console.log(retrievedObject);
+        showSuccess("Login Successfully");
 
+        setTimeout(() => {
+          setcmp(false);
+        }, 500);
+     
+    
+      })
+      .catch((error) => {
+        console.log(error,'error');
+        showError("Login Fail");
 
-  const handleLogin = (props) => {
+        console.error(error)
+      });
+    }else{
+      axios.post(`${configlogin.server_address}?grant_type=${configlogin.RESPONSE_TYPE}&client_id=${configlogin.CLIENT_ID}&client_secret=${configlogin.client_Secret}&username=${states.username}&password=${states.password}PeM4Ov4p4M2nlbW6Q1vbFYv2`)
+      .then((response) => {
+        settokenapi(response.data.access_token);
+        localStorage.setItem('tokenapi', JSON.stringify(tokenapi));
+        console.log(response.data.access_token)
+        console.log(retrievedObject);
+        showSuccess("Login Successfully");
 
-      axios.post(`${configlogin.server_address}?grant_type=${configlogin.RESPONSE_TYPE}&client_id=${configlogin.CLIENT_ID}&client_secret=${configlogin.client_Secret}&username=${states.username}&password=${states.password}${configlogin.refresh_token}`)
-        .then((response) => {
+        setTimeout(() => {
+          setcmp(false);
+        }, 500);
+     
+    
+      })
+      .catch((error) => {
+        console.log(error,'error');
+        showError("Login Fail");
 
+        console.error(error)
+      });
+    }
+   
 
-          settokenapi(response.data.access_token);
-          localStorage.setItem('tokenapi', JSON.stringify(tokenapi));
-          console.log(response.data.access_token)
-          console.log(retrievedObject);
-          showSuccess("Login Successfully");
-
-          setTimeout(() => {
-            setcmp(false);
-          }, 500);
-       
-      
-        })
-        .catch((error) => {
-          console.log(error,'error');
-          showError("Login Fail");
-
-          console.error(error)
-        });
-
-      }
+      })
 
       const logout =()=>{
         localStorage.setItem('tokenapi',null);
@@ -66,7 +89,7 @@ const[cmp , setcmp] = useState(true);
  
 
       useEffect(() => {
-
+      
         if(tokenapi!==undefined)
         localStorage.setItem('tokenapi', JSON.stringify(tokenapi));
 
@@ -130,7 +153,7 @@ const[cmp , setcmp] = useState(true);
 
 </form>
 </div>):(<div>
-    <Home closeHome={closeHome}/>
+    <Home closeHome={closeHome} states={states}/>
 
 
 </div>)}

@@ -98,8 +98,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Home = ({
-  closeHome
-
+  closeHome,
+  states
 }) => {
   const [res, setRes] = useState();
   const [rese, setRese] = useState();
@@ -338,7 +338,7 @@ export const Home = ({
         >
           <AccountCircle />
         </IconButton>
-        <p>User</p>
+        <p>{states.username}</p>
       </MenuItem>
     </Menu>
   );
@@ -588,6 +588,7 @@ export const Home = ({
                   onClick={handleProfileMenuOpen}
                   color="inherit"
                 >
+                  {states.username}
                   <AccountCircle />
                 </IconButton>
               </Box>
