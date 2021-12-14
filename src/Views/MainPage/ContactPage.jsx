@@ -536,6 +536,15 @@ export const ContactPage = (props) => {
                           </span>
                           <span className="item-body">{s.User_Name__c}</span>
                         </div>
+                        <div className="item-wrapper">
+                          <span className="item-header">
+                            <span className="mdi mdi-calendar-blank px-2" />
+                            <span>Last Read / Write:</span>
+                          </span>
+                          <span className="item-body">
+                        {s.Last_Read_Write__c}
+                          </span>
+                        </div>
 
                         <div className="item-wrapper-%">
                           <span className="item-header">
