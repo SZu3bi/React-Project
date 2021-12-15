@@ -65,7 +65,7 @@ body {
   align-items: center;
   font-family: consolas;
   background-color: rgb(56 56 56);
-  /* background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/225748/MD_background.png) no-repeat center center fixed; */
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/225748/MD_background.png) no-repeat center center fixed;
   /* background-size: cover;
     background-image: url('../src//Views/coolpic.jpg'); */
   /* background: #141e30;
@@ -455,6 +455,7 @@ button.primary.ghost {
   justify-content: center;
   width: 25%;
   min-width: 300px;
+  margin-left: 1%;
 
 }
 
@@ -639,4 +640,21 @@ textarea {
   height: 0;
   padding: 0;
   opacity: 0;
+}
+
+
+.form {
+  max-width: 330px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 20px;
+    filter: drop-shadow(2px 4px 6px black);
+}
+
+.form .form__custom-button {
+  margin-top: 50px;
 }

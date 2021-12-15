@@ -16,3 +16,5 @@ export * from './MainPage/EarningCard';
 export * from './MainPage/TotalOrderLineChartCard';
 export * from './MainPage/Login/Login';
 export * from './MainPage/LoginForm/LoginForm';
+export * from './MainPage/LoginSalesForce';
+
