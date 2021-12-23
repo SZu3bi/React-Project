@@ -17,6 +17,11 @@ import { Box } from "@mui/system";
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import { deepOrange, deepPurple } from '@mui/material/colors';
+import { Budget } from "../../components/dashboard/Budget";
+import { LatestOrders } from "../../components/dashboard/latest-orders";
+import { DoughnutChart } from "../../components/dashboard/DoughnutChart";
+import { PieChartGraph } from "../../components/dashboard/PieChartGraph";
+import { Sales } from "../../components/dashboard/sales";
 
 export const DataTable = () => {
   const [result, setResult] = useState();
@@ -483,8 +488,22 @@ export const DataTable = () => {
             </div>
            
           )}
+          
+       
         </div>
-   
+<br/>
+<br/>
+        <div >
+          <Budget />
+          <br/>
+          <LatestOrders/>
+          <br/>
+          <DoughnutChart/>
+          <br/>
+          <PieChartGraph/>
+          <br/>
+          <Sales/>
+        </div>
     </div>
   );
 };
