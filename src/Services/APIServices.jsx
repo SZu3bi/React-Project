@@ -16,6 +16,16 @@ export const GetMainInfo_Case = async () => {
     // .catch((error) => showError(""));
   return result;
 };
+export const GetCredit = async () => {
+  const result = await HttpServices.get(`${config.credit_api}`, {
+    headers: {
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokenapi'))}`,
+    },
+  })
+    .then((data_2) => data_2);
+    // .catch((error) => showError(""));
+  return result;
+};
 
 export const GetMainhistory = async () => {
   const result = await HttpServices.get(`${config.server_address_h}`, {
@@ -41,6 +51,16 @@ export const CreateMainInfo_Case = async (body) => {
 
 export const DeleteInfo_Case = async (id) => {
   const result = await HttpServices.delete(`${config.server_address}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokenapi'))}`,
+    },
+  })
+    .then((data) => data)
+    .catch((error) => showError("Delete Filed"));
+  return result;
+};
+export const DeleteCredit = async (id) => {
+  const result = await HttpServices.delete(`${config.credit_api}/${id}`, {
     headers: {
       Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokenapi'))}`,
     },
@@ -79,3 +99,28 @@ export const EditInfo_Case = async (id, body) => {
 //     .catch((error) => showError("Edit Filed"));
 //   return result;
 // };
+
+
+// trigger CreateAccountContact on Account (after insert, after update){
+
+//   if(Trigger.isInsert){
+  
+//       List<Contact> ct = new List <Contact>();
+  
+//       for(Account acc : trigger.new){
+  
+//           Contact c = new Contact(LastName = acc.name,
+//                       AccountId=acc.id,
+//                       Fax=acc.Fax,
+//                       MailingStreet=acc.BillingStreet,
+//                       MailingCity=acc.BillingCity,
+//                       /* similarly add all fields which you want */
+//                       MailingState=acc.BillingState,
+//                       MailingPostalCode=acc.BillingPostalCode,
+//                       MailingCountry=acc.BillingCountry,
+//                       Phone=acc.Phone);
+  
+//           ct.add(c);
+//       }
+//       insert ct; 
+//   }

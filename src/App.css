@@ -658,3 +658,9 @@ textarea {
 .form .form__custom-button {
   margin-top: 50px;
 }
+
+
+.report-style-class{
+  width: 1500px;
+  height: 900px;
+}

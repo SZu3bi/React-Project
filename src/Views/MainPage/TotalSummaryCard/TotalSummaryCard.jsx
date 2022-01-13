@@ -4,13 +4,17 @@ import {
   GetMainInfo_Contact,
   GetAmount_Contact,
 } from "../../../Services/APIServices_2";
+import { DeleteCredit, GetCredit } from "../../../Services/APIServices";
+import { showError, showSuccess } from "../../../Helper/Tostify.Helper";
+import { IconButton } from "@material-ui/core";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 export const TotalSummaryCard = () => {
   const [result, setResult] = useState();
   const [amount, setamount] = useState(0);
 
   const GetAllData = useCallback(async () => {
-    const result = await GetMainInfo_Contact();
+    const result = await GetCredit();
     if (result) {
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setResult(sortedResult);
@@ -24,6 +28,16 @@ export const TotalSummaryCard = () => {
     } else setResult(0);
   }, []);
 
+  const handleDeleteButton = async (deletedId) => {
+    const result = await DeleteCredit(deletedId);
+    if (result) {
+      // setTimeout(() => {
+      //   setLoading(false);
+      // }, 2000);
+      showSuccess("Deleted Successfully");
+      GetAllData();
+    } else showError("Delete Failed");
+  };
 
 
   useEffect(() => {
@@ -90,9 +104,19 @@ export const TotalSummaryCard = () => {
     <div class="cc__number">
       <span class="cc__number-dot"></span>
       <span class="cc__number-dot"></span>
+      <span class="cc__digits">{s.Contact_Name__c}</span>
       <span class="cc__digits">{s.Name}</span>
     </div>
-    <div class="cc__balance-text">$ {s.Amount__c}</div>
+    <IconButton
+                        className="button"
+                        size="small"
+                        color="inherit"
+                      >
+                        <DeleteForeverIcon
+                          onClick={() => handleDeleteButton(s.Id)}
+                        ></DeleteForeverIcon>
+                      </IconButton>
+    <div class="cc__balance-text">$ {s.Invoice_Amount__c}</div>
   </div>
 
 </div>

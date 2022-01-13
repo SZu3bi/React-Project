@@ -95,6 +95,7 @@ export const ContactPage = (props) => {
     rate: 0,
     active: false,
     amount: 0,
+    qy:null
   });
 
  
@@ -802,6 +803,22 @@ export const ContactPage = (props) => {
                           setStates((item) => ({
                             ...item,
                             amount: event.target.value,
+                          }));
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <TextField
+                        required
+                        id="outlined-required"
+                        label="Qy"
+                        variant="outlined"
+                        error={states.qy === "" ? "error" : null}
+                        value={states.qy}
+                        onChange={(event) => {
+                          setStates((item) => ({
+                            ...item,
+                            qy: event.target.value,
                           }));
                         }}
                       />
