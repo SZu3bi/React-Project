@@ -21,6 +21,8 @@ export const TotalSummaryCard = () => {
     } else setResult(null);
   }, []);
 
+  console.log(result,'result');
+
   const TotalAmount = useCallback(async () => {
     const result = await GetAmount_Contact();
     if (result) {
@@ -104,7 +106,7 @@ export const TotalSummaryCard = () => {
     <div class="cc__number">
       <span class="cc__number-dot"></span>
       <span class="cc__number-dot"></span>
-      <span class="cc__digits">{s.Contact_Name__c}</span>
+      {/* <span class="cc__digits">{s.Contact_Name__c}</span> */}
       <span class="cc__digits">{s.Name}</span>
     </div>
     <IconButton
@@ -116,7 +118,7 @@ export const TotalSummaryCard = () => {
                           onClick={() => handleDeleteButton(s.Id)}
                         ></DeleteForeverIcon>
                       </IconButton>
-    <div class="cc__balance-text">$ {s.Invoice_Amount__c}</div>
+    <div class="cc__balance-text">$ {s.Amount__c }</div>
   </div>
 
 </div>

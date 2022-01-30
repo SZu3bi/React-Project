@@ -1,0 +1,51 @@
+.designform{
+    display: flex;
+    justify-content: center;
+    @media only screen and (max-width: 750px) {
+        margin-top: 30%;
+
+    }
+
+}
+
+.designformSec{
+display: flex;
+background: #e6e6e6;
+width: 30%;
+height: 400px;
+align-items: center;
+margin-top: 3.5%;
+box-shadow: 0px 0px 15px 0px #000000;
+border-radius: 40px 0px 0px 40px;
+justify-content: center;
+}
+
+
+.designformInput{
+background: rgb(254, 246, 246);
+padding: 1%;
+height: 500px;
+display: flex;
+border-radius: 20px;
+box-shadow: 0px 0px 15px 0px #000000;
+align-items: center;
+
+@media only screen and (max-width: 750px) {
+    width: 200px;
+    height: 457px;
+}
+  }
+
+
+
+.picdesign{
+    width: 70%;
+
+}
+
+
+body{
+    background-image: url("../sur.jpg");
+
+
+}

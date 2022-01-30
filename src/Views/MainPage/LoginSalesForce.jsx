@@ -8,16 +8,24 @@ import { ToastContainer } from 'react-toastify';
 import { Home } from '../../Views/MainPage/Home';
 import {configlogin} from '../../config/configlogin'
 import psi from "../../Views/sales.png";
-
+import Sur from "../../Views/sur.jpg";
+import './LoginSalesForce.scss'
+import { Input } from "@mui/material";
+import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from "@material-ui/core";
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 export const  LoginSalesForce =() =>{
   const [tokenapi, settokenapi] = useState();
 
 const[cmp , setcmp] = useState(true);
  
   const [states, setStates] = useState({
-    username: "samjad@gmail.com",
-    password: "Salah122",
-    token:""
+    username : "",
+    password : "",
+    token:"",
+    showPassword: false,
+
   });
 
  
@@ -95,17 +103,102 @@ const[cmp , setcmp] = useState(true);
 
       var retrievedObject = localStorage.getItem('tokenapi');
 
-
+      const handleChange = (prop) => (event) => {
+        setStates({ ...states, [prop]: event.target.value });
+      };
+    
+      const handleClickShowPassword = () => {
+        setStates({
+          ...states,
+          showPassword: !states.showPassword,
+        });
+      };
+    
+      const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+      };
     return (
-<div>
+<div >
       <ToastContainer />
 
 {cmp ? (
 <div >
 <div className='d-flex-v-center-h-between' style={{    marginTop: '1%'}}>
-            <img  style={{    width: '20%'}} src={psi} alt="lead"></img>
             </div>
-      <div className="App">
+<div className="designform">
+<div  className="designformSec">
+<img  className="picdesign" src={psi} alt="lead"></img>
+                </div>
+            <div className="designformInput">
+            <form onSubmit={onFormSubmit}>
+              <div style={{    padding: '5%'}}>
+              <TextField
+               InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AccountCircle />
+                  </InputAdornment>
+                ),
+              }}
+                        label="Email"
+                        // variant="filled"                     
+                        value={states.username}
+                        onChange={(event) => {
+                          setStates((item) => ({
+                            ...item,
+                            username: event.target.value,
+                          }));
+                        }}
+                      />
+     
+          </div>
+          <div>
+          <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={states.showPassword ? 'text' : 'password'}
+            value={states.password}
+            onChange={handleChange('password')}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {states.showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
+          />
+        </FormControl>
+          {/* <TextField
+                        label="password"
+                        variant="filled"             
+                        value={states.password}
+                        onChange={(event) => {
+                          setStates((item) => ({
+                            ...item,
+                            password: event.target.value,
+                          }));
+                        }}
+                      /> */}
+         
+</div>
+<div style={{    padding: '5%'}}>
+          <Button   type="Submit" color="facebook" disabled={states.username ===""}>
+            Log in
+          </Button>
+          </div>
+        </form>
+              
+              </div>
+           
+              </div>
+      {/* <div className="App">
         <form className="form" onSubmit={onFormSubmit}>
           <CustomInput
             labelText="Email"
@@ -142,7 +235,7 @@ const[cmp , setcmp] = useState(true);
             Log in
           </Button>
         </form>
-      </div>
+      </div> */}
       </div>):(<div>
         <Home closeHome={closeHome} states={states}/>
     
