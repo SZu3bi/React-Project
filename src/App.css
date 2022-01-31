@@ -460,9 +460,9 @@ button.primary.ghost {
 }
 
 .user-cover-image {
-  height: 55px;
+  height: 35;
   width: 55px;
-  border-radius: 100%;
+  /* border-radius: 100%; */
   background-size: 100%;
   box-shadow: 0 0 2px 0.5px rgba(#000000, 0.3);
   background-repeat: no-repeat;
