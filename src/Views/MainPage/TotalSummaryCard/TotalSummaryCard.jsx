@@ -118,7 +118,7 @@ export const TotalSummaryCard = () => {
                           onClick={() => handleDeleteButton(s.Id)}
                         ></DeleteForeverIcon>
                       </IconButton>
-    <div class="cc__balance-text">$ {s.Amount__c }</div>
+    <div class="cc__balance-text">$ {s.Invoice__c }</div>
   </div>
 
 </div>

@@ -9,6 +9,7 @@ import { Home } from '../../Views/MainPage/Home';
 import {configlogin} from '../../config/configlogin'
 import psi from "../../Views/sales.png";
 import Sur from "../../Views/sur.jpg";
+import Salesforce from "../../Views/salesforce.gif";
 import './LoginSalesForce.scss'
 import { Input } from "@mui/material";
 import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField } from "@material-ui/core";
@@ -21,8 +22,8 @@ export const  LoginSalesForce =() =>{
 const[cmp , setcmp] = useState(true);
  
   const [states, setStates] = useState({
-    username : "",
-    password : "",
+    username : "samjad@gmail.com",
+    password : "Salah1122",
     token:"",
     showPassword: false,
 
@@ -127,7 +128,7 @@ const[cmp , setcmp] = useState(true);
             </div>
 <div className="designform">
 <div  className="designformSec">
-<img  className="picdesign" src={psi} alt="lead"></img>
+<img  className="picdesign" src={Salesforce} alt="lead"></img>
                 </div>
             <div className="designformInput">
             <form onSubmit={onFormSubmit}>
