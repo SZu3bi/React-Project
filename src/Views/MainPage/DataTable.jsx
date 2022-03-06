@@ -27,7 +27,7 @@ import {Helmet} from "react-helmet";
 import { PowerBIEmbed } from 'powerbi-client-react';
 import { models ,pbi, Report } from 'powerbi-client';
 import axios from 'axios';
-
+import {DashboardWeb} from '../../DashboardWeb/DashboardWeb'
 
 export const DataTable = () => {
   const [result, setResult] = useState();
@@ -566,44 +566,8 @@ const GenerateToken = () => {
 
         </div>
 <div style={{display:'flex' , justifyContent:'center'}}>
-        <PowerBIEmbed
-	embedConfig = {{
-		type: 'report',   // Supported types: report, dashboard, tile, visual and qna
-		id: '4e6691d7-5605-4c28-a1d4-2a48ae372871',
-		embedUrl: 'https://app.powerbi.com/reportEmbed?reportId=4e6691d7-5605-4c28-a1d4-2a48ae372871&groupId=eb31180a-7ca1-4a8d-b847-cee9bffcc291&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVdFU1QtRVVST1BFLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsibW9kZXJuRW1iZWQiOnRydWUsImFuZ3VsYXJPbmx5UmVwb3J0RW1iZWQiOnRydWUsImNlcnRpZmllZFRlbGVtZXRyeUVtYmVkIjp0cnVlLCJ1c2FnZU1ldHJpY3NWTmV4dCI6dHJ1ZSwic2tpcFpvbmVQYXRjaCI6dHJ1ZX19',
-		accessToken: 'H4sIAAAAAAAEACWWtc7GDHaE7-VvHclMkbYwM7M702tmdpR7z5fd5lSjU4xGM8___GNn7zBn5T___Q8F4nWYbA4zGPHcfdspktJd5ONPYUo5OTw8LF39-aLXuwXGmryVsx4us_IhJbZm5oa1goMeQJQKR6JefYfCITKu-g0StjDj1xx5sjPpZvgMtwwlcmzJD9bsspLB4xNRBC7cfG9CBWkCK4hSFFRa9ULDzOHXoyRUZNJ-ox3ha4rwZMpelSD4ZEDLoi91DLdv07GMj-sWc_VDQc8_1B1ZO6HXPlEwfXiFEsxeY0fiexiA8RiA7OHI9ZwahtaKWGDaOuXxdQZqUNR66bzPD9crma7QRPMnFTAYxO8uXQZApBXr2qcON8GwjFT3xJmeixVUz9sAKjfSEdlYeRhH_TyaT-M00uqCHa1eTjh5GbKr2AHYudCE-cB0nKgb9UralbxsMZpFcbklm9RjdmVI2kOlZTKkIVu1XQozll3EzGwPKT6bLVQ2M6eqL2qap-1E4unNs5EgCxPT0qkp3HOzSGFb8muv-PAJ7gD2m8ZWncvCKfLUUpaBHjs5anzCssvukVE_CiORnoxrSKcSke1LQqT8fnQZs5-OtZMpD2a0uAw0805dUgf9QPDFDhkGnaPqYLFAdZ4QGd-er9FuLsNteoTGJIR3yzkwqoX2KJh9wARmlN7KiHAoTl03Vq6RS6Ae-rFopAkwG2b-DqjTKaZr5-SpYgUSO2yLGg7LMdo96SfvsJViXa31OBdqjDbemhOHcz0yt3M7kgwRYyFn1wKP0im19YNcEJMsWNTwUcbfXFlClBGvYl2a4ukRWRXy1DBNYtg-lcm_kXEj69aGkghehT2A0gBw87glEbqUKLOoUcbmHHU4x5-CEqovIFx1-HoAZosYqRzDmlMKTFKt14xAb75FBd8kVK_QK0nx39fn0ejUVCchDN1JUtRBUQ7li_7UYdf0zTBSuvrVy7yHznGdCd_yPHNprmJDUft7f69Fon3vQ23xKDocMB9JpJfNgou8cy0oHSEqO3qwWbESPtqpXkG9Jm55wAFSVNnsPbxmhXu4PtFZXpEySc0aVCxx7T5XcG3YoYeSqNEwBS6IoMJDwD6Qn-TwZQH0ilCYO0B81CtQuhbDiunGnZI1qc8p7eWUczbtOCUfe0ow1_542aHvVoyPUCKd_2RtioRT-sL2Y0-bpewlj4qNkjz1eu7wOIIQZEc34Qh3aqRDHRhRvo2QmhRVGe-44R8RQf3f9-Ep-H0CeNjCSki9fR1U7b4VcKpvzi6Uad8z9en0MVIWUV-3BFRvhclP_x1coD7eKqpIW0N6UdJ1v2EhEwobWvMJ_8VZx4JioI-_D4_b0VNiM1KOzPyB4ko4nhjE-U2HwBQah3Nmk_NOX1EDCQggKrmZbHLQLl0fQwGkoPAi-loLe_YhNcSOIEf15JTknumRKB8SNR4FO3rX-Vl1PeFBZZ9yODUFShjsOmMWpX_h8rpWTd8GN-3sdc3ZHEK0iu2UuUl79iR7uVrOCexiiWlszinQBCaY_RfIHijbLzzlSeBgE0_LIwX1b149Lbi_5kKS4ibabEuCuwnH2Y3o9yUP0QMXGBow-7LZsDw4d0Jtwel3llnkOMqSmfarjMAP0k_UxIS5pg6l8wxzepQ3VHvwiHBO25f1dPFVOJFyaz8UnJ0x-Y8hskCOuuHGEVGdHyrY-5HdkwhOgWsEX_YRO8-Kh-jtdjyWKVsozIPUQUcCm8VEq3i4AFQH-ZM8Oq0V2g4zkBQH9Cmw8liNSF_W3pn8Vk_BSE9HZyZ5gFjBV9fcn4cFNtWh4eDlwMA0aldB6a8-PPkviaMgoPON9p2EMq1LF7PGAPv2t0H7yeRL__ZeaE5ywQS-y-Z6iQK2tHmE6TKQFoPMk7-HyqQBwkzHkaw05jmwuTbob9kSFD1tQA_Jrzd78rX51-yljkKT8VqffCcQyhjSW-j_cjYwJ__p6pzKG9QEhU3ZPQixHqaweYkJaHQui3UjI8thqFKlSDbKTpQV45el8kBa1zKgNQA0XfccOsXf9QuqlYEjPmnXYZ5X97NKCNrYf0fHStHyG6IBvxe3y0NpnW2bq2PWnvMLZ6GZXj61WoCBOlEccz4RpftcBZawlb2g5E5fhwSCjRgmVWxNGtaM6HnBjd1zrvzUMn-YWPf1ok8rmsNLXvrIsqHeHrghWI8h02MosyVLJpQtzDoO5TykxpWCpYf_-5YyfFImTMnaZUBPNbCvLkGH3x5xAiyFFq7VUsngTraPVhRHrQH_gF5u7V5k-Bjy7p_GvOZHfGlH_tU8Z3340jGF5ZiILJ-pYqhBiASuSzpg3yic4I35hN27bXxH1r2Fnsx8WT-I_gcBzwQzgGQpaNxQCPVWMmECDfTRRO479b2IlTjBge_XmUN5GUX87Yx1CKve_sp2ElK40HJrl6ZZQxOzasQnmyrvc5V6ohtslijNLdJv7nb_2HQ1osXdC1HT3vshUeziYaJJqTBHuTWLKlThAem4oXM550yBGoUNAgF90GCnbJbgadT86XJn-nFuuHEYUQOHghEz-byXX3HjTT2SZTiuJqhbBJZ8kuA8ERl4a-JVaJQhBSDGdgGrimPNmfVsyF9wPIiZitFQGX6J81YDN5fjPCaVRAe_1FAaLuCSlDc7pKBckfRbUd1pcoMH_gLXbdqIlnWhhookVU2Gr42lLH-4B2rdiZNME2bxNkxVINOB8o1Mc3JPY5nyAvzt1YNXTvoOu433uwM9wa94IyluvIapNfV3l7FB9MPytyVJATQWbhPMyh0FDhlUujVIGgbXYVz8Q8QFUZ5OdyvAXkPgffuYOQDBqr7AXjoe0-HMQ4MaU__rX__81z_c9i5_0a_eP8zlN0BuRHQdo7nD1UtvoHXCvXY_myuYFzewQ_L0AbjtNp_nnww-yFD4RdXzosdSPBIP-zWtHw3RFQsSpZ5ctoko8zYlsHM_jDV9nZ9WhieQeAvhDnJcvp5Dyj7UiFOAFv46QVhsMoi-g4LAcGXudrz6Enx5AEI83cIfDpaIRwYE_9kIjbLsAHrWGeVvu52I5n6zel2buoQjs5du04vB-rJg19kR8Rnth7-6fErOH-GYmsbGHPeS2NXNPd1iTYxb4nmwcaxIkbpQr5c46piDXBlOkWgQkwk4lGkOFKWpihv1fAtIz-DClSfHKKvpR2BoNPP7kXgybWpv8vof443KX2E6DX3_x-Z3aapNCf9crj9ppN_Hv--oFbZEgoe5Z51_q7y2nrLj3Ko_2fZmqPuNNYybgBCi0Fg4GNOqMPxK3tn3v-2P0wtOqwJAGCv54wiDpgO5kp1pxi_145FMtyvNz9gfwhbyrv6Z5QJGmDAyMS75jpUmExw8igGZ59RKESv0GzzoNKOS3X8GQXvhQoMU08379EcQrRjgu1QUDr0MRf-8DgjCqVqZsRdSHyG2ktOvtV8jpvKylH7awsiU6BDvK407VBffRLghwiJM7VlH2j5Kj99KGCRBH3Z9gv0qxkpBMTJC502oXU2NhEjciEcAHiIxv3bUX3ECkMKAsdD2JzwkoFK1EsubpncQJSzecuA3IrjhlUMmoh3sJJyXcgeQ75wzDxmGPow4E1b8_5n_3_8D1QuwHdoNAAA=.eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVdFU1QtRVVST1BFLUItUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsibW9kZXJuRW1iZWQiOmZhbHNlfX0=',
-		tokenType: models.TokenType.Embed,
-    filters: [basicFilter],
-		settings: {
-      filterPaneEnabled: false,
-      navContentPaneEnabled: false,
-			panes: {
-				filters: {
-					expanded: false,
-					visible: false
-				}
-			},
-			background: models.BackgroundType.Transparent,
-		}
-	}}
-
-	eventHandlers = { 
-		new Map([
-			['loaded', function () {console.log('Report loaded');}],
-			['rendered', function () {console.log('Report rendered');}],
-			['error', function (event) {console.log(event.detail);}]
-		])
-	}
-		
-	cssClassName = { "report-style-class" }
-
-	getEmbeddedComponent = { (embeddedReport) => {
-		window.report = embeddedReport;
-	}}
-/>
-</div>
-<button onClick={GenerateToken}>Refresh</button>
-      
+<DashboardWeb />
+      </div>
     </div>
   );
 };
