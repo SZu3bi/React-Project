@@ -27,6 +27,10 @@ const[cmp , setcmp] = useState(true);
     password : "Salah11223344",
     token:"",
     showPassword: false,
+    username2 : "Zaid-Lawi@gmail.com",
+    password2 : "Zaid1122",
+    token2:"",
+    showPassword2: false,
 
   });
 
@@ -133,7 +137,7 @@ const[cmp , setcmp] = useState(true);
                 </div>
             <div className="designformInput">
             <form onSubmit={onFormSubmit}>
-              <div style={{    padding: '5%'}}>
+              {/* <div style={{    padding: '5%'}}>
               <TextField
                InputProps={{
                 startAdornment: (
@@ -143,7 +147,6 @@ const[cmp , setcmp] = useState(true);
                 ),
               }}
                         label="Email"
-                        // variant="filled"                     
                         value={states.username}
                         onChange={(event) => {
                           setStates((item) => ({
@@ -153,8 +156,8 @@ const[cmp , setcmp] = useState(true);
                         }}
                       />
      
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
           <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
@@ -177,24 +180,25 @@ const[cmp , setcmp] = useState(true);
             label="Password"
           />
         </FormControl>
-          {/* <TextField
-                        label="password"
-                        variant="filled"             
-                        value={states.password}
-                        onChange={(event) => {
-                          setStates((item) => ({
-                            ...item,
-                            password: event.target.value,
-                          }));
-                        }}
-                      /> */}
+
          
-</div>
+</div> */}
+{/* 
 <div style={{    padding: '5%'}}>
           <Button   type="Submit" color="facebook" disabled={states.username ===""}>
             Log in
           </Button>
+          </div> */}
+          <div style={{    padding: '5%'}}>
+          <Button   type="Submit" color="facebook" >
+            {states.username}
+                      </Button>
           </div>
+{/* <div style={{    padding: '5%'}}>
+          <Button   type="Submit" color="facebook" >
+          {states.username2}
+                      </Button>
+          </div> */}
         </form>
               
               </div>
