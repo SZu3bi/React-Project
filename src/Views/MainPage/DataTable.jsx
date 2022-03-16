@@ -139,8 +139,11 @@ const GenerateToken = () => {
   
   }, [GetAllData, GetAllData_Case]);
   return (
-    <div style={{ width: "90%", margin: "1px auto" }}>
-  
+    <div style={{ width: "90%", margin: "1px auto"}}>
+  <div style={{display:'flex' , justifyContent:'center'}}>
+<DashboardWeb />
+      </div>
+      <br/>
         <div>
                      {loading ? (
 
@@ -565,9 +568,7 @@ const GenerateToken = () => {
 
 
         </div>
-<div style={{display:'flex' , justifyContent:'center'}}>
-<DashboardWeb />
-      </div>
+
     </div>
   );
 };

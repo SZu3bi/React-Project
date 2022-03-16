@@ -16,6 +16,7 @@ import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Tex
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { HttpServices } from "../../Services copy/HttpMethod.Helper";
 export const  LoginSalesForce =() =>{
   const [tokenapi, settokenapi] = useState();
 
@@ -23,7 +24,7 @@ const[cmp , setcmp] = useState(true);
  
   const [states, setStates] = useState({
     username : "samjad@gmail.com",
-    password : "Salah1122",
+    password : "Salah11223344",
     token:"",
     showPassword: false,
 
@@ -54,7 +55,7 @@ const[cmp , setcmp] = useState(true);
         console.error(error)
       });
     }else{
-      axios.post(`${configlogin.server_address}?grant_type=${configlogin.RESPONSE_TYPE}&client_id=${configlogin.CLIENT_ID}&client_secret=${configlogin.client_Secret}&username=${states.username}&password=${states.password}PeM4Ov4p4M2nlbW6Q1vbFYv2`)
+      axios.post(`${configlogin.server_address}?grant_type=${configlogin.RESPONSE_TYPE}&client_id=${configlogin.CLIENT_ID}&client_secret=${configlogin.client_Secret}&username=${states.username}&password=${states.password}53Ob6e5N7DM0BR3W196u1eC2c`)
       .then((response) => {
         settokenapi(response.data.access_token);
         localStorage.setItem('tokenapi', JSON.stringify(tokenapi));

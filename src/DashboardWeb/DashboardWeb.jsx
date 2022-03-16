@@ -3,7 +3,7 @@ import { PowerBIEmbed } from "powerbi-client-react";
 import { models } from "powerbi-client";
 import "./DashboardWeb.scss";
 import axios from "axios";
-import { TokenMicrosoftAccount } from "../Services copy/DashboardService";
+// import { TokenMicrosoftAccount ,GenerateTokenreport } from "../Services copy/DashboardService";
 import { PowerBiEnum } from "../Enum/PowerBi.Enum";
 import { GetURLSearchParamsMethod } from "../Services copy/GetURLSearchParamsMethod";
 export const DashboardWeb = () => {
@@ -11,16 +11,27 @@ export const DashboardWeb = () => {
   const Userid = GetURLSearchParamsMethod('id')
 
 
-  const GenerateToken = async () => {
-    localStorage.removeItem("AccountToken");
-    const result = await TokenMicrosoftAccount();
-    if (result && result.data.access_token)
-      localStorage.setItem(
-        "AccountToken",
-        JSON.stringify(result && result.data.access_token) || null
-      );
-    GenerateTokenreport();
-  };
+  // const GenerateToken = async () => {
+  //   localStorage.removeItem("AccountToken");
+  //   const result = await TokenMicrosoftAccount();
+  //   if (result && result.data.access_token)
+  //     localStorage.setItem(
+  //       "AccountToken",
+  //       JSON.stringify(result && result.data.access_token) || null
+  //     );
+  //     GenerateTokenr();
+  // };
+
+  // const GenerateTokenr = async () => {
+  //   const result = await GenerateTokenreport();
+  //   if (result){
+  //   console.log(
+  //     'ssss'
+  //   )}else{
+  //     console.log("first")
+  //   }
+
+  // };
 
   const Filter = {
     $schema: "http://powerbi.com/product/schema#basic",
@@ -34,24 +45,25 @@ export const DashboardWeb = () => {
     requireSingleSelection: true,
   };
 
-  const GenerateTokenreport = async () => {
-    axios.post(PowerBiEnum.powerPI.valueWeb, {
-      data: {
-        accessLevel: "View",
-        allowSaveAs: "false",
-      },
-    })
-      .then((response) => {
-        console.log(response);
-        settokenapii(response.data.token);
-      })
-      .catch((error) => {
-        console.error(error, "error");
-      });
-  };
+  // const GenerateTokenreport = async () => {
+  //   axios.post(PowerBiEnum.powerPI.valueWeb, {
+  //     data: {
+  //       accessLevel: "View",
+  //       allowSaveAs: "false",
+  //     },
+  //   })
+  //     .then((response) => {
+  //       console.log(response);
+  //       settokenapii(response.data.token);
+  //     })
+  //     .catch((error) => {
+  //       console.error(error, "error");
+  //     });
+  // };
 
   useEffect(() => {
-    GenerateToken();
+   /// GenerateToken();
+    // GenerateTokenr();
     //GenerateTokenreport();
     // eslint-disable-next-line
   }, []);
@@ -61,7 +73,8 @@ export const DashboardWeb = () => {
       <div>
         <div style={{ display: "flex", justifyContent: "end" }}></div>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <PowerBIEmbed
+        <iframe title="Salesforce Dev Api" width="950" height="650" src="https://app.powerbi.com/view?r=eyJrIjoiYWRiZGQ3NWItNmVjOS00ZTI5LTk3YzItNTM4MDQyM2Y4MTRjIiwidCI6IjkxMDdlODQ0LTg4Y2MtNGM0MS04ZjU1LThjMDhiMjNkNDgxZiIsImMiOjl9&pageName=ReportSection" frameborder="0" allowFullScreen="true"></iframe>
+          {/* <PowerBIEmbed
             embedConfig={{
               type: "report",
               id: "1623ac5a-ee00-41a6-a41b-474daecc35b6",
@@ -69,7 +82,7 @@ export const DashboardWeb = () => {
 
               accessToken: tokenapii,
               tokenType: models.TokenType.Embed,
-             // filters: [Filter],
+             filters: [Filter],
               settings: {
                 customLayout: {
                   displayOption: models.DisplayOption.FitToWidth,
@@ -102,10 +115,7 @@ export const DashboardWeb = () => {
                 [
                   "error",
                   function () {
-                    //   GenerateToken();
-                    //   setTimeout(() => {
-                    //     GenerateTokenreport();
-                    //   }, 1000);
+              
                   },
                 ],
               ])
@@ -114,7 +124,7 @@ export const DashboardWeb = () => {
             getEmbeddedComponent={(embeddedReport) => {
               window.report = embeddedReport;
             }}
-          />
+          /> */}
         </div>
       </div>
     </div>
