@@ -1,0 +1,286 @@
+import React, { useCallback, useEffect, useState } from "react";
+import { PowerBIEmbed } from "powerbi-client-react";
+import { models } from "powerbi-client";
+import "./TeamleadDashboard.scss";
+import {
+  TokenReport,
+  RefreshTokenPbi,
+} from "../../../../Services/DashboardService";
+import { PowerBiEnum } from "../../../../Enums";
+import { GetUserTeamsInfo } from "../../../../Services/userServices";
+import { DialogComponent } from "../../../../Components";
+import { Button } from "@material-ui/core";
+import { useTranslation } from "react-i18next";
+import { showError } from "../../../../Helper";
+const translationPath = "DialogComponent.";
+
+export const TeamleadDashboard = () => {
+  const [reporttoken, setReporttoken] = useState();
+  const [teamid, setTeamid] = useState(null);
+  const [userTeamList, setUserTeamList] = useState([]);
+  const [isOpenclosed, setIsOpenclosed] = useState(false);
+  const [userTeamListlength, setuserTeamListlength] = useState(0);
+  const { t } = useTranslation("Dashboard");
+
+  const userid = JSON.parse(localStorage.getItem("session")).userId;
+
+  const GenerateTokenReport = async (groupid, reportid) => {
+    const result = await TokenReport(groupid, reportid);
+    setReporttoken(result);
+  };
+
+  const RefreshToken = async () => {
+    const result = await RefreshTokenPbi({
+      reports: PowerBiEnum.teamleadToken.reportid,
+      groups: PowerBiEnum.teamleadToken.groupid,
+    });
+    setReporttoken(result);
+  };
+  const getUserTemasById = useCallback(async () => {
+    const res = await GetUserTeamsInfo(userid);
+    if (!(res && res.status && res.status !== 200)) {
+      localStorage.setItem("userTeamsList", JSON.stringify(res));
+      setUserTeamList(res);
+      setuserTeamListlength(res.length);
+    } else setUserTeamList([]);
+  }, [userid]);
+
+  const Filter = {
+    $schema: "http://powerbi.com/product/schema#basic",
+    target: {
+      table: "Team Users BusinessGroups",
+      column: "TeamsId",
+    },
+    operator: "In",
+    values: [teamid],
+    filterType: models.FilterType.BasicFilter,
+    requireSingleSelection: true,
+  };
+
+  useEffect(() => {
+    getUserTemasById(userid);
+    if (userTeamListlength > 1) {
+      setIsOpenclosed(true);
+    } else {
+      setTeamid((userTeamList[0] && userTeamList[0].teamsId) || null);
+    }
+    GenerateTokenReport(
+      PowerBiEnum.teamleadToken.reportid,
+      PowerBiEnum.teamleadToken.groupid
+    );
+  }, [userTeamListlength, teamid]);
+
+  useEffect(() => {
+    if (teamid !== null);
+
+    setIsOpenclosed(false);
+  }, [teamid]);
+
+  return (
+    <div>
+      <DialogComponent
+        maxWidth="sm"
+        titleText={t(`${translationPath}choose`)}
+        dialogContent={
+          <div>
+            {userTeamList &&
+              userTeamList.map((List) => (
+                <div>
+                  <div className="item-dashboard">
+                    <div>
+                      <Button
+                        className="MuiButtonBase-root btns theme-solid mb-2 muiButton "
+                        type="button"
+                        disabled={List.teamsId === teamid}
+                        onClick={() => {
+                          setTeamid(List.teamsId);
+                        }}
+                      >
+                        <span className="MuiButton-label">
+                          <span className="mx-2"> {List.teamName}</span>
+                        </span>
+                        <span className="MuiTouchRipple-root" />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
+        }
+        onCloseClicked={() => setIsOpenclosed(false)}
+        isOpen={isOpenclosed}
+      />
+      {userTeamListlength > 1 ? (
+        <div className="btnnChoose">
+          <Button
+            className="MuiButtonBase-root btns theme-solid mb-2 muiButton "
+            type="button"
+            onClick={() => setIsOpenclosed(true)}
+          >
+            <span className="MuiButton-label">
+              <span className="mx-2">{t(`${translationPath}choose`)}</span>
+
+              <span className="MuiTouchRipple-root" />
+            </span>
+            <span className="MuiTouchRipple-root" />
+          </Button>
+        </div>
+      ) : null}
+      {/* <div className="bttnrefresh">
+        <Button
+          onClick={() =>
+            GenerateTokenReport(
+              PowerBiEnum.teamleadToken.reportid,
+              PowerBiEnum.teamleadToken.groupid
+            )
+          }
+        >
+          <span className=" mdi mdi-refresh mdi-24px "></span>
+        </Button>
+      </div> */}
+      <div className="dashboardMain">
+        <PowerBIEmbed
+          embedConfig={{
+            type: "report",
+            id: "7742e88e-2949-4de0-8ed1-d7758b89f706",
+            embedUrl:
+              "https://app.powerbi.com/reportEmbed?reportId=7742e88e-2949-4de0-8ed1-d7758b89f706&groupId=fb8582d0-052b-4a26-ba8b-a2f1d0bb79e2&w=2&config=eyJjbHVzdGVyVXJsIjoiaHR0cHM6Ly9XQUJJLVdFU1QtRVVST1BFLUUtUFJJTUFSWS1yZWRpcmVjdC5hbmFseXNpcy53aW5kb3dzLm5ldCIsImVtYmVkRmVhdHVyZXMiOnsibW9kZXJuRW1iZWQiOnRydWUsImFuZ3VsYXJPbmx5UmVwb3J0RW1iZWQiOnRydWUsImNlcnRpZmllZFRlbGVtZXRyeUVtYmVkIjp0cnVlLCJ1c2FnZU1ldHJpY3NWTmV4dCI6dHJ1ZSwic2tpcFpvbmVQYXRjaCI6dHJ1ZX19",
+
+            accessToken: reporttoken,
+            tokenType: models.TokenType.Embed,
+            filters: [Filter],
+            settings: {
+              customLayout: {
+                displayOption: models.DisplayOption.FitToWidth,
+              },
+              filterPaneEnabled: false,
+              navContentPaneEnabled: false,
+              panes: {
+                filters: {
+                  expanded: false,
+                  visible: false,
+                },
+              },
+              background: models.BackgroundType.Transparent,
+            },
+          }}
+          eventHandlers={
+            new Map([
+              [
+                "loaded",
+                () => {
+                  console.log("Report loaded");
+                },
+              ],
+              [
+                "rendered",
+                () => {
+                  console.log("Report rendered");
+                },
+              ],
+              [
+                "error",
+                (event ,embed) => {
+                  console.log("Error");
+                  const error = event.detail;
+              
+                  if (error.message === 'TokenExpired') {
+                       RefreshToken();
+                      GenerateTokenReport(
+                        PowerBiEnum.teamleadToken.reportid,
+                        PowerBiEnum.teamleadToken.groupid
+                      ) 
+                      embed.reload();
+                  } else {
+                    console.log(error.message)
+                      showError(error.detailedMessage);
+                  }
+                
+              
+             
+                },
+              ],
+            ])
+          }
+          cssClassName={"report-style-class"}
+          getEmbeddedComponent={(embeddedReport) => {
+            window.report = embeddedReport;
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
+
+import { config } from '../config/config';
+import { HttpServices } from '../Helper';
+
+const TokenMicrosoftAccount = async () => {
+  try {
+    const result = await HttpServices.post(
+      `${config.server_address}/CrmDfm/ExternalApis/GetToken`,
+
+    );
+    return result;
+  } catch (e) {
+    return undefined;
+  }
+};
+const TokenReport = async (reportid , groupid) => {
+  try {
+    const result = await HttpServices.post(
+      `${config.server_address}/Identity/Account/GetPowerPiToken?reports=${reportid}&groups=${groupid}`,
+
+    );
+    return result;
+  } catch (e) {
+    return undefined;
+  }
+};
+
+
+ const RefreshTokenPbi = async (body) => {
+  const result = await HttpServices.post(`${config.server_address}/Identity/Account/RefreshTokenPowerBi`, body)
+    .then((data) => data)
+    .catch((error) => error.response);
+  return result;
+};
+
+
+
+ 
+export {
+  TokenMicrosoftAccount,
+  TokenReport,
+  RefreshTokenPbi,
+};
+
+
+
+export const PowerBiEnum = {
+  salesToken: {
+    groupid:  "fb8582d0-052b-4a26-ba8b-a2f1d0bb79e2",
+    reportid:  "7742e88e-2949-4de0-8ed1-d7758b89f706",
+  },
+  teamleadToken: {
+    groupid:  "fb8582d0-052b-4a26-ba8b-a2f1d0bb79e2",
+    reportid:  "7742e88e-2949-4de0-8ed1-d7758b89f706",
+  },
+  agentToken: {
+    groupid:  "fb8582d0-052b-4a26-ba8b-a2f1d0bb79e2",
+    reportid:  "36ab7dbc-d6b4-4b8d-9d90-2cf256f2929c",
+  },
+  leasingToken: {
+    groupid:  "fb8582d0-052b-4a26-ba8b-a2f1d0bb79e2",
+    reportid:  "c627e2d0-0013-4e6d-b318-6b0a0670ae2d",
+  },
+  callCenter: {
+    groupid:  "fb8582d0-052b-4a26-ba8b-a2f1d0bb79e2",
+    reportid:  "30f4ca9c-5c8c-4c7a-a7aa-a27510c199b6",
+  },
+  marketing: {
+    groupid:  "fb8582d0-052b-4a26-ba8b-a2f1d0bb79e2",
+    reportid:  "d0608e6e-c134-485b-a152-35d757d19530",
+  },
+};

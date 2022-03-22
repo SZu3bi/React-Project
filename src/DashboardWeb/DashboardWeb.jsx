@@ -15,7 +15,7 @@ export const DashboardWeb = () => {
   //   localStorage.removeItem("AccountToken");
   //   const result = await TokenMicrosoftAccount();
   //   if (result && result.data.access_token)
-  //     localStorage.setItem(
+  //     localStorage.setItem(  
   //       "AccountToken",
   //       JSON.stringify(result && result.data.access_token) || null
   //     );
