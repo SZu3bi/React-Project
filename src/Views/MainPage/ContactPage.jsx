@@ -33,8 +33,9 @@ import PrintIcon from "@mui/icons-material/Print";
 import ShareIcon from "@mui/icons-material/Share";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { Fab, IconButton } from "@material-ui/core";
+import { CircularProgress, Fab, IconButton } from "@material-ui/core";
 import moment from "moment";
 import Backdrop from "@mui/material/Backdrop";
 import Checkbox from "@mui/material/Checkbox";
@@ -45,8 +46,11 @@ import { Spinner } from "../MainPage/SpinnerComponent/Spinner";
 import Skeleton from "@mui/material/Skeleton";
 import Stack from "@mui/material/Stack";
 import Modal from "@mui/material/Modal";
-import token from '../../config/token-address.json'
-
+import token from "../../config/token-address.json";
+import { green } from "@mui/material/colors";
+import CheckIcon from "@mui/icons-material/Check";
+import SaveIcon from "@mui/icons-material/Save";
+import CopyToClipboard from "react-copy-to-clipboard";
 const style = {
   position: "absolute",
   top: "50%",
@@ -95,10 +99,37 @@ export const ContactPage = (props) => {
     rate: 0,
     active: false,
     amount: 0,
-    qy:null
+    qy: null,
   });
 
- 
+  const [load, setLoad] = useState(false);
+  const [copy, setCopy] = useState(true);
+  const [suc, setSuc] = useState(false);
+  const timer = useRef();
+  const buttonSx = {
+    ...(suc && {
+      bgcolor: green[500],
+      "&:hover": {
+        bgcolor: green[700],
+      },
+    }),
+  };
+
+  const handleButtonClick = () => {
+    if (!loading) {
+      setSuc(false);
+      setLoad(true);
+      timer.current = window.setTimeout(() => {
+        setSuc(true);
+        setLoad(false);
+      }, 2000);
+    }
+  };
+  useEffect(() => {
+    return () => {
+      clearTimeout(timer.current);
+    };
+  }, []);
 
   const [isLoading, setIsLoading] = useState(false);
   const [openD, setOpenD] = useState(false);
@@ -122,12 +153,10 @@ export const ContactPage = (props) => {
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const handleOpenD = () => setOpenD(true);
 
+  const handleCloseD = () => {
+    setOpenD(false);
+  };
 
-  const handleCloseD = () => 
-  {
-  setOpenD(false);
-  }
-  
   const classes = useStyles();
   const openvalchangeContact = () => {
     setOpen(false);
@@ -192,20 +221,15 @@ export const ContactPage = (props) => {
     showSuccess(`${id}` + "\n" + `${name}`);
   };
 
- 
-
-
   const GetAllData = useCallback(async () => {
     const result = await GetMainInfo_Contact();
     if (result) {
-
       setcount(result.data.length);
       setTimeout(() => {
         setLoading(false);
       }, 3000);
       const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
       setResult(sortedResult);
-
     } else setResult(null);
   }, []);
 
@@ -220,12 +244,9 @@ export const ContactPage = (props) => {
   //   } else setCasedata(null);
   // }, []);
 
-
-  
   const hundle = () => {
     if (states.name !== "") {
       handleCreateButtons_2();
-
     } else showError("Fill Name ");
   };
 
@@ -233,14 +254,14 @@ export const ContactPage = (props) => {
     setLoading(true);
     handleCloseD();
     const result = await CreateMainInfo_Contact(states);
-    if (result){
-     clearState();
-    showSuccess("Create Successfully");
-    setSuccess(false);
-    GetAllData();
-    setLoading(false);
-    handleClose();
-    }else{
+    if (result) {
+      clearState();
+      showSuccess("Create Successfully");
+      setSuccess(false);
+      GetAllData();
+      setLoading(false);
+      handleClose();
+    } else {
       GetAllData();
       handleClose();
     }
@@ -261,12 +282,14 @@ export const ContactPage = (props) => {
     setLoading(false);
     setOpenm(false);
     const result = await Clone_Contact(clonedId);
-    if (!(result && result.LeadSource && result.LeadSource !== 'Web' )) {
-      showSuccess('Contact cloned successfully');
+    if (!(result && result.LeadSource && result.LeadSource !== "Web")) {
+      showSuccess("Contact cloned successfully");
       GetAllData();
 
       setIsLoading(false);
-    } else { showError('Contact clone failed');}
+    } else {
+      showError("Contact clone failed");
+    }
   };
 
   const handleStaffRatingChange = (event) => {
@@ -281,15 +304,17 @@ export const ContactPage = (props) => {
       const context = textArea.current;
       context.value = Id;
       context.select();
-      document.execCommand('copy');
+      document.execCommand("copy");
       showSuccess(`Copy id successfully  (${Id})`);
-      console.log('id', Id)
-
-    
+      console.log("id", Id);
     }
   };
 
-
+  const showId = (Id) => {
+    if (copy) {
+      showSuccess(`Copy id successfully  (${Id})`);
+    }
+  };
 
   useEffect(() => {
     return () => clearInterval(timerIdRef.current);
@@ -299,7 +324,7 @@ export const ContactPage = (props) => {
     GetAllData();
   }, [GetAllData]);
   useEffect(() => {
-    localStorage.getItem('tokenapi');
+    localStorage.getItem("tokenapi");
   }, []);
 
   return (
@@ -343,48 +368,50 @@ export const ContactPage = (props) => {
                       <Spinner isActive={isLoading} isAbsolute />
                       <div className="cards-header">
                         <div className="item-wrapper">
-                        <div style={{display:'flex'}}>
-                          <div>
-                          <img
-                            id="avatar"
-                            className="user-cover-image"
-                            src={psi}
-                            alt="lead"
-                          ></img>
-                          </div>
-                          {/* <div>Timer: {count}s</div>
+                          <div style={{ display: "flex" }}>
+                            <div>
+                              <img
+                                id="avatar"
+                                className="user-cover-image"
+                                src={psi}
+                                alt="lead"
+                              ></img>
+                            </div>
+                            {/* <div>Timer: {count}s</div>
       <div>
         <button onClick={startHandler}>Start</button>
         <button onClick={stopHandler}>Stop</button>
       </div> */}
-         <div style={{marginLeft:'15%'}}>
-                        
-                        {(((s &&
-                        s.LeadSource === 'Web') && (
-                          <div style={{display: 'flex'}}>
-                            <div style={{    display: 'flex',
-    alignItems: 'center' , marginRight: '10%',
-    fontFamily: 'cursive',
-    fontWeight: 'bold'}}>
-                            <span>Clone</span>
-                            </div>
-                            <div>
-                           <Tooltip title="Clone">
-                              <Fab
-                                size='small'
-                                aria-label='clone'
-                                label='clone'
-                                onClick={() => clone(s.Id)}
-                              >
-                                <span className='mdi mdi-animation-outline mdi-18px' />
-                              </Fab>
-                            </Tooltip>
-                            </div>
-                            </div>
-                         
-                        )) ||
-                        '')}
-                        {/* <Tooltip title="Clone">
+                            <div style={{ marginLeft: "15%" }}>
+                              {(s && s.LeadSource === "Web" && (
+                                <div style={{ display: "flex" }}>
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      marginRight: "10%",
+                                      fontFamily: "cursive",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                    <span>Clone</span>
+                                  </div>
+                                  <div>
+                                    <Tooltip title="Clone">
+                                      <Fab
+                                        size="small"
+                                        aria-label="clone"
+                                        label="clone"
+                                        onClick={() => clone(s.Id)}
+                                      >
+                                        <span className="mdi mdi-animation-outline mdi-18px" />
+                                      </Fab>
+                                    </Tooltip>
+                                  </div>
+                                </div>
+                              )) ||
+                                ""}
+                              {/* <Tooltip title="Clone">
                               <Fab
                                 size='small'
                                 aria-label='clone'
@@ -394,16 +421,12 @@ export const ContactPage = (props) => {
                                 <span className='mdi mdi-animation-outline mdi-18px' />
                               </Fab>
                             </Tooltip> */}
-                    
-                       </div>
-                       </div>
+                            </div>
+                          </div>
                         </div>
                         <div className="d-flex-column">
                           <div className="item-wrapper px-2">
-                            
-                            <span className="item-header-ellipsis">
-                             
-                            </span>
+                            <span className="item-header-ellipsis"></span>
                           </div>
                           {/* <div className="item-wrapper">
                             <span className="item-header-ellipsis px-2">
@@ -416,24 +439,35 @@ export const ContactPage = (props) => {
                           <div className="item-wrapper"></div>
                         </div>
                       </div>
+                      <div>
+                        <Fab aria-label="like">
+                          <FavoriteIcon />
+                        </Fab>
+                      </div>
                       <div className="cards-body">
                         <div className="item-wrapper">
                           <span className="item-header">
                             <span className="mdi mdi-account px-2" />
                             <span>Name:</span>
                           </span>
-                          <span className="item-header-ellipsis"> {s.Name}</span>
-                   
+                          <span className="item-header-ellipsis">
+                            {" "}
+                            {s.Name}
+                          </span>
                         </div>
                         <div className="item-wrapper">
                           <span className="item-header">
                             <span className="mdi mdi-account px-2" />
                             <span>Id:</span>
                             {s.Id}
-                            <textarea readOnly aria-disabled value={s.Id} ref={textArea} />
-
+                            <textarea
+                              readOnly
+                              aria-disabled
+                              value={s.Id}
+                              ref={textArea}
+                            />
                           </span>
-                          <Tooltip title="Copy">
+                          {/* <Tooltip title="Copy">
                           <span
                             onClick={(e) => {
                               e.stopPropagation();
@@ -442,7 +476,17 @@ export const ContactPage = (props) => {
                             }}
                             className='mdi mdi-content-copy'
                           />
-                        </Tooltip>
+                        </Tooltip> */}
+
+                          <CopyToClipboard
+                            text={s.Id}
+                            onCopy={() => {
+                              setCopy(true);
+                              showId(s.Id);
+                            }}
+                          >
+                            <span className="mdi mdi-content-copy"></span>
+                          </CopyToClipboard>
                         </div>
                         <div className="item-wrapper">
                           <span className="item-header">
@@ -543,7 +587,7 @@ export const ContactPage = (props) => {
                             <span>Last Read / Write:</span>
                           </span>
                           <span className="item-body">
-                        {s.Last_Read_Write__c}
+                            {s.Last_Read_Write__c}
                           </span>
                         </div>
 
@@ -619,7 +663,7 @@ export const ContactPage = (props) => {
                                   {" "}
                                   "Do you really want to delete this Contact?"
                                 </div>
-                                <br/>
+                                <br />
                                 <div className="confirmbtn">
                                   <ButtonGroup
                                     variant="contained"
@@ -641,7 +685,6 @@ export const ContactPage = (props) => {
                                       No
                                     </Button>
                                   </ButtonGroup>
-                                 
                                 </div>
                               </div>
                             </Box>
@@ -658,7 +701,7 @@ export const ContactPage = (props) => {
         ) : (
           <div>
             <img
-            alt="ss"
+              alt="ss"
               style={{
                 borderRadius: "5px",
                 filter: "drop-shadow(2px 4px 6px black)",
@@ -668,7 +711,55 @@ export const ContactPage = (props) => {
             ></img>
           </div>
         )}
-
+        <div style={{ display: " flex", justifyContent: "center" }}>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Box sx={{ m: 1, position: "relative" }}>
+              <Fab
+                aria-label="save"
+                color="primary"
+                sx={buttonSx}
+                onClick={handleButtonClick}
+              >
+                {suc ? <CheckIcon /> : <SaveIcon />}
+              </Fab>
+              {load && (
+                <CircularProgress
+                  size={68}
+                  sx={{
+                    color: green[500],
+                    position: "absolute",
+                    top: -6,
+                    left: -6,
+                    zIndex: 1,
+                  }}
+                />
+              )}
+            </Box>
+            <Box sx={{ m: 1, position: "relative" }}>
+              {/* <Button
+          variant="contained"
+          sx={buttonSx}
+          disabled={loading}
+          onClick={handleButtonClick}
+        >
+          Accept terms
+        </Button>
+        {loading && (
+          <CircularProgress
+            size={24}
+            sx={{
+              color: green[500],
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              marginTop: '-12px',
+              marginLeft: '-12px',
+            }}
+          />
+        )} */}
+            </Box>
+          </Box>
+        </div>
         <div className="speedDial no-printme">
           {/* <Backdrop open={openD} /> */}
           <SpeedDial
@@ -691,6 +782,7 @@ export const ContactPage = (props) => {
             ))}
           </SpeedDial>
         </div>
+
         <div>
           <ToastContainer />
 
