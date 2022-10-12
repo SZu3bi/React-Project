@@ -24,7 +24,7 @@ const[cmp , setcmp] = useState(true);
  
   const [states, setStates] = useState({
     username : "samjad@gmail.com",
-    password : "Salah11223344",
+    password : "Cover1122",
     token:"",
     showPassword: false,
     username2 : "Zaid-Lawi@gmail.com",
@@ -38,7 +38,7 @@ const[cmp , setcmp] = useState(true);
   const onFormSubmit = useCallback(async (e) => {
     e.preventDefault();
     if(states.username === "Zaid-Lawi@gmail.com"){
-      axios.post(`${configlogin.server_address}?grant_type=${configlogin.RESPONSE_TYPE}&client_id=${configlogin.CLIENT_ID}&client_secret=${configlogin.client_Secret}&username=${states.username}&password=${states.password}Q1E6OOQuzAy74GyWBXK9Kwhy`)
+      axios.post(`${configlogin.server_address}?grant_type=${configlogin.RESPONSE_TYPE}&client_id=${configlogin.CLIENT_ID}&client_secret=${configlogin.client_Secret}&username=${states.username}&password=${states.password}k89xVUWApVLgGwWulAcb336Kd`)
       .then((response) => {
         settokenapi(response.data.access_token);
         localStorage.setItem('tokenapi', JSON.stringify(tokenapi));
@@ -59,7 +59,7 @@ const[cmp , setcmp] = useState(true);
         console.error(error)
       });
     }else{
-      axios.post(`${configlogin.server_address}?grant_type=${configlogin.RESPONSE_TYPE}&client_id=${configlogin.CLIENT_ID}&client_secret=${configlogin.client_Secret}&username=${states.username}&password=${states.password}53Ob6e5N7DM0BR3W196u1eC2c`)
+      axios.post(`${configlogin.server_address}?grant_type=${configlogin.RESPONSE_TYPE}&client_id=${configlogin.CLIENT_ID}&client_secret=${configlogin.client_Secret}&username=${states.username}&password=${states.password}amT78fpsBV2H2idIDkyLMGAP6`)
       .then((response) => {
         settokenapi(response.data.access_token);
         localStorage.setItem('tokenapi', JSON.stringify(tokenapi));
@@ -191,7 +191,7 @@ const[cmp , setcmp] = useState(true);
           </div> */}
           <div style={{    padding: '5%'}}>
           <Button   type="Submit" color="facebook" >
-            {states.username}
+          Salah
                       </Button>
           </div>
 {/* <div style={{    padding: '5%'}}>

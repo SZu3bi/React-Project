@@ -51,6 +51,9 @@ import { green } from "@mui/material/colors";
 import CheckIcon from "@mui/icons-material/Check";
 import SaveIcon from "@mui/icons-material/Save";
 import CopyToClipboard from "react-copy-to-clipboard";
+import "./ContactPage.scss";
+import User from "../../assets/img/User.png";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -137,6 +140,7 @@ export const ContactPage = (props) => {
   const [openContactAdd, setOpenContactAdd] = useState(false);
   const [open, setOpen] = useState(false);
   const [result, setResult] = useState();
+  const [res, setres] = useState();
   const [casedata, setCasedata] = useState();
   const [EditVal, setEditVal] = useState();
   const [loading, setLoading] = useState(true);
@@ -146,6 +150,7 @@ export const ContactPage = (props) => {
   const [Count, setCount] = useState();
   const [countcase, setcountcase] = useState();
   const [openm, setOpenm] = useState(false);
+  const [contactid, setcontactid] = useState();
   const handleOpenm = () => setOpenm(true);
   const handleClosem = () => setOpenm(false);
   const timerIdRef = useRef(0);
@@ -187,6 +192,20 @@ export const ContactPage = (props) => {
     });
   };
 
+
+  const GetAllDatacase = useCallback(async () => {
+    const result = await GetMainInfo_Case();
+    if (result) {
+
+      setcountcase(result.data.length);
+    
+      setTimeout(() => {
+        setLoading(false);
+      }, 3000);
+      const sortedResult = result.data.sort((a, b) => a.Id.localeCompare(b.Id));
+      setres(sortedResult);
+    } else setres(null);
+  }, []);
   const handleClickOpen = (id) => {
     //   console.log('subject: ', name.subject);
     if (id == 1) {
@@ -319,14 +338,17 @@ export const ContactPage = (props) => {
   useEffect(() => {
     return () => clearInterval(timerIdRef.current);
   }, []);
-
+console.log(res)
   useEffect(() => {
+    setcontactid(res && res.map((s, index) => (s.ContactId)));
+    
     GetAllData();
-  }, [GetAllData]);
+    GetAllDatacase();
+  }, [GetAllData,GetAllDatacase]);
   useEffect(() => {
     localStorage.getItem("tokenapi");
   }, []);
-
+console.log(states.name)
   return (
     <div className="Agents-wrapper view-wrapper">
       {open && (
@@ -340,12 +362,12 @@ export const ContactPage = (props) => {
 
       <div>
         {count !== 0 ? (
-          <div>
+          <div className="main">
             {result &&
               result.map((s, index) => (
-                <div className="users-card-wrapper">
+                <div className="text-container">
                   {loading ? (
-                    <div className="users-card-wrapper">
+                    <div className="text-container">
                       <Stack spacing={1}>
                         <Skeleton variant="text" />
                         <Skeleton variant="circular" width={50} height={50} />
@@ -358,70 +380,26 @@ export const ContactPage = (props) => {
                     </div>
                   ) : (
                     // <CircularProgress />
-                    <div
-                      className={
-                        s.Active__c === true
-                          ? "cards-wrapper-active"
-                          : "cards-wrapper-notactive"
-                      }
-                    >
+                    <div>
                       <Spinner isActive={isLoading} isAbsolute />
                       <div className="cards-header">
                         <div className="item-wrapper">
+                          <img
+                            className={
+                              s.Active__c === true
+                                ? "imgborder-active"
+                                : "imgborder-notactive"
+                            }
+                            src={User}
+                            alt="arrowImage"
+                          />
                           <div style={{ display: "flex" }}>
-                            <div>
-                              <img
-                                id="avatar"
-                                className="user-cover-image"
-                                src={psi}
-                                alt="lead"
-                              ></img>
-                            </div>
                             {/* <div>Timer: {count}s</div>
       <div>
         <button onClick={startHandler}>Start</button>
         <button onClick={stopHandler}>Stop</button>
       </div> */}
-                            <div style={{ marginLeft: "15%" }}>
-                              {(s && s.LeadSource === "Web" && (
-                                <div style={{ display: "flex" }}>
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      marginRight: "10%",
-                                      fontFamily: "cursive",
-                                      fontWeight: "bold",
-                                    }}
-                                  >
-                                    <span>Clone</span>
-                                  </div>
-                                  <div>
-                                    <Tooltip title="Clone">
-                                      <Fab
-                                        size="small"
-                                        aria-label="clone"
-                                        label="clone"
-                                        onClick={() => clone(s.Id)}
-                                      >
-                                        <span className="mdi mdi-animation-outline mdi-18px" />
-                                      </Fab>
-                                    </Tooltip>
-                                  </div>
-                                </div>
-                              )) ||
-                                ""}
-                              {/* <Tooltip title="Clone">
-                              <Fab
-                                size='small'
-                                aria-label='clone'
-                                label='clone'
-                                onClick={() => clone(s.Id)}
-                              >
-                                <span className='mdi mdi-animation-outline mdi-18px' />
-                              </Fab>
-                            </Tooltip> */}
-                            </div>
+                       
                           </div>
                         </div>
                         <div className="d-flex-column">
@@ -439,11 +417,11 @@ export const ContactPage = (props) => {
                           <div className="item-wrapper"></div>
                         </div>
                       </div>
-                      <div>
+                      {/* <div>
                         <Fab aria-label="like">
                           <FavoriteIcon />
                         </Fab>
-                      </div>
+                      </div> */}
                       <div className="cards-body">
                         <div className="item-wrapper">
                           <span className="item-header">
@@ -454,7 +432,9 @@ export const ContactPage = (props) => {
                             {" "}
                             {s.Name}
                           </span>
+                  
                         </div>
+                        
                         <div className="item-wrapper">
                           <span className="item-header">
                             <span className="mdi mdi-account px-2" />
@@ -495,7 +475,7 @@ export const ContactPage = (props) => {
                           </span>
                           <span className="item-body">{s.Phone || "N/A"}</span>
                         </div>
-                        {/* <div className="item-wrapper">
+                        <div className="item-wrapper">
                           <span className="item-header">
                             <span className="mdi mdi-phone px-2" />
                             <span>Active:</span>
@@ -504,7 +484,7 @@ export const ContactPage = (props) => {
                             {" "}
                             {s.Active__c === true ? "Active" : "Not Active"}
                           </span>
-                        </div> */}
+                        </div>
                         <div className="item-wrapper flex-nowrap">
                           <div className="texts-truncate d-flex">
                             <span className="item-header">
@@ -592,13 +572,13 @@ export const ContactPage = (props) => {
                         </div>
 
                         <div className="item-wrapper-%">
-                          <span className="item-header">
+                          {/* <span className="item-header">
                             <span className="mdi mdi-focus-field-horizontal px-2" />
                             <span>Field Fill Status</span>
-                          </span>
+                          </span> */}
                           {/* <span className="item-body">{s.Fill__c || null}</span> */}
                         </div>
-                        <div>
+                        {/* <div>
                           <Box>
                             <Box sx={{ width: "100%", mr: 1 }}>
                               <LinearProgress
@@ -613,8 +593,8 @@ export const ContactPage = (props) => {
                               >{`${Math.round(s.Fill__c)}%`}</Typography>
                             </Box>
                           </Box>
-                        </div>
-                        <Rating
+                        </div> */}
+                        {/* <Rating
                           name="text-feedback"
                           value={s.Rating__c}
                           readOnly
@@ -625,31 +605,33 @@ export const ContactPage = (props) => {
                               fontSize="inherit"
                             />
                           }
-                        />
+                        /> */}
                       </div>
-                      <div className="item-wrapper actions">
-                        <IconButton
-                          size="small"
-                          color="inherit"
-                          className="button-edit"
+                      {/* <div className="item-wrapper actions"> */}
+                      <div className="actions">
+                        <Button
+                          // disabled={contactid === s.id}
+                          style={{ margin: "1%" }}
+                          variant="contained"
+                          color="secondary"
+                          onClick={handleOpenm}
                         >
-                          <EditIcon
-                            onClick={() => {
-                              setOpen(true);
-                              setEditVal(s);
-                            }}
-                          ></EditIcon>
-                        </IconButton>
+                          Delete
+                        </Button>
+
+                        <Button
+                          style={{ margin: "1%" }}
+                          variant="contained"
+                          color="primary"
+                          onClick={() => {
+                            setOpen(true);
+                            setEditVal(s);
+                          }}
+                        >
+                          Edit
+                        </Button>
+
                         <div>
-                          <IconButton
-                            size="small"
-                            color="inherit"
-                            className="button"
-                          >
-                            <DeleteForeverIcon
-                              onClick={handleOpenm}
-                            ></DeleteForeverIcon>
-                          </IconButton>
                           <Modal
                             open={openm}
                             onClose={handleClosem}
@@ -672,6 +654,8 @@ export const ContactPage = (props) => {
                                     aria-label="contained primary button group"
                                   >
                                     <Button
+
+                                  
                                       onClick={() => {
                                         handleDeleteButton(s.Id);
                                       }}
@@ -690,7 +674,38 @@ export const ContactPage = (props) => {
                             </Box>
                           </Modal>
                         </div>
+                        <div style={{marginLeft:'5%'}}>
+                              {(s && s.LeadSource === "Web" && (
+                                <div >
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      marginRight: "10%",
+                                      fontFamily: "cursive",
+                                      fontWeight: "bold",
+                                    }}
+                                  >
+                                  </div>
+                                  <div>
+                                    <Tooltip title="Clone">
+                                      <Fab
+                                        size="small"
+                                        aria-label="clone"
+                                        label="clone"
+                                        onClick={() => clone(s.Id)}
+                                      >
+                                        <span className="mdi mdi-animation-outline mdi-18px" />
+                                      </Fab>
+                                    </Tooltip>
+                                  </div>
+                                </div>
+                              )) ||
+                                ""}
+                
+                            </div>
                       </div>
+                      
                     </div>
                   )}
                 </div>
@@ -711,55 +726,7 @@ export const ContactPage = (props) => {
             ></img>
           </div>
         )}
-        <div style={{ display: " flex", justifyContent: "center" }}>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Box sx={{ m: 1, position: "relative" }}>
-              <Fab
-                aria-label="save"
-                color="primary"
-                sx={buttonSx}
-                onClick={handleButtonClick}
-              >
-                {suc ? <CheckIcon /> : <SaveIcon />}
-              </Fab>
-              {load && (
-                <CircularProgress
-                  size={68}
-                  sx={{
-                    color: green[500],
-                    position: "absolute",
-                    top: -6,
-                    left: -6,
-                    zIndex: 1,
-                  }}
-                />
-              )}
-            </Box>
-            <Box sx={{ m: 1, position: "relative" }}>
-              {/* <Button
-          variant="contained"
-          sx={buttonSx}
-          disabled={loading}
-          onClick={handleButtonClick}
-        >
-          Accept terms
-        </Button>
-        {loading && (
-          <CircularProgress
-            size={24}
-            sx={{
-              color: green[500],
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              marginTop: '-12px',
-              marginLeft: '-12px',
-            }}
-          />
-        )} */}
-            </Box>
-          </Box>
-        </div>
+
         <div className="speedDial no-printme">
           {/* <Backdrop open={openD} /> */}
           <SpeedDial
@@ -828,7 +795,9 @@ export const ContactPage = (props) => {
                         error={states.name === "" ? "error" : null}
                         value={states.name}
                         onChange={(event) => {
+                        
                           setStates((names) => ({
+                            
                             ...names,
                             name: event.target.value,
                           }));
