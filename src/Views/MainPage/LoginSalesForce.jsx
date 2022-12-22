@@ -17,6 +17,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { HttpServices } from "../../Services copy/HttpMethod.Helper";
+import {createBrowserHistory} from 'history';
+const browserHistory = createBrowserHistory();
+
 export const  LoginSalesForce =() =>{
   const [tokenapi, settokenapi] = useState();
 
@@ -106,6 +109,16 @@ const[cmp , setcmp] = useState(true);
 
         localStorage.getItem('tokenapi');
       }, [tokenapi]);
+      useEffect(() => {
+        if (localStorage.getItem('tokenapi') != null) {
+      
+    
+          browserHistory.push('/home');
+     }
+     else {
+        browserHistory.replace('/');
+     }
+      }, []);
 
       var retrievedObject = localStorage.getItem('tokenapi');
 

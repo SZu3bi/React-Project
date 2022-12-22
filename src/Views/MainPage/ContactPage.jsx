@@ -192,13 +192,11 @@ export const ContactPage = (props) => {
     });
   };
 
-
   const GetAllDatacase = useCallback(async () => {
     const result = await GetMainInfo_Case();
     if (result) {
-
       setcountcase(result.data.length);
-    
+
       setTimeout(() => {
         setLoading(false);
       }, 3000);
@@ -338,17 +336,17 @@ export const ContactPage = (props) => {
   useEffect(() => {
     return () => clearInterval(timerIdRef.current);
   }, []);
-console.log(res)
+  console.log(res);
   useEffect(() => {
-    setcontactid(res && res.map((s, index) => (s.ContactId)));
-    
+    setcontactid(res && res.map((s, index) => s.ContactId));
+
     GetAllData();
     GetAllDatacase();
-  }, [GetAllData,GetAllDatacase]);
+  }, [GetAllData, GetAllDatacase]);
   useEffect(() => {
     localStorage.getItem("tokenapi");
   }, []);
-console.log(states.name)
+  console.log(states.name);
   return (
     <div className="Agents-wrapper view-wrapper">
       {open && (
@@ -365,7 +363,7 @@ console.log(states.name)
           <div className="main">
             {result &&
               result.map((s, index) => (
-                <div className="text-container">
+                <div className="text-container" key={index}>
                   {loading ? (
                     <div className="text-container">
                       <Stack spacing={1}>
@@ -399,7 +397,6 @@ console.log(states.name)
         <button onClick={startHandler}>Start</button>
         <button onClick={stopHandler}>Stop</button>
       </div> */}
-                       
                           </div>
                         </div>
                         <div className="d-flex-column">
@@ -423,18 +420,20 @@ console.log(states.name)
                         </Fab>
                       </div> */}
                       <div className="cards-body">
+                                 {index}
                         <div className="item-wrapper">
                           <span className="item-header">
                             <span className="mdi mdi-account px-2" />
                             <span>Name:</span>
                           </span>
+                 
                           <span className="item-header-ellipsis">
                             {" "}
+                         
                             {s.Name}
                           </span>
-                  
                         </div>
-                        
+
                         <div className="item-wrapper">
                           <span className="item-header">
                             <span className="mdi mdi-account px-2" />
@@ -654,8 +653,6 @@ console.log(states.name)
                                     aria-label="contained primary button group"
                                   >
                                     <Button
-
-                                  
                                       onClick={() => {
                                         handleDeleteButton(s.Id);
                                       }}
@@ -674,38 +671,35 @@ console.log(states.name)
                             </Box>
                           </Modal>
                         </div>
-                        <div style={{marginLeft:'5%'}}>
-                              {(s && s.LeadSource === "Web" && (
-                                <div >
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      marginRight: "10%",
-                                      fontFamily: "cursive",
-                                      fontWeight: "bold",
-                                    }}
+                        <div style={{ marginLeft: "5%" }}>
+                          {(s && s.LeadSource === "Web" && (
+                            <div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  marginRight: "10%",
+                                  fontFamily: "cursive",
+                                  fontWeight: "bold",
+                                }}
+                              ></div>
+                              <div>
+                                <Tooltip title="Clone">
+                                  <Fab
+                                    size="small"
+                                    aria-label="clone"
+                                    label="clone"
+                                    onClick={() => clone(s.Id)}
                                   >
-                                  </div>
-                                  <div>
-                                    <Tooltip title="Clone">
-                                      <Fab
-                                        size="small"
-                                        aria-label="clone"
-                                        label="clone"
-                                        onClick={() => clone(s.Id)}
-                                      >
-                                        <span className="mdi mdi-animation-outline mdi-18px" />
-                                      </Fab>
-                                    </Tooltip>
-                                  </div>
-                                </div>
-                              )) ||
-                                ""}
-                
+                                    <span className="mdi mdi-animation-outline mdi-18px" />
+                                  </Fab>
+                                </Tooltip>
+                              </div>
                             </div>
+                          )) ||
+                            ""}
+                        </div>
                       </div>
-                      
                     </div>
                   )}
                 </div>
@@ -795,9 +789,7 @@ console.log(states.name)
                         error={states.name === "" ? "error" : null}
                         value={states.name}
                         onChange={(event) => {
-                        
                           setStates((names) => ({
-                            
                             ...names,
                             name: event.target.value,
                           }));

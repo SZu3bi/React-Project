@@ -6,6 +6,8 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
+import {createBrowserHistory} from 'history';
+
 import { MainPageView } from "./MainPageView";
 import { TotalSummaryCard } from "./TotalSummaryCard/TotalSummaryCard";
 import { TripTour } from "./TripTour/TripTour";
@@ -46,6 +48,9 @@ import { SectionTabs } from "./SectionTabs";
 import {SectionPills} from "./SectionPills";
 import {EarningCard} from "./EarningCard";
 import {Login} from "./Login/Login";
+
+const browserHistory = createBrowserHistory();
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -165,6 +170,8 @@ export const Home = ({
     } else setRese(null);
   }, []);
 
+  
+
   useEffect(() => {
     Data();
     GetAllData();
@@ -172,6 +179,8 @@ export const Home = ({
 
   useEffect(() => {
     localStorage.getItem('tokenapi');
+
+   
   }, []);
 
   const menuId = "primary-search-account-menu";
